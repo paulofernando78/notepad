@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Bookmark, PaintBucket, Trash } from "lucide-react";
-import { Border } from "../Border";
+import { Border } from "@/components/Border";
 
 export const Note = () => {
   const [bookmark, setBookmark] = useState(false);

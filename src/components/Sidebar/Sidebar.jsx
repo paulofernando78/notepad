@@ -1,7 +1,6 @@
 import { useState } from "react";
 // import { Link } from "react-router-dom";
 import { Border } from "../Border";
-import { SearchBar } from "../SearchBar";
 
 import { Plus, FolderClosed, FolderOpen } from "lucide-react";
 
@@ -17,7 +16,7 @@ export const Sidebar = () => {
     <Border>
       <aside>
       <nav className="p-2 space-y-2">
-        <SearchBar />
+        
         <hr className="text-gray-400" />
         <div className="flex items-center justify-between">
           <button

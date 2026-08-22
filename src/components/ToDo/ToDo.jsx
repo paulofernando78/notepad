@@ -1,4 +1,4 @@
-import { Border } from "../Border";
+import { Border } from "@/components/Border";
 
 const statusOptions = [
   {
@@ -24,9 +24,9 @@ export const ToDo = () => {
     <div className="grid grid-cols-4 gap-2 p-2">
       {statusOptions.map((status) => (
         <div className="flex flex-col gap-2">
-          <Border className={`px-2 py-1 border-2 ${status.color}`}>
+          <Border className={`px-2 py-1 border-0 ${status.color}`}>
             <span className="block mb-2 font-bold">{status.label}</span>
-              <span className="block w-full px-2 border">radio.item</span>
+              <span className={`block w-full mb-1 px-2 border rounded ${status.color}`}>todo.item</span>
           </Border>
         </div>
       ))}
