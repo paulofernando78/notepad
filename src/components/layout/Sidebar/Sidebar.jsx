@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { Icon } from "@/components/Icon";
-import { Board } from "../Board";
+import { Icon } from "@/components/ui/Icon";
+import { Board } from "@/components/ui/Board";
 
 export const Sidebar = () => {
   const [folderOpen, setFolderOpen] = useState(false);

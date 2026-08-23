@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { Board } from "@/components/Board";
+import { Board } from "@/components/ui/Board";
 
-export const Clock = ({ className }) => {
+export const Clock = () => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const Clock = ({ className }) => {
   });
 
   return (
-    <Board className={`flex flex-col items-center justify-center p-4 w-max font-['Oswald_Variable'] text-2xl text-white bg-gray-800 [text-shadow:0_0_6px_rgba(255,255,255,0.3)] ${className}`}>
+    <Board className="timer-card">
       <span>{currentTime}</span>
       <span>{currentDate}</span>
     </Board>

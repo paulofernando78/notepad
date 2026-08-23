@@ -1,5 +1,5 @@
-import { Board } from "@/components/Board";
-import { Icon } from "@/components/Icon";
+import { Board } from "@/components/ui/Board";
+import { Icon } from "@/components/ui/Icon";
 
 const statusOptions = [
   {

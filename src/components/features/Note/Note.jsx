@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Board } from "@/components/Board";
-import { Icon } from "@/components/Icon";
+import { Board } from "@/components/ui/Board";
+import { Icon } from "@/components/ui/Icon";
 
 export const Note = () => {
   const [bookmark, setBookmark] = useState(false);
