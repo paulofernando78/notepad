@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-// import { Border } from "../Border";
+import { Board } from "@/components/Board";
 
 export const Clock = ({ className }) => {
   const [time, setTime] = useState(new Date());
@@ -27,8 +27,9 @@ export const Clock = ({ className }) => {
   });
 
   return (
-    <div className={`font-mono text-white ${className}`}>
-      <span>{currentTime}</span> • <span>{currentDate}</span>
-    </div>
+    <Board className={`flex flex-col items-center justify-center p-4 w-max font-['Oswald_Variable'] text-2xl text-white bg-gray-800 [text-shadow:0_0_6px_rgba(255,255,255,0.3)] ${className}`}>
+      <span>{currentTime}</span>
+      <span>{currentDate}</span>
+    </Board>
   );
 };

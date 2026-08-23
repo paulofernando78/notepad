@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Bookmark, PaintBucket, Trash } from "lucide-react";
-import { Border } from "@/components/Border";
+import { Board } from "@/components/Board";
 import { Icon } from "@/components/Icon";
 
 export const Note = () => {
@@ -11,7 +10,7 @@ export const Note = () => {
   }
 
   return (
-    <Border className="flex flex-col h-60">
+    <Board className="flex flex-col h-60">
       {/* Title */}
       <div className="flex items-center justify-between px-2">
         <span className="block pl-1 pt-2 pb-1 font-bold text-lg">
@@ -34,6 +33,6 @@ export const Note = () => {
         <Icon name="paintBucket" />
         <Icon name="trash" />
       </div>
-    </Border>
+    </Board>
   );
 };

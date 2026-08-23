@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Icon } from "@/components/Icon";
-import { Border } from "../Border";
+import { Board } from "../Board";
 
 export const Sidebar = () => {
   const [folderOpen, setFolderOpen] = useState(false);
@@ -12,19 +12,22 @@ export const Sidebar = () => {
   }
 
   return (
-    <Border>
+    <Board>
       <aside>
-        <nav className="p-2">
+        <nav className="p-2 space-y-2">
+          <Link to="/favorites" className="flex items-center gap-2">
+            <Icon name="squareText" />
+            <span>All notes</span>
+          </Link>
+          <Link to="/favorites" className="flex items-center gap-2">
+            <Icon name="bookmark" />
+            <span>Favorites</span>
+          </Link>
+          <hr className="my-3 text-gray-400" />
           <button className="flex items-center gap-2">
             <Icon name="plus" />
             <span>New folder</span>
           </button>
-          <div className="flex items-center gap-1">
-            <Icon name="bookmark" />
-            <Link to="" />
-            Favorites
-          </div>
-          <hr className="my-3 text-gray-400" />
           <div className="flex items-center justify-between">
             <button
               onClick={handleFolderToggle}
@@ -40,6 +43,6 @@ export const Sidebar = () => {
           </div>
         </nav>
       </aside>
-    </Border>
+    </Board>
   );
 };

@@ -1,22 +1,26 @@
 import {
   Bookmark,
+  Ellipsis,
   FolderClosed,
   FolderOpen,
   NotepadText,
   PaintBucket,
   Plus,
   Search,
+  SquareText,
   Trash,
 } from "lucide-react";
 
 const icons = {
   bookmark: Bookmark,
+  ellipsis: Ellipsis,
   folderClosed: FolderClosed,
   folderOpen: FolderOpen,
   notepadText: NotepadText,
   paintBucket: PaintBucket,
   plus: Plus,
   search: Search,
+  squareText: SquareText,
   trash: Trash,
 };
 
