@@ -21,7 +21,7 @@ const statusOptions = [
 
 export const ToDo = () => {
   return (
-    <div className="grid grid-cols-4 gap-2 p-2">
+    <div className="grid grid-cols-4 gap-2 py-2">
       {statusOptions.map((status) => (
         <div className="flex flex-col gap-2">
           <Border className={`px-2 py-1 border-0 ${status.color}`}>
