@@ -18,7 +18,7 @@ export const Note = () => {
         </span>
         <button type="button" onClick={handleBookmark}>
           {bookmark ? (
-            <Icon name="bookmark" fill="lightgray" />
+            <Icon name="bookmark" fill="gray" />
           ) : (
             <Icon name="bookmark" />
           )}
