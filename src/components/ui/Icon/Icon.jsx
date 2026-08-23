@@ -1,8 +1,11 @@
 import {
   Bookmark,
+  CirclePause,
+  CirclePlay,
   Ellipsis,
   FolderClosed,
   FolderOpen,
+  FolderPlus,
   NotepadText,
   PaintBucket,
   Plus,
@@ -13,9 +16,12 @@ import {
 
 const icons = {
   bookmark: Bookmark,
+  circlePause: CirclePause,
+  circlePlay: CirclePlay,
   ellipsis: Ellipsis,
   folderClosed: FolderClosed,
   folderOpen: FolderOpen,
+  folderPlus: FolderPlus,
   notepadText: NotepadText,
   paintBucket: PaintBucket,
   plus: Plus,
@@ -26,7 +32,7 @@ const icons = {
 
 export const Icon = ({
   name,
-  size = 18,
+  size = 20,
   className = "",
   ...props
 }) => {

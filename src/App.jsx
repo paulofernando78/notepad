@@ -10,16 +10,16 @@ import { SearchBar } from "@/components/ui/SearchBar";
 
 import { Note } from "@/components/features/Note";
 import { Pomodoro } from "./components/features/Pomodoro";
-import { StopWatch } from "./components/features/StopWatch";
+import { Timer } from "./components/features/Timer";
 
 function App() {
   return (
     <div className="flex flex-col gap-2 min-h-screen p-1">
       <Header />
-      <div>
+      <div className="flex gap-4">
         <Clock />
-        <Pomodoro />
-        <StopWatch />
+        <Pomodoro minutes={1} breakMinutes={5}/>
+        <Timer />
       </div>
       <ToDo />
       <div className="grid grid-cols-[200px_1fr] gap-2 flex-1">

@@ -30,6 +30,7 @@ export const Note = () => {
         <p className="px-3 py-2">note.description</p>
       </div>
       <div className="flex justify-end gap-2 p-2">
+        <Icon name="folderPlus" />
         <Icon name="paintBucket" />
         <Icon name="trash" />
       </div>

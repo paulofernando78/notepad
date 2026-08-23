@@ -5,7 +5,7 @@ export const SearchBar = () => {
     <div className="relative">
       <Icon
         name="search"
-        className="absolute top-2 left-2 text-gray-400"
+        className="absolute top-[0.4rem] left-2 text-gray-400"
       />
 
       <input
@@ -14,7 +14,7 @@ export const SearchBar = () => {
         className="
           w-full
           min-w-0
-          px-8
+          pl-9
           py-1
           border
           border-gray-400

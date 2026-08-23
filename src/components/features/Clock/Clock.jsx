@@ -29,7 +29,7 @@ export const Clock = () => {
   return (
     <Board className="timer-card">
       <span>{currentTime}</span>
-      <span>{currentDate}</span>
+      <span className="text-sm">{currentDate}</span>
     </Board>
   );
 };
