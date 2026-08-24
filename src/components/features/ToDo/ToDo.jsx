@@ -35,7 +35,7 @@ export const ToDo = () => {
             >
               <div className="flex items-center justify-between">
                 <span className="block mb-2 font-bold uppercase">{status.label}</span>
-                <Icon name="ellipsis" />
+                <Icon name="ellipsis" className="translate-y-[-0.4rem]"/>
               </div>
               <div className={`flex items-center gap-1 p-1 border rounded ${status.color}`}>
                 <Icon name="plus" />

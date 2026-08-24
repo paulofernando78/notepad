@@ -1,4 +1,3 @@
-import { Board } from "@/components/ui/Board";
 import { Icon } from "@/components/ui/Icon";
 
 export const Header = () => {
