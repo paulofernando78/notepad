@@ -143,7 +143,6 @@ export const Timer = ({
           <Icon name="rotateCcw" size="25" />
         </button>
       </div>
-      <button onClick={() => setIsAlarmPlaying(true)}>test</button>
     </Board>
   );
 };
