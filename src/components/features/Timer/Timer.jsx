@@ -111,6 +111,7 @@ export const Timer = ({
         type="text"
         className="
         w-32
+        p-1
         font-[Arial]
         text-sm
         border-b
