@@ -11,6 +11,7 @@ import {
   Plus,
   Search,
   SquareText,
+  RotateCcw,
   Trash,
 } from "lucide-react";
 
@@ -27,6 +28,7 @@ const icons = {
   plus: Plus,
   search: Search,
   squareText: SquareText,
+  rotateCcw: RotateCcw,
   trash: Trash,
 };
 

@@ -26,20 +26,23 @@ const statusOptions = [
 
 export const ToDo = () => {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto text-black">
       <div className="grid grid-cols-4 gap-2 py-2 min-w-max">
         {statusOptions.map((status) => (
           <section key={status.id} className="flex flex-col gap-2">
             <Board className={`px-2 py-1 min-w-47.5 border-0 ${status.color}`}>
               <div className="flex items-center justify-between">
                 <span className="block mb-2 font-bold">{status.label}</span>
-                <Icon name="ellipsis"/>
+                <Icon name="ellipsis" />
               </div>
-              <span
-                className={`block w-full mb-1 px-2 border rounded ${status.color}`}
-              >
-                todo.item
-              </span>
+              <div className="flex items-center gap-1 p-1 border border-gray- 500 rounded">
+                <Icon name="plus" />
+                <span
+                  className=""
+                >
+                  Add task...
+                </span>
+              </div>
             </Board>
           </section>
         ))}

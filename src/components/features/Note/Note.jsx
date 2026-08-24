@@ -16,23 +16,30 @@ export const Note = () => {
         <span className="block pl-1 pt-2 pb-1 font-bold text-lg">
           Note.title
         </span>
-        <button type="button" onClick={handleBookmark}>
-          {bookmark ? (
-            <Icon name="bookmark" fill="gray" />
-          ) : (
-            <Icon name="bookmark" />
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          <button type="button" onClick={handleBookmark}>
+            {bookmark ? (
+              <Icon name="bookmark" fill="gray" />
+            ) : (
+              <Icon name="bookmark" />
+            )}
+          </button>
+          <button>
+            <Icon name="paintBucket" />
+          </button>
+          <button>
+            <Icon name="trash" />
+          </button>
+        </div>
       </div>
       <hr className="px-3" />
       {/* Description */}
       <div className="flex-1 overflow-hidden">
         <p className="px-3 py-2">note.description</p>
       </div>
-      <div className="flex justify-end gap-2 p-2">
+      <div className="flex items-center gap-2 p-2">
         <Icon name="folderPlus" />
-        <Icon name="paintBucket" />
-        <Icon name="trash" />
+        <span>Folder's name</span>
       </div>
     </Board>
   );

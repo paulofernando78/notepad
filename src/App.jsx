@@ -9,16 +9,16 @@ import { ToDo } from "@/components/features/ToDo";
 import { SearchBar } from "@/components/ui/SearchBar";
 
 import { Note } from "@/components/features/Note";
-import { Pomodoro } from "./components/features/Pomodoro";
-import { Timer } from "./components/features/Timer";
+import { Pomodoro } from "@/components/features/Pomodoro";
+import { Timer } from "@/components/features/Timer";
 
 function App() {
   return (
     <div className="flex flex-col gap-2 min-h-screen p-1">
       <Header />
       <div className="flex gap-4">
-        <Clock />
-        <Pomodoro minutes={1} breakMinutes={5}/>
+        <Clock city="São Paulo" latitude={-23.5505} longitude={-46.6333} />
+        <Pomodoro minutes={1} breakMinutes={1} />
         <Timer />
       </div>
       <ToDo />
