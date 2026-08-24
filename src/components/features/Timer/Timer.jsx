@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { Board } from "@/components/ui/Board";
-import { Icon } from "@/components/ui/Icon";
+import { TimerControls } from "@/components/ui/TimerControls";
 
 const DEFAULT_TIMER_MINUTES = 0;
 const DEFAULT_TIMER_SECONDS = 3;
@@ -16,6 +16,7 @@ export const Timer = ({
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState("idle");
   const [isAlarmPlaying, setIsAlarmPlaying] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (!isRunning) return;
@@ -121,29 +122,18 @@ export const Timer = ({
         placeholder="ex: boiling water"
       />
       <span
-        className={` uppercase
+        className={`text-sm uppercase
           ${mode === "done" ? activeDoneModeClass : inactiveModeClass}`}
       >
         Done
       </span>
-      <div className="flex gap-2 mb-1 ">
-        <button
-          onClick={() => {
-            // Start from focus mode and toggle between running and paused.
-            setIsRunning((current) => !current);
-          }}
-        >
-          {isRunning ? (
-            <Icon name="circlePause" size="25" />
-          ) : (
-            <Icon name="circlePlay" size="25" />
-          )}
-        </button>
-
-        <button onClick={handleReset}>
-          <Icon name="rotateCcw" size="25" />
-        </button>
-      </div>
+      <TimerControls
+        isRunning={isRunning}
+        onToggle={() => setIsRunning((current) => !current)}
+        onReset={handleReset}
+        onEdit={() => setIsEditing(true)}
+        showEdit
+      />
     </Board>
   );
 };

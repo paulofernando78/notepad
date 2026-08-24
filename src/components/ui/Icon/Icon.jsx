@@ -8,11 +8,13 @@ import {
   FolderPlus,
   NotepadText,
   PaintBucket,
+  Pencil,
   Plus,
   Search,
   SquareText,
   RotateCcw,
   Trash,
+  X
 } from "lucide-react";
 
 const icons = {
@@ -25,11 +27,13 @@ const icons = {
   folderPlus: FolderPlus,
   notepadText: NotepadText,
   paintBucket: PaintBucket,
+  pencil: Pencil,
   plus: Plus,
   search: Search,
   squareText: SquareText,
   rotateCcw: RotateCcw,
   trash: Trash,
+  x: X
 };
 
 export const Icon = ({

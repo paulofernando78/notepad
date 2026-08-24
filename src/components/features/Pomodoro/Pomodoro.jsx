@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Board } from "@/components/ui/Board";
-import { Icon } from "@/components/ui/Icon";
+import { TimerControls } from "@/components/ui/TimerControls";
 
 const DEFAULT_FOCUS_MINUTES = 25;
 const DEFAULT_BREAK_MINUTES = 5;
@@ -19,6 +19,7 @@ export const Pomodoro = ({
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState("focus");
   const [currentCycle, setCurrentCycle] = useState(0);
+  const [isEditing, setIsEditing] = useState(false)
 
   useEffect(() => {
     // Do not create an interval while the timer is paused.
@@ -73,7 +74,7 @@ export const Pomodoro = ({
     <Board className="timer-card space-y-2">
       <span className="timer-font-number">{getFormattedTime}</span>
       <span className="text-sm">
-        Cycles: {currentCycle}  • {totalCycles}
+        Cycles: {currentCycle} • {totalCycles}
       </span>
       <div className="flex gap-2 text-sm uppercase">
         <span
@@ -85,7 +86,7 @@ export const Pomodoro = ({
         >
           Focus
         </span>
-         <span>•</span>
+        <span>•</span>
         <span
           className={
             mode === "break" && isRunning
@@ -96,24 +97,16 @@ export const Pomodoro = ({
           Break
         </span>
       </div>
-      <div className="flex gap-2 mb-1">
-        <button
-          onClick={() => {
-            // Start from focus mode and toggle between running and paused.
-            setMode("focus");
-            setIsRunning((current) => !current);
-          }}
-        >
-          {isRunning ? (
-            <Icon name="circlePause" size="25" />
-          ) : (
-            <Icon name="circlePlay" size="25" />
-          )}
-        </button>
-        <button onClick={handleReset}>
-          <Icon name="rotateCcw" size="25" />
-        </button>
-      </div>
+      <TimerControls
+        isRunning={isRunning}
+        onToggle={() => {
+          setMode("focus");
+          setIsRunning((current) => !current);
+        }}
+        onReset={handleReset}
+        onEdit={() => setIsEditing(true)}
+        showEdit
+      />
     </Board>
   );
 };

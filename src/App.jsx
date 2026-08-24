@@ -24,7 +24,7 @@ function App() {
             <Clock city="São Paulo" latitude={-23.5505} longitude={-46.6333} />
           </Widget>
           <Widget title="Pomodoro">
-            <Pomodoro minutes={1} breakMinutes={1} />
+            <Pomodoro />
           </Widget>
           <Widget title="Timer">
             <Timer />
