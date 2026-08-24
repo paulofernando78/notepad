@@ -52,12 +52,21 @@ export const Timer = ({ minutes = DEFAULT_TIMER_MINUTES }) => {
   return (
     <Board className="timer-card space-y-2">
       <span className="text-3xl">{getFormattedTime}</span>
+      <input
+        type="text"
+        className="
+        w-32
+        font-[Arial]
+        text-sm
+        border-b
+        border-gray-700
+        placeholder:italic
+        "
+        placeholder="ex: boiling water"
+      />
       <span
         className={` uppercase
-          ${mode === "done"
-            ? activeDoneModeClass
-            : inactiveModeClass
-          }`}
+          ${mode === "done" ? activeDoneModeClass : inactiveModeClass}`}
       >
         Done
       </span>
