@@ -8,6 +8,7 @@ import { Clock } from "@/components/features/Clock";
 import { ToDo } from "@/components/features/ToDo";
 import { SearchBar } from "@/components/ui/SearchBar";
 
+import { Widget } from "./components/ui/Widget";
 import { Note } from "@/components/features/Note";
 import { Pomodoro } from "@/components/features/Pomodoro";
 import { Timer } from "@/components/features/Timer";
@@ -17,16 +18,23 @@ function App() {
     <div className="flex flex-col gap-2 min-h-screen p-1">
       <Header />
       <div className="flex gap-4">
-        <Clock city="São Paulo" latitude={-23.5505} longitude={-46.6333} />
-        <Pomodoro minutes={1} breakMinutes={1} />
-        <Timer />
+        <Widget title={"Clock • Weather"}>
+          <Clock city="São Paulo" latitude={-23.5505} longitude={-46.6333} />
+        </Widget>
+        <Widget title="Pomodoro">
+          <Pomodoro minutes={1} breakMinutes={1} />
+        </Widget>
+        <Widget title="Timer">
+          <Timer />
+        </Widget>
       </div>
       <ToDo />
       <div className="grid grid-cols-[200px_1fr] gap-2 flex-1">
         <Sidebar />
         <div className="space-y-2">
           <SearchBar />
-          <main className="grid grid-cols-3 gap-2 w-full flex-1">
+          New Note
+          <main className="flex flex-wrap gap-2 flex-1">
             <Note />
             <Note />
           </main>

@@ -51,9 +51,11 @@ export const Pomodoro = ({
   const minutesLeft = Math.floor(time / 60);
   const secondLeft = time % 60;
 
-  const formattedTime = `${String(minutesLeft).padStart(2, "0")}:${String(
-    secondLeft,
-  ).padStart(2, "0")}`;
+  const getFormattedTime = `
+    ${String(minutesLeft).padStart(2, "0")}
+    :
+    ${String(secondLeft,).padStart(2, "0")}
+    `;
 
   const activeFocusModeClass =
     "text-yellow-300 [text-shadow:0_0_8px_rgba(253,224,71,0.8)]";
@@ -71,9 +73,9 @@ export const Pomodoro = ({
 
   return (
     <Board className="timer-card space-y-2">
-      <span className="text-3xl">{formattedTime}</span>
+      <span className="text-3xl">{getFormattedTime}</span>
       <span className="text-sm">
-        Cycles: {currentCycle} / {totalCycles}
+        Cycles: {currentCycle} : {totalCycles}
       </span>
       <div className="flex gap-2 text-sm uppercase">
         <span
@@ -83,7 +85,7 @@ export const Pomodoro = ({
               : inactiveModeClass
           }
         >
-          Focus
+          Focus •
         </span>
         <span
           className={
@@ -95,7 +97,7 @@ export const Pomodoro = ({
           Break
         </span>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 mb-1">
         <button
           onClick={() => {
             // Start from focus mode and toggle between running and paused.

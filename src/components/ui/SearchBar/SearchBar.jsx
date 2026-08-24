@@ -17,7 +17,7 @@ export const SearchBar = () => {
           pl-9
           py-1
           border
-          border-gray-400
+          border-gray-700
           rounded-md"
         placeholder="Search card..."
       />
