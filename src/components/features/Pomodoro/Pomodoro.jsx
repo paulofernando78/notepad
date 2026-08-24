@@ -52,9 +52,7 @@ export const Pomodoro = ({
   const secondLeft = time % 60;
 
   const getFormattedTime = `
-    ${String(minutesLeft).padStart(2, "0")}
-    :
-    ${String(secondLeft).padStart(2, "0")}
+    ${String(minutesLeft).padStart(2, "0")}:${String(secondLeft).padStart(2, "0")}
     `;
 
   const activeFocusModeClass =
@@ -73,7 +71,7 @@ export const Pomodoro = ({
 
   return (
     <Board className="timer-card space-y-2">
-      <span className="text-3xl">{getFormattedTime}</span>
+      <span className="timer-font-number">{getFormattedTime}</span>
       <span className="text-sm">
         Cycles: {currentCycle}  • {totalCycles}
       </span>

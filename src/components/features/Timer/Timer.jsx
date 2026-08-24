@@ -3,10 +3,14 @@ import { useState, useEffect } from "react";
 import { Board } from "@/components/ui/Board";
 import { Icon } from "@/components/ui/Icon";
 
-const DEFAULT_TIMER_MINUTES = 1;
+const DEFAULT_TIMER_MINUTES = 0;
+const DEFAULT_TIMER_SECONDS = 3;
 
-export const Timer = ({ minutes = DEFAULT_TIMER_MINUTES }) => {
-  const initialTime = minutes * 60;
+export const Timer = ({
+  minutes = DEFAULT_TIMER_MINUTES,
+  seconds = DEFAULT_TIMER_SECONDS,
+}) => {
+  const initialTime = minutes * 60 + seconds;
 
   const [time, setTime] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
@@ -81,13 +85,12 @@ export const Timer = ({ minutes = DEFAULT_TIMER_MINUTES }) => {
     return () => clearInterval(alarmIntervalID);
   }, [isAlarmPlaying]);
 
-  const minutesLeft = Math.floor(time / 60);
+  const hoursLeft = Math.floor(time / 3600);
+  const minutesLeft = Math.floor((time % 3600) / 60);
   const secondsLeft = time % 60;
 
   const getFormattedTime = `
-    ${String(minutesLeft).padStart(2, "0")}
-    :
-    ${String(secondsLeft).padStart(2, "0")}
+    ${String(hoursLeft).padStart(2, "0")}:${String(minutesLeft).padStart(2, "0")}:${String(secondsLeft).padStart(2, "0")}
     `;
 
   const activeDoneModeClass =
@@ -103,7 +106,7 @@ export const Timer = ({ minutes = DEFAULT_TIMER_MINUTES }) => {
 
   return (
     <Board className="timer-card space-y-2">
-      <span className="text-3xl">{getFormattedTime}</span>
+      <span className="timer-font-number">{getFormattedTime}</span>
       <input
         type="text"
         className="

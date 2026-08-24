@@ -48,7 +48,7 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
 
   return (
       <Board className="timer-card">
-        <span className="text-3xl mb-4">{currentTime}</span>
+        <span className="timer-font-number">{currentTime}</span>
         <div className="flex flex-col items-center text-sm">
           <span className="text-sm">{currentDate}</span>
           <div className="flex gap-1 space-y-2">
