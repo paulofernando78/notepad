@@ -8,30 +8,29 @@ const DEFAULT_BREAK_MINUTES = 1;
 const DEFAULT_LONG_BREAK_MINUTES = 15;
 const LONG_BREAK_INTERVAL = 4;
 
- function playTick() {
+function playTick() {
+  const audioContext = new AudioContext();
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
 
-    const audioContext = new AudioContext();
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
 
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
+  oscillator.frequency.value = 800;
 
-    oscillator.frequency.value = 800;
+  gain.gain.setValueAtTime(0.9, audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audioContext.currentTime + 0.03,
+  );
 
-    gain.gain.setValueAtTime(0.9, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + 0.03,
-    );
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + 0.03);
 
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.03);
-
-    oscillator.addEventListener("ended", () => {
-      audioContext.close();
-    });
-  }
+  oscillator.addEventListener("ended", () => {
+    audioContext.close();
+  });
+}
 
 export const Pomodoro = ({
   minutes = DEFAULT_FOCUS_MINUTES,
@@ -121,7 +120,7 @@ export const Pomodoro = ({
     focusTime,
     breakTime,
     longBreakTime,
-    isSoundEnabled
+    isSoundEnabled,
   ]);
 
   const getFormattedTime = `
@@ -205,14 +204,14 @@ export const Pomodoro = ({
   return (
     <Board className="timer-card space-y-2">
       {isEditing ? (
-        <div className="grid">
+        <Board className="grid gap-1 px-2 p-1">
           <label>
             Focus{" "}
             <input
               type="number"
               value={editFocusMinutes}
               onChange={handleEditFocusMinutesChange}
-              className="w-5"
+              className="w-11 pl-1 border border-gray-700 rounded show-spinner"
             />
           </label>
           <label>
@@ -221,7 +220,7 @@ export const Pomodoro = ({
               type="number"
               value={editBreakMinutes}
               onChange={handleEditBreakMinutesChange}
-              className="w-5"
+              className="w-8"
             />
           </label>
           <label>
@@ -230,7 +229,7 @@ export const Pomodoro = ({
               type="number"
               value={editLongMinutes}
               onChange={handleEditLongMinutesChange}
-              className="w-5"
+              className="w-8"
             />
           </label>
           <label>
@@ -240,10 +239,10 @@ export const Pomodoro = ({
               min="1"
               value={editPomodoroGoal}
               onChange={handleEditPomodoroGoalChange}
-              className="w-5"
+              className="w-8"
             />
           </label>
-        </div>
+        </Board>
       ) : (
         <div className="flex gap-4">
           <span className="timer-font-number"> {getFormattedTime}</span>
@@ -252,16 +251,19 @@ export const Pomodoro = ({
           </button>
         </div>
       )}
-      <div className="flex gap-2 text-sm uppercase">
-        <span
-          className={
-            mode === "focus" && isRunning
-              ? activeFocusModeClass
-              : inactiveModeClass
-          }
-        >
-          Focus
-        </span>
+      <div className="flex gap-2 items-end text-sm uppercase">
+        <div className="flex flex-col items-center">
+          {completedPomodoros} • {pomodoroGoal}
+          <span
+            className={
+              mode === "focus" && isRunning
+                ? activeFocusModeClass
+                : inactiveModeClass
+            }
+          >
+            Focus
+          </span>
+        </div>
         <span>•</span>
         <span
           className={
@@ -284,19 +286,11 @@ export const Pomodoro = ({
         </span>
       </div>
       <div className="text-sm">
-        {mode === "done" ? (
-          <span
-            className={
-              mode === "done" ? activeDoneModeClass : inactiveModeClass
-            }
-          >
-            DONE
-          </span>
-        ) : (
-          <span className="">
-            POMODOROS: {completedPomodoros} • {pomodoroGoal}
-          </span>
-        )}
+        <span
+          className={mode === "done" ? activeDoneModeClass : inactiveModeClass}
+        >
+          DONE
+        </span>
       </div>
       <TimerControls
         isRunning={isRunning}

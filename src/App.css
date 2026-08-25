@@ -26,12 +26,12 @@ body {
   font-weight: bold;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  appearance: none;
-  margin: 0;
+input[type="number"].show-spinner {
+  appearance: auto;
 }
 
-input[type="number"] {
-  appearance: textfield;
+input[type="number"].show.spinner::-webkit-inner-spin-button {
+  appearance: auto;
+  opacity: 1;
 }
+
