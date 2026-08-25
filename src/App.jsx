@@ -15,8 +15,9 @@ import { Timer } from "@/components/features/Timer";
 
 function App() {
   return (
-    <div className="flex flex-col gap-2 min-h-screen p-1">
+    <div className="flex flex-col gap-6 min-h-screen p-1">
       <Header />
+
       {/* WIDGETS */}
       <div className="overflow-x-auto">
         <div className="flex gap-4">
@@ -31,10 +32,12 @@ function App() {
           </Widget>
         </div>
       </div>
+
       {/* TODO */}
       <div className="overflow-hidden">
         <ToDo />
       </div>
+
       {/* NOTES */}
       <div className="grid grid-cols-[200px_1fr] gap-2 flex-1">
         <Sidebar />

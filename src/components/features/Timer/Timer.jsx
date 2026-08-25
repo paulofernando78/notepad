@@ -127,6 +127,8 @@ export const Timer = ({
       >
         Done
       </span>
+      {/* Inpts */}
+      <div></div>
       <TimerControls
         isRunning={isRunning}
         onToggle={() => setIsRunning((current) => !current)}
