@@ -12,7 +12,18 @@ export const TimerControls = ({
   className,
 }) => {
   return (
-    <div className={`flex gap-4 mt-2 mb-1 ${className}`}>
+    <div className={`
+      flex gap-4
+      mt-2
+      mb-1
+      p-2
+      bg-gray-700/50
+      border
+      border-gray-700
+      rounded-3xl
+      shadow-md
+      shadow-black/30
+      ${className}`}>
       <button
         onClick={onToggle}
         disabled={toggleDisabled}
@@ -33,11 +44,11 @@ export const TimerControls = ({
         <>
           {isEditing ? (
             <button onClick={onConfirmEdit}>
-              <Icon name="check" size="25" className="translate-y-[0.04rem]" />
+              <Icon name="check" size="23" className="translate-y-[0.04rem]" />
             </button>
           ) : (
             <button onClick={onEdit}>
-              <Icon name="pencil" size="25" />
+              <Icon name="pencil" size="23" />
             </button>
           )}
         </>
