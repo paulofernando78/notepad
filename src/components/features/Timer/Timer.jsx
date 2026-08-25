@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { Board } from "@/components/ui/Board";
+import { NumberInput } from "@/components/ui/NumberInput";
 import { TimerControls } from "@/components/ui/TimerControls";
 
 function playTone(frequency, startDelay = 0) {
@@ -149,17 +150,22 @@ export const Timer = () => {
   const inactiveModeClass = "text-gray-400";
 
   return (
-    <Board className="relative w-42.5 space-y-4 timer-card">
+    <Board className="relative w-43  flex flex-col gap-4 timer-card">
       {/* Time */}
       <div
         className={`flex flex-col items-center ${isEditing ? "invisible" : "visible"}`}
       >
         <span className="timer-font-number">{getFormattedTime}</span>
-        <div className="flex flex-col items-center gap-2">
-          <label>
-            <input
-              type="text"
-              className="
+      </div>
+
+      {/* Input message */}
+      <div
+        className={`flex flex-col items-center gap-2 ${isEditing ? "invisible" : "visible"}`}
+      >
+        <label>
+          <input
+            type="text"
+            className="
           w-32
           px-1
           font-[Arial]
@@ -168,60 +174,44 @@ export const Timer = () => {
           border-gray-700
           placeholder:italic
         "
-              placeholder="ex: boiling water"
-            />
-          </label>
-          <span
-            className={`text-sm uppercase
+            placeholder="ex: boiling water"
+          />
+        </label>
+        <span
+          className={`text-sm uppercase
           ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
-          >
-            Done
-          </span>
-        </div>
+        >
+          Done
+        </span>
       </div>
 
       {/* Inputs */}
       <div
-        className={`absolute inset-x-2 top-2 flex gap-3 ${isEditing ? "visible" : "invisible"}`}
+        className={`absolute inset-x-2 top-12 flex gap-3 ${isEditing ? "visible" : "invisible"}`}
       >
-        {/* Hours */}
-        <label className="text-center">
-          <span>h</span>
-          <input
-            type="number"
-            name="hours"
-            min="0"
-            value={editHours}
-            onChange={(event) => setEditHours(Number(event.target.value))}
-            className="border border-gray-700 rounded show-spinner"
-          />
-        </label>
-        {/* Minutes */}
-        <label className="text-center">
-          <span>m</span>
-          <input
-            type="number"
-            name="minutes"
-            min="0"
-            max="59"
-            value={editMinutes}
-            onChange={(event) => setEditMinutes(Number(event.target.value))}
-            className="border border-gray-700 rounded show-spinner"
-          />
-        </label>
-        {/* Seconds */}
-        <label className="text-center">
-          <span>s</span>
-          <input
-            type="number"
-            name="seconds"
-            min="0"
-            max="59"
-            value={editSeconds}
-            onChange={(event) => setEditSeconds(Number(event.target.value))}
-            className="border border-gray-700 rounded show-spinner"
-          />
-        </label>
+        <NumberInput
+          label="h"
+          name="hours"
+          value={editHours}
+          onChange={setEditHours}
+          labelClassName="text-center"
+        />
+        <NumberInput
+          label="m"
+          name="minutes"
+          value={editMinutes}
+          onChange={setEditMinutes}
+          max={59}
+          labelClassName="text-center"
+        />
+        <NumberInput
+          label="s"
+          name="seconds"
+          value={editSeconds}
+          onChange={setEditSeconds}
+          max={59}
+          labelClassName="text-center"
+        />
       </div>
       <TimerControls
         isEditing={isEditing}

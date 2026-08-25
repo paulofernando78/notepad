@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Board } from "@/components/ui/Board";
 import { TimerControls } from "@/components/ui/TimerControls";
 import { Icon } from "@/components/ui/Icon";
+import { NumberInput } from "@/components/ui/NumberInput";
 
 const DEFAULT_FOCUS_MINUTES = 25;
 const DEFAULT_BREAK_MINUTES = 1;
@@ -149,22 +150,6 @@ export const Pomodoro = ({
     "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)] animate-pulse";
   const inactiveModeClass = "text-gray-400";
 
-  function handleEditFocusMinutesChange(event) {
-    setEditFocusMinutes(Number(event.target.value));
-  }
-
-  function handleEditBreakMinutesChange(event) {
-    setEditBreakMinutes(Number(event.target.value));
-  }
-
-  function handleEditLongBreakMinutesChange(event) {
-    setEditLongBreakMinutes(Number(event.target.value));
-  }
-
-  function handleEditPomodoroGoalChange(event) {
-    setEditPomodoroGoal(Number(event.target.value));
-  }
-
   function handleEdit() {
     setIsRunning(false);
     setEditFocusMinutes(focusMinutes);
@@ -213,7 +198,7 @@ export const Pomodoro = ({
   }
 
   return (
-    <Board className="relative space-y-4 px-[0.8rem]! timer-card">
+    <Board className="relative flex flex-col gap-4 px-[0.8rem]! timer-card">
 
       {/* Timer */}
       <div className={isEditing ? "invisible" : "visible"}>
@@ -281,45 +266,36 @@ export const Pomodoro = ({
 
       {/* Inputs */}
       <div
-        className={`absolute inset-x-2 top-2 grid gap-2 ${isEditing ? "visible" : "invisible"}`}
+        className={`absolute inset-x-3 top-[0.8rem] grid gap-2 text-[0.97rem] ${isEditing ? "visible" : "invisible"}`}
       >
-        <label>
-          Focus{" "}
-          <input
-            type="number"
-            value={editFocusMinutes}
-            onChange={handleEditFocusMinutesChange}
-            className="border border-gray-700 rounded show-spinner"
-          />
-        </label>
-        <label>
-          Break{" "}
-          <input
-            type="number"
-            value={editBreakMinutes}
-            onChange={handleEditBreakMinutesChange}
-            className="border border-gray-700 rounded show-spinner"
-          />
-        </label>
-        <label>
-          Long{" "}
-          <input
-            type="number"
-            value={editLongBreakMinutes}
-            onChange={handleEditLongBreakMinutesChange}
-            className="border border-gray-700 rounded show-spinner"
-          />
-        </label>
-        <label>
-          Pomodoros{" "}
-          <input
-            type="number"
-            min="1"
-            value={editPomodoroGoal}
-            onChange={handleEditPomodoroGoalChange}
-            className="border border-gray-700 rounded show-spinner"
-          />
-        </label>
+        <NumberInput
+          label="Focus"
+          name="focus"
+          value={editFocusMinutes}
+          onChange={setEditFocusMinutes}
+          min={1}
+        />
+        <NumberInput
+          label="Break"
+          name="break"
+          value={editBreakMinutes}
+          onChange={setEditBreakMinutes}
+          min={1}
+        />
+        <NumberInput
+          label="Long"
+          name="long-break"
+          value={editLongBreakMinutes}
+          onChange={setEditLongBreakMinutes}
+          min={1}
+        />
+        <NumberInput
+          label="Pomodoros"
+          name="pomodoro-goal"
+          value={editPomodoroGoal}
+          onChange={setEditPomodoroGoal}
+          min={1}
+        />
       </div>
 
       <TimerControls
