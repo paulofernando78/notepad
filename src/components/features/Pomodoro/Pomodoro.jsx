@@ -8,6 +8,31 @@ const DEFAULT_BREAK_MINUTES = 1;
 const DEFAULT_LONG_BREAK_MINUTES = 15;
 const LONG_BREAK_INTERVAL = 4;
 
+ function playTick() {
+
+    const audioContext = new AudioContext();
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.frequency.value = 800;
+
+    gain.gain.setValueAtTime(0.9, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioContext.currentTime + 0.03,
+    );
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.03);
+
+    oscillator.addEventListener("ended", () => {
+      audioContext.close();
+    });
+  }
+
 export const Pomodoro = ({
   minutes = DEFAULT_FOCUS_MINUTES,
   breakMinutes = DEFAULT_BREAK_MINUTES,
@@ -36,32 +61,6 @@ export const Pomodoro = ({
 
   const minutesLeft = Math.floor(time / 60);
   const secondLeft = time % 60;
-
-  function playTick() {
-    if (!isSoundEnabled) return;
-
-    const audioContext = new AudioContext();
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-
-    oscillator.frequency.value = 800;
-
-    gain.gain.setValueAtTime(0.9, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioContext.currentTime + 0.03,
-    );
-
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime + 0.03);
-
-    oscillator.addEventListener("ended", () => {
-      audioContext.close();
-    });
-  }
 
   useEffect(() => {
     if (!isRunning) return;
@@ -122,7 +121,7 @@ export const Pomodoro = ({
     focusTime,
     breakTime,
     longBreakTime,
-    isSoundEnabled,
+    isSoundEnabled
   ]);
 
   const getFormattedTime = `
