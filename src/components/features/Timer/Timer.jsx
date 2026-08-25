@@ -4,7 +4,7 @@ import { Board } from "@/components/ui/Board";
 import { TimerControls } from "@/components/ui/TimerControls";
 
 const DEFAULT_TIMER_MINUTES = 0;
-const DEFAULT_TIMER_SECONDS = 3;
+const DEFAULT_TIMER_SECONDS = 2;
 
 export const Timer = ({
   minutes = DEFAULT_TIMER_MINUTES,
@@ -94,8 +94,8 @@ export const Timer = ({
     ${String(hoursLeft).padStart(2, "0")}:${String(minutesLeft).padStart(2, "0")}:${String(secondsLeft).padStart(2, "0")}
     `;
 
-  const activeDoneModeClass =
-    "text-red-400 drop-shadow-[0_0_6px_rgba(248,113,113,0.1)]";
+   const activeTimerDoneModeClass =
+    "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)] animate-pulse";
   const inactiveModeClass = "text-gray-400";
 
   function handleReset() {
@@ -123,7 +123,7 @@ export const Timer = ({
       />
       <span
         className={`text-sm uppercase
-          ${mode === "done" ? activeDoneModeClass : inactiveModeClass}`}
+          ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
       >
         Done
       </span>

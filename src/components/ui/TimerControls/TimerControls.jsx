@@ -9,9 +9,10 @@ export const TimerControls = ({
   onConfirmEdit,
   isEditing = false,
   showEdit = false,
+  className
 }) => {
   return (
-    <div className="flex gap-2 mt-2 mb-1">
+    <div className={`flex gap-2 mt-2 mb-1 ${className}`}>
       <button
         onClick={onToggle}
         disabled={toggleDisabled}

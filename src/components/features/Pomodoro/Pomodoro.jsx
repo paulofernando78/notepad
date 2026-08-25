@@ -36,7 +36,7 @@ export const Pomodoro = ({
   minutes = DEFAULT_FOCUS_MINUTES,
   breakMinutes = DEFAULT_BREAK_MINUTES,
   longBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
-  totalPomodoros = 4,
+  totalPomodoros = 8,
 }) => {
   const [focusMinutes, setFocusMinutes] = useState(minutes);
   const [restMinutes, setRestMinutes] = useState(breakMinutes);
@@ -60,6 +60,10 @@ export const Pomodoro = ({
 
   const minutesLeft = Math.floor(time / 60);
   const secondLeft = time % 60;
+  const displayedPomodoro =
+    mode === "focus"
+      ? Math.min(completedPomodoros + 1, pomodoroGoal)
+      : completedPomodoros;
 
   useEffect(() => {
     if (!isRunning) return;
@@ -74,40 +78,38 @@ export const Pomodoro = ({
           return current - 1;
         }
 
+        // "Focus" has finihed
         if (mode === "focus") {
           const nextPomodoro = completedPomodoros + 1;
 
           setCompletedPomodoros(nextPomodoro);
 
-          if (
-            nextPomodoro % LONG_BREAK_INTERVAL === 0 &&
-            nextPomodoro < pomodoroGoal
-          ) {
-            setMode("long");
-            return longBreakTime;
-          }
-
-          setMode("break");
-          return breakTime;
-        }
-
-        if (mode === "break") {
-          if (completedPomodoros >= pomodoroGoal) {
+          // Goal is complete, so no further break is needed.
+          if (nextPomodoro >= pomodoroGoal) {
             setMode("done");
             setIsRunning(false);
             return 0;
           }
 
+          // Every four Pomodoros, a Long break replaces the short Break.
+          // If nextPomodoro is divisible by 4 with no remainder, start a long break.
+          if (nextPomodoro % LONG_BREAK_INTERVAL === 0) {
+            setMode("long");
+            return longBreakTime;
+          }
+
+          // Start a short break before the next "Focus"
+          setMode("break");
+          return breakTime;
+        }
+
+        // A short or long break finished
+        if (mode === "break" || mode === "long") {
           setMode("focus");
           return focusTime;
         }
 
-        if (mode === "long") {
-          setMode("focus");
-          return focusTime;
-        }
-
-        return focusTime;
+        return current;
       });
     }, 1000);
 
@@ -133,9 +135,9 @@ export const Pomodoro = ({
   const activeBreakModeClass =
     "text-yellow-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
   const activeLongModeClass =
-    "text-orange-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
-  const activeDoneModeClass =
-    "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
+    "text-blue-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
+  const activePomodoroDoneModeClass =
+    "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)] animate-pulse";
   const inactiveModeClass = "text-gray-400";
 
   function handleEditFocusMinutesChange(event) {
@@ -202,96 +204,115 @@ export const Pomodoro = ({
   }
 
   return (
-    <Board className="timer-card space-y-2">
-      {isEditing ? (
-        <Board className="grid gap-1 px-2 p-1">
-          <label>
-            Focus{" "}
-            <input
-              type="number"
-              value={editFocusMinutes}
-              onChange={handleEditFocusMinutesChange}
-              className="w-11 pl-1 border border-gray-700 rounded show-spinner"
-            />
-          </label>
-          <label>
-            Break{" "}
-            <input
-              type="number"
-              value={editBreakMinutes}
-              onChange={handleEditBreakMinutesChange}
-              className="w-8"
-            />
-          </label>
-          <label>
-            Long{" "}
-            <input
-              type="number"
-              value={editLongMinutes}
-              onChange={handleEditLongMinutesChange}
-              className="w-8"
-            />
-          </label>
-          <label>
-            Pomodoros{" "}
-            <input
-              type="number"
-              min="1"
-              value={editPomodoroGoal}
-              onChange={handleEditPomodoroGoalChange}
-              className="w-8"
-            />
-          </label>
-        </Board>
-      ) : (
+    <Board className="relative space-y-4 timer-card">
+
+      {/* Timer */}
+      <div className={isEditing ? "invisible" : "visible"}>
+        {/* Time + Sound Icon */}
         <div className="flex gap-4">
           <span className="timer-font-number"> {getFormattedTime}</span>
-          <button onClick={handleToggleSound}>
+          <button
+            onClick={handleToggleSound}
+            aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
+            title={isSoundEnabled ? "Mute tick" : "Enable tick"}
+          >
             {isSoundEnabled ? <Icon name="volumeX" /> : <Icon name="volume" />}
           </button>
         </div>
-      )}
-      <div className="flex gap-2 items-end text-sm uppercase">
-        <div className="flex flex-col items-center">
-          {completedPomodoros} • {pomodoroGoal}
+      </div>
+
+      {/* FOCUS • BREAK • LONG  + DONE */}
+      <div className={`text-sm text-center ${isEditing ? "invisible" : "visible"}`}>
+        {/* Focus • Break • Long  */}
+        <div className="flex gap-2 items-end text-sm uppercase">
+          {/* Numbers + FOCUS */}
+          <div className="flex flex-col items-center">
+            {displayedPomodoro} • {pomodoroGoal}
+            <span
+              className={
+                mode === "focus" && isRunning
+                  ? activeFocusModeClass
+                  : inactiveModeClass
+              }
+            >
+              Focus
+            </span>
+          </div>
+          <span>•</span>
+          {/* BREAK */}
           <span
             className={
-              mode === "focus" && isRunning
-                ? activeFocusModeClass
+              mode === "break" && isRunning
+                ? activeBreakModeClass
                 : inactiveModeClass
             }
           >
-            Focus
+            Break
+          </span>
+          <span>•</span>
+          {/* LONG */}
+          <span
+            className={
+              mode === "long" && isRunning
+                ? activeLongModeClass
+                : inactiveModeClass
+            }
+          >
+            Long
           </span>
         </div>
-        <span>•</span>
         <span
           className={
-            mode === "break" && isRunning
-              ? activeBreakModeClass
-              : inactiveModeClass
+            mode === "done" ? activePomodoroDoneModeClass : inactiveModeClass
           }
-        >
-          Break
-        </span>
-        <span>•</span>
-        <span
-          className={
-            mode === "long" && isRunning
-              ? activeLongModeClass
-              : inactiveModeClass
-          }
-        >
-          Long
-        </span>
-      </div>
-      <div className="text-sm">
-        <span
-          className={mode === "done" ? activeDoneModeClass : inactiveModeClass}
         >
           DONE
         </span>
       </div>
+
+      {/* Inputs */}
+      <div
+        className={`absolute inset-x-2 top-2 grid gap-2 ${isEditing ? "visible" : "invisible"}`}
+      >
+        <label>
+          Focus{" "}
+          <input
+            type="number"
+            value={editFocusMinutes}
+            onChange={handleEditFocusMinutesChange}
+            className="w-11 pl-1 border border-gray-700 rounded show-spinner"
+          />
+        </label>
+        <label>
+          Break{" "}
+          <input
+            type="number"
+            value={editBreakMinutes}
+            onChange={handleEditBreakMinutesChange}
+            className="w-11 pl-1 border border-gray-700 rounded show-spinner"
+          />
+        </label>
+        <label>
+          Long{" "}
+          <input
+            type="number"
+            value={editLongMinutes}
+            onChange={handleEditLongMinutesChange}
+            className="w-11 pl-1 border border-gray-700 rounded show-spinner"
+          />
+        </label>
+        <label>
+          Pomodoros{" "}
+          <input
+            type="number"
+            min="1"
+            value={editPomodoroGoal}
+            onChange={handleEditPomodoroGoalChange}
+            className="w-11 pl-1 border border-gray-700 rounded show-spinner"
+          />
+        </label>
+      </div>
+
       <TimerControls
         isRunning={isRunning}
         onToggle={handleToggle}

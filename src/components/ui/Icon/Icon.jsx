@@ -1,5 +1,6 @@
 import {
   Bookmark,
+  Brain,
   CirclePause,
   CirclePlay,
   Check,
@@ -21,6 +22,7 @@ import {
 
 const icons = {
   bookmark: Bookmark,
+  brain: Brain,
   circlePause: CirclePause,
   circlePlay: CirclePlay,
   check: Check,

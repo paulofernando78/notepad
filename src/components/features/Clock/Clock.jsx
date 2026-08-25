@@ -49,12 +49,12 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
   return (
       <Board className="timer-card">
         <span className="timer-font-number">{currentTime}</span>
-        <div className="flex flex-col items-center text-sm">
-          <span className="text-sm">{currentDate}</span>
+        <div className="flex flex-col items-center text-lg">
+          <span className="">{currentDate}</span>
           <div className="flex gap-1 space-y-2">
             <span className="block">{city}</span>{" "}
             {weather && (
-              <span className="block text-sm">{weather.temperature}°C</span>
+              <span className="block">{weather.temperature}°C</span>
             )}
           </div>
         </div>
