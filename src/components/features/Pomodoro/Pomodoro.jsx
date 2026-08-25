@@ -3,79 +3,214 @@ import { Board } from "@/components/ui/Board";
 import { TimerControls } from "@/components/ui/TimerControls";
 
 const DEFAULT_FOCUS_MINUTES = 25;
-const DEFAULT_BREAK_MINUTES = 5;
+const DEFAULT_BREAK_MINUTES = 1;
+const DEFAULT_LONG_BREAK_MINUTES = 15;
+const LONG_BREAK_INTERVAL = 4;
 
 export const Pomodoro = ({
   minutes = DEFAULT_FOCUS_MINUTES,
   breakMinutes = DEFAULT_BREAK_MINUTES,
-  totalCycles = 4,
+  longBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
+  totalPomodoros = 4,
 }) => {
-  // Store durations in seconds so the countdown math stays simple.
-  const focusTime = minutes * 60;
-  const breakTime = breakMinutes * 60;
+  const [focusMinutes, setFocusMinutes] = useState(minutes);
+  const [restMinutes, setRestMinutes] = useState(breakMinutes);
+  const [longMinutes, setLongMinutes] = useState(longBreakMinutes);
+  const [pomodoroGoal, setPomodoroGoal] = useState(totalPomodoros);
 
-  // time is the current countdown value, mode controls focus/break state.
+  const focusTime = focusMinutes * 60;
+  const breakTime = restMinutes * 60;
+  const longBreakTime = longMinutes * 60;
+
   const [time, setTime] = useState(focusTime);
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState("focus");
-  const [currentCycle, setCurrentCycle] = useState(0);
-  const [isEditing, setIsEditing] = useState(false)
+  const [completedPomodoros, setCompletedPomodoros] = useState(0);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editFocusMinutes, setEditFocusMinutes] = useState(minutes);
+  const [editBreakMinutes, setEditBreakMinutes] = useState(breakMinutes);
+  const [editLongMinutes, setEditLongMinutes] = useState(longBreakMinutes);
+  const [editPomodoroGoal, setEditPomodoroGoal] = useState(totalPomodoros);
+
+  const minutesLeft = Math.floor(time / 60);
+  const secondLeft = time % 60;
 
   useEffect(() => {
-    // Do not create an interval while the timer is paused.
     if (!isRunning) return;
 
     const intervalID = setInterval(() => {
       setTime((current) => {
-        // Keep counting down while there is more than one second left.
         if (current > 1) {
           return current - 1;
         }
 
-        // When focus time ends, switch to break time.
         if (mode === "focus") {
+          const nextPomodoro = completedPomodoros + 1;
+
+          setCompletedPomodoros(nextPomodoro);
+
+          if (
+            nextPomodoro % LONG_BREAK_INTERVAL === 0 &&
+            nextPomodoro < pomodoroGoal
+          ) {
+            setMode("long");
+            return longBreakTime;
+          }
+
           setMode("break");
           return breakTime;
         }
 
-        // When break time ends, switch back to focus time.
-        setCurrentCycle((current) => current + 1);
-        setMode("focus");
+        if (mode === "break") {
+          if (completedPomodoros >= pomodoroGoal) {
+            setMode("done");
+            setIsRunning(false);
+            return 0;
+          }
+
+          setMode("focus");
+          return focusTime;
+        }
+
+        if (mode === "long") {
+          setMode("focus");
+          return focusTime;
+        }
+
         return focusTime;
       });
     }, 1000);
 
     return () => clearInterval(intervalID);
-  }, [isRunning, mode, focusTime, breakTime]);
-
-  // Convert raw seconds into MM:SS for display.
-  const minutesLeft = Math.floor(time / 60);
-  const secondLeft = time % 60;
+  }, [
+    isRunning,
+    mode,
+    completedPomodoros,
+    pomodoroGoal,
+    focusTime,
+    breakTime,
+    longBreakTime,
+  ]);
 
   const getFormattedTime = `
     ${String(minutesLeft).padStart(2, "0")}:${String(secondLeft).padStart(2, "0")}
     `;
 
   const activeFocusModeClass =
-    "text-yellow-300 [text-shadow:0_0_8px_rgba(253,224,71,0.8)]";
+    "text-green-300 [text-shadow:0_0_8px_rgba(253,224,71,0.8)]";
 
   const activeBreakModeClass =
+    "text-yellow-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
+  const activeLongModeClass =
     "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
-
+  const activeDoneModeClass =
+    "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
   const inactiveModeClass = "text-gray-400";
+
+  function handleEditFocusMinutesChange(event) {
+    setEditFocusMinutes(Number(event.target.value));
+  }
+
+  function handleEditBreakMinutesChange(event) {
+    setEditBreakMinutes(Number(event.target.value));
+  }
+
+  function handleEditLongMinutesChange(event) {
+    setEditLongMinutes(Number(event.target.value));
+  }
+
+  function handleEditPomodoroGoalChange(event) {
+    setEditPomodoroGoal(Number(event.target.value));
+  }
+
+  function handleEdit() {
+    setIsRunning(false);
+    setEditFocusMinutes(focusMinutes);
+    setEditBreakMinutes(restMinutes);
+    setEditLongMinutes(longMinutes);
+    setEditPomodoroGoal(pomodoroGoal);
+    setIsEditing(true);
+  }
+
+  function applyEditSettings(shouldStart) {
+    setFocusMinutes(editFocusMinutes);
+    setRestMinutes(editBreakMinutes);
+    setLongMinutes(editLongMinutes);
+    setPomodoroGoal(editPomodoroGoal);
+    setTime(editFocusMinutes * 60);
+    setCompletedPomodoros(0);
+    setMode("focus");
+    setIsRunning(shouldStart);
+    setIsEditing(false);
+  }
+
+  function handleConfirmEdit() {
+    applyEditSettings(false);
+  }
+
+  function handleToggle() {
+    if (isEditing) {
+      applyEditSettings(true);
+      return;
+    }
+
+    if (mode === "done") return;
+
+    setIsRunning((current) => !current);
+  }
 
   function handleReset() {
     setIsRunning(false);
+    setCompletedPomodoros(0);
     setMode("focus");
     setTime(focusTime);
   }
 
   return (
     <Board className="timer-card space-y-2">
-      <span className="timer-font-number">{getFormattedTime}</span>
-      <span className="text-sm">
-        Cycles: {currentCycle} • {totalCycles}
-      </span>
+      {isEditing ? (
+        <div className="grid">
+          <label>
+            Focus{" "}
+            <input
+              type="number"
+              value={editFocusMinutes}
+              onChange={handleEditFocusMinutesChange}
+              className="w-5"
+            />
+          </label>
+          <label>
+            Break{" "}
+            <input
+              type="number"
+              value={editBreakMinutes}
+              onChange={handleEditBreakMinutesChange}
+              className="w-5"
+            />
+          </label>
+          <label>
+            Long{" "}
+            <input
+              type="number"
+              value={editLongMinutes}
+              onChange={handleEditLongMinutesChange}
+              className="w-5"
+            />
+          </label>
+          <label>
+            Pomodoros{" "}
+            <input
+              type="number"
+              min="1"
+              value={editPomodoroGoal}
+              onChange={handleEditPomodoroGoalChange}
+              className="w-5"
+            />
+          </label>
+        </div>
+      ) : (
+        <span className="timer-font-number"> {getFormattedTime}</span>
+      )}
       <div className="flex gap-2 text-sm uppercase">
         <span
           className={
@@ -96,15 +231,42 @@ export const Pomodoro = ({
         >
           Break
         </span>
+        <span>•</span>
+        <span
+          className={
+            mode === "long" && isRunning
+              ? activeLongModeClass
+              : inactiveModeClass
+          }
+        >
+          Long
+        </span>
+      </div>
+      <div className="text-sm">
+        {mode === "done" ? (
+          <span
+            className={
+              mode === "done"
+                ? activeDoneModeClass
+                : inactiveModeClass
+            }
+          >
+            DONE
+          </span>
+        ) : (
+          <span className="">
+            POMODOROS: {completedPomodoros} • {pomodoroGoal}
+          </span>
+        )}
       </div>
       <TimerControls
         isRunning={isRunning}
-        onToggle={() => {
-          setMode("focus");
-          setIsRunning((current) => !current);
-        }}
+        onToggle={handleToggle}
+        toggleDisabled={mode === "done" && !isEditing}
         onReset={handleReset}
-        onEdit={() => setIsEditing(true)}
+        onEdit={handleEdit}
+        onConfirmEdit={handleConfirmEdit}
+        isEditing={isEditing}
         showEdit
       />
     </Board>

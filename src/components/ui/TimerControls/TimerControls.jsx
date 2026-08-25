@@ -3,15 +3,20 @@ import { Icon } from "@/components/ui/Icon";
 export const TimerControls = ({
   isRunning,
   onToggle,
+  toggleDisabled = false,
   onReset,
   onEdit,
-  onCancelEdit,
+  onConfirmEdit,
   isEditing = false,
   showEdit = false,
 }) => {
   return (
-    <div className="flex gap-2 mb-1">
-      <button onClick={onToggle}>
+    <div className="flex gap-2 mt-2 mb-1">
+      <button
+        onClick={onToggle}
+        disabled={toggleDisabled}
+        className="disabled:cursor-not-allowed disabled:opacity-40"
+      >
         {isRunning ? (
           <Icon name="circlePause" size="25" />
         ) : (
@@ -26,8 +31,8 @@ export const TimerControls = ({
       {showEdit && (
         <>
           {isEditing ? (
-            <button onClick={onCancelEdit}>
-              <Icon name="x" size="23" />
+            <button onClick={onConfirmEdit}>
+              <Icon name="check" size="23" className="translate-y-[0.04rem]" />
             </button>
           ) : (
             <button onClick={onEdit}>

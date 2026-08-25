@@ -111,13 +111,13 @@ export const Timer = ({
       <input
         type="text"
         className="
-        w-32
-        p-1
-        font-[Arial]
-        text-sm
-        border-b
-        border-gray-700
-        placeholder:italic
+          w-32
+          px-1
+          font-[Arial]
+          text-sm
+          border-b
+          border-gray-700
+          placeholder:italic
         "
         placeholder="ex: boiling water"
       />

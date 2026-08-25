@@ -2,6 +2,7 @@ import {
   Bookmark,
   CirclePause,
   CirclePlay,
+  Check,
   Ellipsis,
   FolderClosed,
   FolderOpen,
@@ -14,13 +15,13 @@ import {
   SquareText,
   RotateCcw,
   Trash,
-  X
 } from "lucide-react";
 
 const icons = {
   bookmark: Bookmark,
   circlePause: CirclePause,
   circlePlay: CirclePlay,
+  check: Check,
   ellipsis: Ellipsis,
   folderClosed: FolderClosed,
   folderOpen: FolderOpen,
@@ -33,7 +34,6 @@ const icons = {
   squareText: SquareText,
   rotateCcw: RotateCcw,
   trash: Trash,
-  x: X
 };
 
 export const Icon = ({
