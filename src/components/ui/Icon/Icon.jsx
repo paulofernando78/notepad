@@ -15,6 +15,8 @@ import {
   SquareText,
   RotateCcw,
   Trash,
+  Volume,
+  VolumeX
 } from "lucide-react";
 
 const icons = {
@@ -34,6 +36,8 @@ const icons = {
   squareText: SquareText,
   rotateCcw: RotateCcw,
   trash: Trash,
+  volume: Volume,
+  volumeX: VolumeX
 };
 
 export const Icon = ({
