@@ -9,7 +9,7 @@ export const TimerControls = ({
   onConfirmEdit,
   isEditing = false,
   showEdit = false,
-  className
+  className,
 }) => {
   return (
     <div className={`flex gap-2 mt-2 mb-1 ${className}`}>

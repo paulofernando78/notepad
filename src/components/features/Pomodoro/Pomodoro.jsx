@@ -33,29 +33,38 @@ function playTick() {
 }
 
 export const Pomodoro = ({
-  minutes = DEFAULT_FOCUS_MINUTES,
-  breakMinutes = DEFAULT_BREAK_MINUTES,
-  longBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
-  totalPomodoros = 8,
+  minutes: initialFocusMinutes = DEFAULT_FOCUS_MINUTES,
+  breakMinutes: initialBreakMinutes = DEFAULT_BREAK_MINUTES,
+  longBreakMinutes: initialLongBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
+  totalPomodoros: initialPomodoroGoal = 8,
 }) => {
-  const [focusMinutes, setFocusMinutes] = useState(minutes);
-  const [restMinutes, setRestMinutes] = useState(breakMinutes);
-  const [longMinutes, setLongMinutes] = useState(longBreakMinutes);
-  const [pomodoroGoal, setPomodoroGoal] = useState(totalPomodoros);
+  const [focusMinutes, setFocusMinutes] = useState(initialFocusMinutes);
+  const [breakMinutes, setBreakMinutes] = useState(initialBreakMinutes);
+  const [longBreakMinutes, setLongBreakMinutes] = useState(
+    initialLongBreakMinutes,
+  );
+  const [pomodoroGoal, setPomodoroGoal] = useState(initialPomodoroGoal);
 
-  const focusTime = focusMinutes * 60;
-  const breakTime = restMinutes * 60;
-  const longBreakTime = longMinutes * 60;
+  const focusDuration = focusMinutes * 60;
+  const breakDuration = breakMinutes * 60;
+  const longBreakDuration = longBreakMinutes * 60;
 
-  const [time, setTime] = useState(focusTime);
+  const [time, setTime] = useState(focusDuration);
+
+  // Editing
+  const [isEditing, setIsEditing] = useState(false);
+  const [editFocusMinutes, setEditFocusMinutes] =
+    useState(initialFocusMinutes);
+  const [editBreakMinutes, setEditBreakMinutes] =
+    useState(initialBreakMinutes);
+  const [editLongBreakMinutes, setEditLongBreakMinutes] =
+    useState(initialLongBreakMinutes);
+  const [editPomodoroGoal, setEditPomodoroGoal] =
+    useState(initialPomodoroGoal);
+
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState("focus");
   const [completedPomodoros, setCompletedPomodoros] = useState(0);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editFocusMinutes, setEditFocusMinutes] = useState(minutes);
-  const [editBreakMinutes, setEditBreakMinutes] = useState(breakMinutes);
-  const [editLongMinutes, setEditLongMinutes] = useState(longBreakMinutes);
-  const [editPomodoroGoal, setEditPomodoroGoal] = useState(totalPomodoros);
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
 
   const minutesLeft = Math.floor(time / 60);
@@ -95,18 +104,18 @@ export const Pomodoro = ({
           // If nextPomodoro is divisible by 4 with no remainder, start a long break.
           if (nextPomodoro % LONG_BREAK_INTERVAL === 0) {
             setMode("long");
-            return longBreakTime;
+            return longBreakDuration;
           }
 
           // Start a short break before the next "Focus"
           setMode("break");
-          return breakTime;
+          return breakDuration;
         }
 
         // A short or long break finished
         if (mode === "break" || mode === "long") {
           setMode("focus");
-          return focusTime;
+          return focusDuration;
         }
 
         return current;
@@ -119,9 +128,9 @@ export const Pomodoro = ({
     mode,
     completedPomodoros,
     pomodoroGoal,
-    focusTime,
-    breakTime,
-    longBreakTime,
+    focusDuration,
+    breakDuration,
+    longBreakDuration,
     isSoundEnabled,
   ]);
 
@@ -148,8 +157,8 @@ export const Pomodoro = ({
     setEditBreakMinutes(Number(event.target.value));
   }
 
-  function handleEditLongMinutesChange(event) {
-    setEditLongMinutes(Number(event.target.value));
+  function handleEditLongBreakMinutesChange(event) {
+    setEditLongBreakMinutes(Number(event.target.value));
   }
 
   function handleEditPomodoroGoalChange(event) {
@@ -159,16 +168,16 @@ export const Pomodoro = ({
   function handleEdit() {
     setIsRunning(false);
     setEditFocusMinutes(focusMinutes);
-    setEditBreakMinutes(restMinutes);
-    setEditLongMinutes(longMinutes);
+    setEditBreakMinutes(breakMinutes);
+    setEditLongBreakMinutes(longBreakMinutes);
     setEditPomodoroGoal(pomodoroGoal);
     setIsEditing(true);
   }
 
   function applyEditSettings(shouldStart) {
     setFocusMinutes(editFocusMinutes);
-    setRestMinutes(editBreakMinutes);
-    setLongMinutes(editLongMinutes);
+    setBreakMinutes(editBreakMinutes);
+    setLongBreakMinutes(editLongBreakMinutes);
     setPomodoroGoal(editPomodoroGoal);
     setTime(editFocusMinutes * 60);
     setCompletedPomodoros(0);
@@ -200,7 +209,7 @@ export const Pomodoro = ({
     setIsRunning(false);
     setCompletedPomodoros(0);
     setMode("focus");
-    setTime(focusTime);
+    setTime(focusDuration);
   }
 
   return (
@@ -280,7 +289,7 @@ export const Pomodoro = ({
             type="number"
             value={editFocusMinutes}
             onChange={handleEditFocusMinutesChange}
-            className="w-11 pl-1 border border-gray-700 rounded show-spinner"
+            className="border border-gray-700 rounded show-spinner"
           />
         </label>
         <label>
@@ -289,16 +298,16 @@ export const Pomodoro = ({
             type="number"
             value={editBreakMinutes}
             onChange={handleEditBreakMinutesChange}
-            className="w-11 pl-1 border border-gray-700 rounded show-spinner"
+            className="border border-gray-700 rounded show-spinner"
           />
         </label>
         <label>
           Long{" "}
           <input
             type="number"
-            value={editLongMinutes}
-            onChange={handleEditLongMinutesChange}
-            className="w-11 pl-1 border border-gray-700 rounded show-spinner"
+            value={editLongBreakMinutes}
+            onChange={handleEditLongBreakMinutesChange}
+            className="border border-gray-700 rounded show-spinner"
           />
         </label>
         <label>
@@ -308,20 +317,20 @@ export const Pomodoro = ({
             min="1"
             value={editPomodoroGoal}
             onChange={handleEditPomodoroGoalChange}
-            className="w-11 pl-1 border border-gray-700 rounded show-spinner"
+            className="border border-gray-700 rounded show-spinner"
           />
         </label>
       </div>
 
       <TimerControls
+        isEditing={isEditing}
+        onEdit={handleEdit}
+        onConfirmEdit={handleConfirmEdit}
+        showEdit
         isRunning={isRunning}
         onToggle={handleToggle}
         toggleDisabled={mode === "done" && !isEditing}
         onReset={handleReset}
-        onEdit={handleEdit}
-        onConfirmEdit={handleConfirmEdit}
-        isEditing={isEditing}
-        showEdit
       />
     </Board>
   );
