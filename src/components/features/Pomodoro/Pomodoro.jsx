@@ -204,7 +204,7 @@ export const Pomodoro = ({
   }
 
   return (
-    <Board className="relative space-y-4 timer-card">
+    <Board className="relative space-y-4 px-[0.8rem]! timer-card">
 
       {/* Timer */}
       <div className={isEditing ? "invisible" : "visible"}>
