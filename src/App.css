@@ -9,26 +9,6 @@ body {
   color: gray;
 }
 
-.timer-card {
-  @apply
-    flex
-    flex-col
-    items-center
-    justify-center
-    min-w-37.5
-    p-2.5
-    text-white
-    bg-gray-500/20;
-  font-family: "Oswald Variable", sans-serif;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
-}
-
-.timer-font-number {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
 input[type="number"].show-spinner {
   color-scheme: dark;
   width: 40px;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { Board } from "@/components/ui/Board";
+import { WidgetBody } from "@/components/ui/WidgetBody";
+import { WidgetControls } from "@/components/ui/WidgetControls";
 
 export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
   const [time, setTime] = useState(new Date());
@@ -47,15 +48,30 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
   }, [latitude, longitude]);
 
   return (
-    <Board className="timer-card">
-      <span className="timer-font-number">{currentTime}</span>
-      <div className="flex flex-col items-center text-lg">
-        <span className="">{currentDate}</span>
-        <div className="flex gap-1 space-y-2">
-          <span className="block">{city}</span>{" "}
-          {weather && <span className="block">{weather.temperature}°C</span>}
+    <WidgetBody
+      top={<span>{currentTime}</span>}
+      middle={
+        <div>
+          <div className="flex flex-col items-center text-lg">
+            <span className="">{currentDate}</span>
+            <div className="flex gap-2">
+              <span className="block">{city}</span>{" "}
+              {weather && (
+                <span className="block">{weather.temperature}°C</span>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </Board>
+      }
+      bottom={
+        <WidgetControls>
+          {/* <WidgetControls.Edit
+              isEditing={isEditingWeather}
+              onEdit={handleEditWeather}
+              onConfirm={handleConfirmWeather}
+            /> */}
+        </WidgetControls>
+      }
+    />
   );
 };

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Board } from "@/components/ui/Board";
-import { TimerControls } from "@/components/ui/TimerControls";
-import { Icon } from "@/components/ui/Icon";
+import { WidgetBody } from "@/components/ui/WidgetBody";
 import { NumberInput } from "@/components/ui/NumberInput";
+import { WidgetControls } from "@/components/ui/WidgetControls";
+import { Icon } from "@/components/ui/Icon";
 
 const DEFAULT_FOCUS_MINUTES = 25;
 const DEFAULT_BREAK_MINUTES = 1;
@@ -54,14 +54,12 @@ export const Pomodoro = ({
 
   // Editing
   const [isEditing, setIsEditing] = useState(false);
-  const [editFocusMinutes, setEditFocusMinutes] =
-    useState(initialFocusMinutes);
-  const [editBreakMinutes, setEditBreakMinutes] =
-    useState(initialBreakMinutes);
-  const [editLongBreakMinutes, setEditLongBreakMinutes] =
-    useState(initialLongBreakMinutes);
-  const [editPomodoroGoal, setEditPomodoroGoal] =
-    useState(initialPomodoroGoal);
+  const [editFocusMinutes, setEditFocusMinutes] = useState(initialFocusMinutes);
+  const [editBreakMinutes, setEditBreakMinutes] = useState(initialBreakMinutes);
+  const [editLongBreakMinutes, setEditLongBreakMinutes] = useState(
+    initialLongBreakMinutes,
+  );
+  const [editPomodoroGoal, setEditPomodoroGoal] = useState(initialPomodoroGoal);
 
   const [isRunning, setIsRunning] = useState(false);
   const [mode, setMode] = useState("focus");
@@ -204,75 +202,104 @@ export const Pomodoro = ({
   }
 
   return (
-    <Board className="relative flex flex-col gap-4 px-[0.8rem]! timer-card">
-
-      {/* Timer */}
-      <div className={isEditing ? "invisible" : "visible"}>
-        {/* Time + Sound Icon */}
-        <div className="flex gap-4">
-          <span className="timer-font-number"> {getFormattedTime}</span>
-          <button
-            onClick={handleToggleSound}
-            aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
-            title={isSoundEnabled ? "Mute tick" : "Enable tick"}
-          >
-            {isSoundEnabled ? <Icon name="volumeX" /> : <Icon name="volume" />}
-          </button>
-        </div>
-      </div>
-
-      {/* FOCUS • BREAK • LONG  + DONE */}
-      <div className={`text-sm text-center ${isEditing ? "invisible" : "visible"}`}>
-        {/* Focus • Break • Long  */}
-        <div className="flex gap-2 items-end text-sm uppercase">
-          {/* Numbers + FOCUS */}
-          <div className="flex flex-col items-center">
-            {displayedPomodoro} • {pomodoroGoal}
-            <span
-              className={
-                mode === "focus" && isRunning
-                  ? activeFocusModeClass
-                  : inactiveModeClass
-              }
+    <div className="relative flex flex-col gap-4">
+      <WidgetBody
+        top={
+          <div className={isEditing ? "invisible" : "visible"}>
+            {/* Time + Sound Icon */}
+            <div className="flex gap-4">
+              <span> {getFormattedTime}</span>
+              <button
+                onClick={handleToggleSound}
+                aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
+                title={isSoundEnabled ? "Mute tick" : "Enable tick"}
+              >
+                {isSoundEnabled ? (
+                  <Icon name="volumeX" />
+                ) : (
+                  <Icon name="volume" />
+                )}
+              </button>
+            </div>
+          </div>
+        }
+        middle={
+          <div className="text-sm text-center uppercase">
+            {/* Focus • Break • Long  */}
+            <div
+              className={`flex gap-2 items-end justify-center  ${isEditing ? "invisible" : "visible"}`}
             >
-              Focus
+              {/* Numbers + FOCUS */}
+              <div className="flex flex-col items-center">
+                {displayedPomodoro} • {pomodoroGoal}
+                <span
+                  className={
+                    mode === "focus" && isRunning
+                      ? activeFocusModeClass
+                      : inactiveModeClass
+                  }
+                >
+                  Focus
+                </span>
+              </div>
+              <span>•</span>
+              {/* BREAK */}
+              <span
+                className={
+                  mode === "break" && isRunning
+                    ? activeBreakModeClass
+                    : inactiveModeClass
+                }
+              >
+                Break
+              </span>
+              <span>•</span>
+              {/* LONG */}
+              <span
+                className={
+                  mode === "long" && isRunning
+                    ? activeLongModeClass
+                    : inactiveModeClass
+                }
+              >
+                Long
+              </span>
+            </div>
+            <span
+              className={`block
+                  ${isEditing ? "invisible" : "visible"}
+                 ${
+                   mode === "done"
+                     ? activePomodoroDoneModeClass
+                     : inactiveModeClass
+                 }
+                `}
+            >
+              DONE
             </span>
           </div>
-          <span>•</span>
-          {/* BREAK */}
-          <span
-            className={
-              mode === "break" && isRunning
-                ? activeBreakModeClass
-                : inactiveModeClass
-            }
-          >
-            Break
-          </span>
-          <span>•</span>
-          {/* LONG */}
-          <span
-            className={
-              mode === "long" && isRunning
-                ? activeLongModeClass
-                : inactiveModeClass
-            }
-          >
-            Long
-          </span>
-        </div>
-        <span
-          className={
-            mode === "done" ? activePomodoroDoneModeClass : inactiveModeClass
-          }
-        >
-          DONE
-        </span>
-      </div>
+        }
+        bottom={
+          <WidgetControls>
+            <WidgetControls.Play
+              isRunning={isRunning}
+              onClick={handleToggle}
+              disabled={mode === "done" && !isEditing}
+            />
 
+            <WidgetControls.Reset onClick={handleReset} />
+
+            <WidgetControls.Edit
+              isEditing={isEditing}
+              onEdit={handleEdit}
+              onConfirm={handleConfirmEdit}
+            />
+          </WidgetControls>
+        }
+      />
       {/* Inputs */}
       <div
-        className={`absolute inset-x-3 top-[0.8rem] grid gap-2 text-[0.97rem] ${isEditing ? "visible" : "invisible"}`}
+        className={`absolute inset-x-2 top-[0.4rem] grid gap-2 text-[0.97rem] ${isEditing ? "visible" : "invisible"}`}
       >
         <NumberInput
           label="Focus"
@@ -303,17 +330,6 @@ export const Pomodoro = ({
           min={1}
         />
       </div>
-
-      <TimerControls
-        isEditing={isEditing}
-        onEdit={handleEdit}
-        onConfirmEdit={handleConfirmEdit}
-        showEdit
-        isRunning={isRunning}
-        onToggle={handleToggle}
-        toggleDisabled={mode === "done" && !isEditing}
-        onReset={handleReset}
-      />
-    </Board>
+    </div>
   );
 };

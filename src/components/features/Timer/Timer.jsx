@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { Board } from "@/components/ui/Board";
+import { WidgetBody } from "@/components/ui/WidgetBody";
 import { NumberInput } from "@/components/ui/NumberInput";
-import { TimerControls } from "@/components/ui/TimerControls";
+import { WidgetControls } from "@/components/ui/WidgetControls";
 
 function playTone(frequency, startDelay = 0) {
   const audioContext = new AudioContext();
@@ -184,41 +184,63 @@ export const Timer = () => {
   const inactiveModeClass = "text-gray-400";
 
   return (
-    <Board className="relative w-43 flex flex-col gap-4 timer-card">
-      {/* Time */}
-      <div
-        className={`flex flex-col items-center ${isEditing ? "invisible" : "visible"}`}
-      >
-        <span className="timer-font-number">{getFormattedTime}</span>
-      </div>
+    <div className="relative flex flex-col gap-4">
+      <WidgetBody
+        // Timer
+        top={
+          <div
+            className={isEditing ? "invisible" : "visible"}
+          >
+            <span>{getFormattedTime}</span>
+          </div>
+        }
+        middle={
+          <>
+            <div
+              className={`flex flex-col items-center gap-2 ${isEditing ? "invisible" : "visible"}`}
+            >
+              <label>
+                <input
+                  type="text"
+                  className="
+            w-32
+            px-1
+            font-[Arial]
+            text-sm
+            border-b
+            border-gray-700
+            placeholder:italic
+          "
+                  placeholder="ex: boiling water"
+                />
+              </label>
+              <span
+                className={`text-sm uppercase
+            ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
+              >
+                Done
+              </span>
+            </div>
+          </>
+        }
+        bottom={
+          <WidgetControls>
+            <WidgetControls.Play
+              isRunning={isRunning}
+              onClick={handleToggle}
+              disabled={mode === "done" && !isEditing}
+            />
 
-      {/* Input message */}
-      <div
-        className={`flex flex-col items-center gap-2 ${isEditing ? "invisible" : "visible"}`}
-      >
-        <label>
-          <input
-            type="text"
-            className="
-          w-32
-          px-1
-          font-[Arial]
-          text-sm
-          border-b
-          border-gray-700
-          placeholder:italic
-        "
-            placeholder="ex: boiling water"
-          />
-        </label>
-        <span
-          className={`text-sm uppercase
-          ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
-        >
-          Done
-        </span>
-      </div>
+            <WidgetControls.Reset onClick={handleReset} />
 
+            <WidgetControls.Edit
+              isEditing={isEditing}
+              onEdit={handleEdit}
+              onConfirm={handleConfirmEdit}
+            />
+          </WidgetControls>
+        }
+      />
       {/* Inputs */}
       <div
         className={`absolute inset-x-2 top-12 flex gap-3 ${isEditing ? "visible" : "invisible"}`}
@@ -247,16 +269,6 @@ export const Timer = () => {
           labelClassName="text-center"
         />
       </div>
-      <TimerControls
-        isEditing={isEditing}
-        onEdit={handleEdit}
-        showEdit
-        onConfirmEdit={handleConfirmEdit}
-        isRunning={isRunning}
-        onToggle={handleToggle}
-        toggleDisabled={mode === "done" && !isEditing}
-        onReset={handleReset}
-      />
-    </Board>
+    </div>
   );
 };
