@@ -192,9 +192,15 @@ export const Pomodoro = ({
 
   function handleReset() {
     setIsRunning(false);
+
+    setEditFocusMinutes(focusMinutes);
+    setEditBreakMinutes(breakMinutes);
+    setEditLongBreakMinutes(longBreakMinutes);
+    setEditPomodoroGoal(pomodoroGoal);
+
     setCompletedPomodoros(0);
     setMode("focus");
-    setTime(focusDuration);
+    setTime(initialFocusMinutes * 60);
   }
 
   return (

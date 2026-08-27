@@ -101,9 +101,20 @@ export const Timer = () => {
   function handleReset() {
     setIsRunning(false);
     setIsAlarmPlaying(false);
+
+    setDuration(initialTime)
+    setTime(initialTime);
+    
+    setEditHours(0);
+    setEditMinutes(0);
+    setEditSeconds(0);
+    
     setMode("idle");
-    setIsEditing(false);
-    setTime(duration);
+
+    const hours = Math.floor(duration / 3600);
+    const minutes = Math.floor((duration % 3600) / 60);
+    const seconds = duration % 60;
+
   }
 
   useEffect(() => {
@@ -150,7 +161,7 @@ export const Timer = () => {
   const inactiveModeClass = "text-gray-400";
 
   return (
-    <Board className="relative w-43  flex flex-col gap-4 timer-card">
+    <Board className="relative w-43 flex flex-col gap-4 timer-card">
       {/* Time */}
       <div
         className={`flex flex-col items-center ${isEditing ? "invisible" : "visible"}`}
