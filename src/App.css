@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 body {
   background-color: #191919;
   color: white;
@@ -8,16 +10,17 @@ body {
 }
 
 .timer-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 150px;
-  padding: 10px;
-  background: #1f2937;
-  color: white;
+  @apply
+    flex
+    flex-col
+    items-center
+    justify-center
+    min-w-37.5
+    p-2.5
+    text-white
+    bg-gray-500/20;
   font-family: "Oswald Variable", sans-serif;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
 }
 
 .timer-font-number {

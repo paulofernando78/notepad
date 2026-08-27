@@ -24,7 +24,7 @@ const statusOptions = [
   },
 ];
 
-export const ToDo = () => {
+export const TaskBoard = () => {
   return (
     <div className="overflow-x-auto text-slate-100">
       <div className="grid grid-cols-4 gap-2 py-2 min-w-max">

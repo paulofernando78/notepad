@@ -42,9 +42,39 @@ function playAlarm() {
 }
 
 export const Timer = () => {
+  /*
+    Flow do componente:
+
+    1. O React chama Timer() e cria os valores iniciais.
+       initialTime e zero, entao o Timer comeca zerado.
+
+    2. Depois o React cria os useState.
+       Cada useState guarda uma parte da tela:
+       - time: tempo real do contador, em segundos.
+       - isEditing: decide se mostra os inputs ou o timer.
+       - editHours/editMinutes/editSeconds: valores temporarios dos inputs.
+       - isRunning: decide se o useEffect deve contar.
+       - isAlarmPlaying: decide se o useEffect deve tocar o alarme.
+       - mode: controla o texto/estado visual, como "idle" ou "done".
+
+    3. As functions nao rodam sozinhas.
+       Elas rodam quando algum botao as chama:
+       - handleEdit: copia time para os inputs edit...
+       - applyEditSettings: copia os inputs edit... de volta para time.
+       - handleToggle: da play/pause ou confirma a edicao e inicia.
+       - handleReset: volta tudo para o default.
+
+    4. Quando uma function chama setTime, setIsRunning, etc.,
+       o React salva o novo state e chama Timer() de novo.
+       Essa nova chamada redesenha a tela com os valores atualizados.
+
+    5. Os useEffect ficam observando states especificos.
+       O primeiro observa isRunning e diminui time a cada segundo.
+       O segundo observa isAlarmPlaying e toca o alarme quando fica true.
+  */
+
   const initialTime = 0;
 
-  const [duration, setDuration] = useState(initialTime);
   const [time, setTime] = useState(initialTime);
 
   // Editing
@@ -75,7 +105,6 @@ export const Timer = () => {
 
     const newTime = hours * 3600 + minutes * 60 + seconds;
 
-    setDuration(newTime);
     setTime(newTime);
     setMode("idle");
     setIsAlarmPlaying(false);
@@ -102,19 +131,13 @@ export const Timer = () => {
     setIsRunning(false);
     setIsAlarmPlaying(false);
 
-    setDuration(initialTime)
     setTime(initialTime);
-    
+
     setEditHours(0);
     setEditMinutes(0);
     setEditSeconds(0);
-    
+
     setMode("idle");
-
-    const hours = Math.floor(duration / 3600);
-    const minutes = Math.floor((duration % 3600) / 60);
-    const seconds = duration % 60;
-
   }
 
   useEffect(() => {

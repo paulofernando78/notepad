@@ -5,9 +5,10 @@ import "./App.css";
 import { Header } from "@/components/layout/Header";
 import { Clock } from "@/components/features/Clock";
 
-import { ToDo } from "@/components/features/ToDo";
+import { TaskBoard } from "@/components/features/TaskBoard";
 import { SearchBar } from "@/components/ui/SearchBar";
 
+import { Collapsible } from "./components/ui/Collapsible";
 import { Widget } from "./components/ui/Widget";
 import { Note } from "@/components/features/Note";
 import { Pomodoro } from "@/components/features/Pomodoro";
@@ -19,23 +20,29 @@ function App() {
       <Header />
 
       {/* WIDGETS */}
-      <div className="overflow-x-auto">
-        <div className="flex gap-4">
-          <Widget title={"Clock • Weather"}>
-            <Clock city="São Paulo" latitude={-23.5505} longitude={-46.6333} />
-          </Widget>
-          <Widget title="Pomodoro">
-            <Pomodoro />
-          </Widget>
-          <Widget title="Timer">
-            <Timer />
-          </Widget>
+      <Collapsible label="Widgets">
+        <div className="overflow-x-auto">
+          <div className="flex gap-4">
+            <Widget title={"Clock • Weather"}>
+              <Clock
+                city="São Paulo"
+                latitude={-23.5505}
+                longitude={-46.6333}
+              />
+            </Widget>
+            <Widget title="Pomodoro">
+              <Pomodoro />
+            </Widget>
+            <Widget title="Timer">
+              <Timer />
+            </Widget>
+          </div>
         </div>
-      </div>
+      </Collapsible>
 
       {/* TODO */}
       <div className="overflow-hidden">
-        <ToDo />
+        <TaskBoard />
       </div>
 
       {/* NOTES */}

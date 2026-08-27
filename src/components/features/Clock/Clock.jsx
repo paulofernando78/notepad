@@ -14,6 +14,19 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
     return () => clearInterval(intervalID);
   }, []);
 
+  const currentTime = time.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  const currentDate = time.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    // year: "numeric",
+  });
+
   useEffect(() => {
     async function fetchWeather() {
       if (!latitude || !longitude) return;
@@ -33,31 +46,16 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
     fetchWeather();
   }, [latitude, longitude]);
 
-  const currentTime = time.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-
-  const currentDate = time.toLocaleDateString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    // year: "numeric",
-  });
-
   return (
-      <Board className="timer-card">
-        <span className="timer-font-number">{currentTime}</span>
-        <div className="flex flex-col items-center text-lg">
-          <span className="">{currentDate}</span>
-          <div className="flex gap-1 space-y-2">
-            <span className="block">{city}</span>{" "}
-            {weather && (
-              <span className="block">{weather.temperature}°C</span>
-            )}
-          </div>
+    <Board className="timer-card">
+      <span className="timer-font-number">{currentTime}</span>
+      <div className="flex flex-col items-center text-lg">
+        <span className="">{currentDate}</span>
+        <div className="flex gap-1 space-y-2">
+          <span className="block">{city}</span>{" "}
+          {weather && <span className="block">{weather.temperature}°C</span>}
         </div>
-      </Board>
+      </div>
+    </Board>
   );
 };

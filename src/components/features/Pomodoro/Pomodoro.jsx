@@ -140,12 +140,12 @@ export const Pomodoro = ({
     `;
 
   const activeFocusModeClass =
-    "text-green-300 [text-shadow:0_0_8px_rgba(253,224,71,0.8)]";
+    "text-green-400 [text-shadow:0_0_8px_rgba(0,225,0,0.8)]";
 
   const activeBreakModeClass =
-    "text-yellow-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
+    "text-yellow-400 [text-shadow:0_0_8px_rgba(255,255,0,0.8)]";
   const activeLongModeClass =
-    "text-blue-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)]";
+    "text-blue-400 [text-shadow:0_0_12px_rgba(96,165,250,1)]";
   const activePomodoroDoneModeClass =
     "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)] animate-pulse";
   const inactiveModeClass = "text-gray-400";
