@@ -3,16 +3,18 @@ import { Icon } from "@/components/ui/Icon";
 export const WidgetControls = ({ children }) => {
   return (
     <div
-      className={`
-      bg-gray-700/50
-      border
-      border-gray-700
-      rounded-3xl
-      shadow-md
-      shadow-black/30
-      `}
+      className="
+        bg-gray-700/50
+        border
+        border-gray-700
+        rounded-3xl
+        shadow-md
+        shadow-black/30
+      "
     >
-      <div className="flex justify-between p-2 translate-[0.03rem]">{children}</div>
+      <div className="flex justify-between gap-4 p-2 translate-[0.03rem]">
+        {children}
+      </div>
     </div>
   );
 };

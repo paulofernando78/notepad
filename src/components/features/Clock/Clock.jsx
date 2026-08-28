@@ -7,6 +7,13 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
   const [time, setTime] = useState(new Date());
   const [weather, setWeather] = useState(null);
 
+  const [selectedCity, setSelectedCity] = useState(city);
+  const [selectedLatitude, setSelectedLatitude] = useState(latitude);
+  const [selectedLongitude, setSelectedLongitude] = useState(longitude);
+
+  const [editCity, setEditCity] = useState(city);
+  const [isEditingWeather, setIsEditingWeather] = useState(false);
+
   useEffect(() => {
     const intervalID = setInterval(() => {
       setTime(new Date());
@@ -30,10 +37,10 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
 
   useEffect(() => {
     async function fetchWeather() {
-      if (!latitude || !longitude) return;
+      if (selectedLatitude == null || selectedLongitude == null) return;
 
       const response = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&timezone=auto`,
+        `https://api.open-meteo.com/v1/forecast?latitude=${selectedLatitude}&longitude=${selectedLongitude}&current=temperature_2m,weather_code&timezone=auto`,
       );
 
       const data = await response.json();
@@ -45,31 +52,66 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
     }
 
     fetchWeather();
-  }, [latitude, longitude]);
+  }, [selectedLatitude, selectedLongitude]);
+
+  function handleEditWeather() {
+    setEditCity(selectedCity);
+    setIsEditingWeather(true);
+  }
+
+  async function handleConfirmWeather() {
+    const cityName = editCity.trim();
+
+    if (!cityName) return;
+
+    const response = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&language=pt&format=json`,
+    );
+
+    const data = await response.json();
+    const location = data.results?.[0];
+
+    if (!location) return;
+
+    setSelectedCity(location.name);
+    setSelectedLatitude(location.latitude);
+    setSelectedLongitude(location.longitude);
+    setIsEditingWeather(false);
+  }
 
   return (
     <WidgetBody
       top={<span>{currentTime}</span>}
       middle={
-        <div>
-          <div className="flex flex-col items-center text-lg">
-            <span className="">{currentDate}</span>
+        !isEditingWeather ? (
+          <div className="text-xl text-center">
+            <span>{currentDate}</span>
             <div className="flex gap-2">
-              <span className="block">{city}</span>{" "}
+              <span className="block">{selectedCity}</span>{" "}
               {weather && (
                 <span className="block">{weather.temperature}°C</span>
               )}
             </div>
           </div>
-        </div>
+        ) : (
+          <label>
+            <input
+              type="text"
+              value={editCity}
+              onChange={(e) => setEditCity(e.target.value)}
+              placeholder="Type city"
+              className="w- border rounded px-2"
+            />
+          </label>
+        )
       }
       bottom={
         <WidgetControls>
-          {/* <WidgetControls.Edit
-              isEditing={isEditingWeather}
-              onEdit={handleEditWeather}
-              onConfirm={handleConfirmWeather}
-            /> */}
+          <WidgetControls.Edit
+            isEditing={isEditingWeather}
+            onEdit={handleEditWeather}
+            onConfirm={handleConfirmWeather}
+          />
         </WidgetControls>
       }
     />

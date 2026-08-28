@@ -184,91 +184,73 @@ export const Timer = () => {
   const inactiveModeClass = "text-gray-400";
 
   return (
-    <div className="relative flex flex-col gap-4">
-      <WidgetBody
-        // Timer
-        top={
-          <div
-            className={isEditing ? "invisible" : "visible"}
-          >
-            <span>{getFormattedTime}</span>
-          </div>
-        }
-        middle={
-          <>
-            <div
-              className={`flex flex-col items-center gap-2 ${isEditing ? "invisible" : "visible"}`}
-            >
-              <label>
-                <input
-                  type="text"
-                  className="
-            w-32
-            px-1
-            font-[Arial]
-            text-sm
-            border-b
-            border-gray-700
-            placeholder:italic
-          "
-                  placeholder="ex: boiling water"
-                />
-              </label>
-              <span
-                className={`text-sm uppercase
+    <WidgetBody
+      top={<span>{getFormattedTime}</span>}
+      middle={
+        !isEditing ? (
+          <div className="flex flex-col items-center gap-2">
+            <label>
+              <input
+                type="text"
+                className="
+                    w-32
+                    px-1
+                    font-[Arial]
+                    text-sm
+                    border-b
+                    border-gray-700
+                    placeholder:italic
+                  "
+                placeholder="ex: boiling water"
+              />
+            </label>
+            <span
+              className={`text-sm uppercase
             ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
-              >
-                Done
-              </span>
-            </div>
-          </>
-        }
-        bottom={
-          <WidgetControls>
-            <WidgetControls.Play
-              isRunning={isRunning}
-              onClick={handleToggle}
-              disabled={mode === "done" && !isEditing}
+            >
+              Done
+            </span>
+          </div>
+        ) : (
+          <div className="flex gap-3 text-[0.97rem]">
+            <NumberInput
+              label="h"
+              name="hours"
+              value={editHours}
+              onChange={setEditHours}
             />
-
-            <WidgetControls.Reset onClick={handleReset} />
-
-            <WidgetControls.Edit
-              isEditing={isEditing}
-              onEdit={handleEdit}
-              onConfirm={handleConfirmEdit}
+            <NumberInput
+              label="m"
+              name="minutes"
+              value={editMinutes}
+              onChange={setEditMinutes}
+              max={59}
             />
-          </WidgetControls>
-        }
-      />
-      {/* Inputs */}
-      <div
-        className={`absolute inset-x-2 top-12 flex gap-3 ${isEditing ? "visible" : "invisible"}`}
-      >
-        <NumberInput
-          label="h"
-          name="hours"
-          value={editHours}
-          onChange={setEditHours}
-          labelClassName="text-center"
-        />
-        <NumberInput
-          label="m"
-          name="minutes"
-          value={editMinutes}
-          onChange={setEditMinutes}
-          max={59}
-          labelClassName="text-center"
-        />
-        <NumberInput
-          label="s"
-          name="seconds"
-          value={editSeconds}
-          onChange={setEditSeconds}
-          max={59}
-          labelClassName="text-center"
-        />
-      </div>
-    </div>
+            <NumberInput
+              label="s"
+              name="seconds"
+              value={editSeconds}
+              onChange={setEditSeconds}
+              max={59}
+            />
+          </div>
+        )
+      }
+      bottom={
+        <WidgetControls>
+          <WidgetControls.Play
+            isRunning={isRunning}
+            onClick={handleToggle}
+            disabled={mode === "done" && !isEditing}
+          />
+          <WidgetControls.Reset onClick={handleReset} />
+          <WidgetControls.Edit
+            isEditing={isEditing}
+            onEdit={handleEdit}
+            onConfirm={handleConfirmEdit}
+          />
+        </WidgetControls>
+      }
+    />
   );
 };

@@ -202,36 +202,68 @@ export const Pomodoro = ({
   }
 
   return (
-    <div className="relative flex flex-col gap-4">
-      <WidgetBody
-        top={
-          <div className={isEditing ? "invisible" : "visible"}>
-            {/* Time + Sound Icon */}
-            <div className="flex gap-4">
-              <span> {getFormattedTime}</span>
-              <button
-                onClick={handleToggleSound}
-                aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
-                title={isSoundEnabled ? "Mute tick" : "Enable tick"}
-              >
-                {isSoundEnabled ? (
-                  <Icon name="volumeX" />
-                ) : (
-                  <Icon name="volume" />
-                )}
-              </button>
-            </div>
+    <WidgetBody
+      top={
+        <div className="flex gap-4 justify-center">
+          <span> {getFormattedTime}</span>
+          <button
+            onClick={handleToggleSound}
+            aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
+            title={isSoundEnabled ? "Mute tick" : "Enable tick"}
+          >
+            {isSoundEnabled ? <Icon name="volumeX" /> : <Icon name="volume" />}
+          </button>
+        </div>
+      }
+      middle={
+        isEditing ? (
+          <div
+            className="
+            grid
+            grid-cols-3
+            gap-2
+            justify-items-center
+            text-[0.97rem]
+            "
+          >
+            <NumberInput
+              label="Focus"
+              name="focus"
+              value={editFocusMinutes}
+              onChange={setEditFocusMinutes}
+              min={1}
+              wrapperClassName="text-center"
+            />
+            <NumberInput
+              label="Break"
+              name="break"
+              value={editBreakMinutes}
+              onChange={setEditBreakMinutes}
+              min={1}
+            />
+            <NumberInput
+              label="Long"
+              name="long-break"
+              value={editLongBreakMinutes}
+              onChange={setEditLongBreakMinutes}
+              min={1}
+            />
+            <NumberInput
+              label="Pomodoros"
+              name="pomodoro-goal"
+              value={editPomodoroGoal}
+              onChange={setEditPomodoroGoal}
+              min={1}
+            />
           </div>
-        }
-        middle={
-          <div className="text-sm text-center uppercase">
+        ) : (
+          <div className="text-[0.8rem] text-center uppercase">
+            <div className="flex items-center translate-x-[0.1rem]">
+              {displayedPomodoro} <Icon name="dot" size={20} /> {pomodoroGoal}
+            </div>
             {/* Focus • Break • Long  */}
-            <div
-              className={`flex gap-2 items-end justify-center  ${isEditing ? "invisible" : "visible"}`}
-            >
-              {/* Numbers + FOCUS */}
-              <div className="flex flex-col items-center">
-                {displayedPomodoro} • {pomodoroGoal}
+            <div className="space-y-2">
+              <div className="flex items-center justify-center text-sm">
                 <span
                   className={
                     mode === "focus" && isRunning
@@ -241,95 +273,58 @@ export const Pomodoro = ({
                 >
                   Focus
                 </span>
+                <Icon name="dot" size={20} />
+                {/* BREAK */}
+                <span
+                  className={
+                    mode === "break" && isRunning
+                      ? activeBreakModeClass
+                      : inactiveModeClass
+                  }
+                >
+                  Break
+                </span>
+                <Icon name="dot" size={20} />
+                {/* LONG */}
+                <span
+                  className={
+                    mode === "long" && isRunning
+                      ? activeLongModeClass
+                      : inactiveModeClass
+                  }
+                >
+                  Long
+                </span>
               </div>
-              <span>•</span>
-              {/* BREAK */}
               <span
-                className={
-                  mode === "break" && isRunning
-                    ? activeBreakModeClass
+                className={`block text-sm ${
+                  mode === "done"
+                    ? activePomodoroDoneModeClass
                     : inactiveModeClass
                 }
+                    `}
               >
-                Break
-              </span>
-              <span>•</span>
-              {/* LONG */}
-              <span
-                className={
-                  mode === "long" && isRunning
-                    ? activeLongModeClass
-                    : inactiveModeClass
-                }
-              >
-                Long
+                DONE
               </span>
             </div>
-            <span
-              className={`block
-                  ${isEditing ? "invisible" : "visible"}
-                 ${
-                   mode === "done"
-                     ? activePomodoroDoneModeClass
-                     : inactiveModeClass
-                 }
-                `}
-            >
-              DONE
-            </span>
           </div>
-        }
-        bottom={
-          <WidgetControls>
-            <WidgetControls.Play
-              isRunning={isRunning}
-              onClick={handleToggle}
-              disabled={mode === "done" && !isEditing}
-            />
-
-            <WidgetControls.Reset onClick={handleReset} />
-
-            <WidgetControls.Edit
-              isEditing={isEditing}
-              onEdit={handleEdit}
-              onConfirm={handleConfirmEdit}
-            />
-          </WidgetControls>
-        }
-      />
-      {/* Inputs */}
-      <div
-        className={`absolute inset-x-2 top-[0.4rem] grid gap-2 text-[0.97rem] ${isEditing ? "visible" : "invisible"}`}
-      >
-        <NumberInput
-          label="Focus"
-          name="focus"
-          value={editFocusMinutes}
-          onChange={setEditFocusMinutes}
-          min={1}
-        />
-        <NumberInput
-          label="Break"
-          name="break"
-          value={editBreakMinutes}
-          onChange={setEditBreakMinutes}
-          min={1}
-        />
-        <NumberInput
-          label="Long"
-          name="long-break"
-          value={editLongBreakMinutes}
-          onChange={setEditLongBreakMinutes}
-          min={1}
-        />
-        <NumberInput
-          label="Pomodoros"
-          name="pomodoro-goal"
-          value={editPomodoroGoal}
-          onChange={setEditPomodoroGoal}
-          min={1}
-        />
-      </div>
-    </div>
+        )
+      }
+      bottom={
+        <WidgetControls>
+          <WidgetControls.Play
+            isRunning={isRunning}
+            onClick={handleToggle}
+            disabled={mode === "done" && !isEditing}
+          />
+          <WidgetControls.Reset onClick={handleReset} />
+          <WidgetControls.Edit
+            isEditing={isEditing}
+            onEdit={handleEdit}
+            onConfirm={handleConfirmEdit}
+          />
+        </WidgetControls>
+      }
+    />
   );
 };

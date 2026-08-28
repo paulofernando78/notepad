@@ -8,37 +8,29 @@ import { Clock } from "@/components/features/Clock";
 import { TaskBoard } from "@/components/features/TaskBoard";
 import { SearchBar } from "@/components/ui/SearchBar";
 
-import { Collapsible } from "./components/ui/Collapsible";
+// import { Collapsible } from "./components/ui/Collapsible";
 import { Widget } from "./components/ui/Widget";
 import { Note } from "@/components/features/Note";
 import { Pomodoro } from "@/components/features/Pomodoro";
 import { Timer } from "@/components/features/Timer";
+import { WidgetContainer } from "./components/ui/WidgetContainer/WidgetContainer";
 
 function App() {
   return (
     <div className="flex flex-col gap-6 min-h-screen p-1">
       <Header />
 
-      {/* WIDGETS */}
-      <Collapsible label="Widgets">
-        <div className="overflow-x-auto">
-          <div className="flex gap-4">
-            <Widget title={"Clock • Weather"}>
-              <Clock
-                city="São Paulo"
-                latitude={-23.5505}
-                longitude={-46.6333}
-              />
-            </Widget>
-            <Widget title="Pomodoro">
-              <Pomodoro />
-            </Widget>
-            <Widget title="Timer">
-              <Timer />
-            </Widget>
-          </div>
-        </div>
-      </Collapsible>
+      <WidgetContainer>
+        <Widget title={"Clock • Weather"}>
+          <Clock city="São Paulo" latitude={-23.5505} longitude={-46.6333} />
+        </Widget>
+        <Widget title="Pomodoro">
+          <Pomodoro />
+        </Widget>
+        <Widget title="Timer">
+          <Timer />
+        </Widget>
+      </WidgetContainer>
 
       {/* TODO */}
       <div className="overflow-hidden">
