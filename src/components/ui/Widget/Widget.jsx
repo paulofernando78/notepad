@@ -23,7 +23,7 @@ export const Widget = ({ title, children }) => {
         <div
           className="
             h-65
-            p-2.5
+            pt-2.5 pb-4
             text-white
             bg-gray-500/20
             rounded
