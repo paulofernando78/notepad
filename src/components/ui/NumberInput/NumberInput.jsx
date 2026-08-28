@@ -6,10 +6,10 @@ export const NumberInput = ({
   min = 0,
   max,
   className = "",
-  // wrapperClassName = "",
+  wrapperClassName = "",
 }) => {
   return (
-    <label className="text-center">
+    <label className={`text-center ${wrapperClassName}`}>
       <span className="block mb-1">{label}</span>{" "}
       <input
         type="number"

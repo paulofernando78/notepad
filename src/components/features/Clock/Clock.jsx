@@ -87,7 +87,7 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
         !isEditingWeather ? (
           <div
             className="
-            text-xl
+            
             text-center
             translate-x-[-0.05rem]
             translate-y-[-0.3rem]

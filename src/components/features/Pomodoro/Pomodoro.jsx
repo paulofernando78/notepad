@@ -221,9 +221,10 @@ export const Pomodoro = ({
             className="
             grid
             grid-cols-3
-            gap-2
-            text-[0.97rem]
+            gap-y-3
+            text-[0.8rem]
             translate-y-[-0.2rem]
+            uppercase
             "
           >
             <NumberInput
@@ -254,6 +255,7 @@ export const Pomodoro = ({
               value={editPomodoroGoal}
               onChange={setEditPomodoroGoal}
               min={1}
+              wrapperClassName="col-start-2"
             />
           </div>
         ) : (
@@ -306,28 +308,25 @@ export const Pomodoro = ({
                 </span>
               </div>
               {/* POMODORO */}
-              <div className="flex gap-2 justify-center">
-                <span>pomodoro:</span>
-                <div
-                  className="
+              <span>pomodoro:</span>
+              <div
+                className="
                   flex
                   items-center
                   translate-x-[0.1rem]
                   "
-                  >
-                  {displayedPomodoro} <Icon name="dot" size={20} />{" "}
-                  {pomodoroGoal}
-                </div>
+              >
+                {displayedPomodoro} <Icon name="dot" size={20} /> {pomodoroGoal}
               </div>
               {/* DONE */}
               <span
                 className={`block ${
                   mode === "done"
-                  ? activePomodoroDoneModeClass
-                  : inactiveModeClass
+                    ? activePomodoroDoneModeClass
+                    : inactiveModeClass
                 }
                 `}
-                >
+              >
                 DONE
               </span>
             </div>
