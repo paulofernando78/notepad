@@ -109,7 +109,7 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
               <Icon name="mapPin" />
               <span className="block">{selectedCity}</span>
             </div>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               {weather && (
                 <>
                   <Icon name="thermometer" />
