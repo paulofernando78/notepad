@@ -27,7 +27,7 @@ export const Widget = ({ title, children }) => {
         <div
           className="
           h-65
-          pt-2.5 pb-4
+          pt-4 pb-5.25
           text-white
           border
           border-slate-600
