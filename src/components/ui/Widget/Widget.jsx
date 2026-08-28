@@ -4,7 +4,7 @@ export const Widget = ({ title, children }) => {
   return (
     <div
       className="
-      min-w-55
+      min-w-58.25
       font-['Oswald_Variable']
       [text-shadow:0_0_6px_rgba(255,255,255,0.3)]"
     >

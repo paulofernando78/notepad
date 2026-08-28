@@ -91,11 +91,21 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
             space-y-2
             "
           >
-            <div className="flex items-center gap-2">
+            <div className="
+              flex
+              items-center
+              gap-2
+              "
+            >
               <Icon name="calendar" />
               <span>{currentDate}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="
+              flex
+              items-center
+              gap-2
+              "
+            >
               <Icon name="mapPin" />
               <span className="block">{selectedCity}</span>
             </div>
@@ -109,7 +119,12 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
             </div>
           </div>
         ) : (
-          <div className="flex gap-2 translate-x-[-0.15rem]">
+          <div className="
+            flex
+            gap-2
+            translate-x-[-0.15rem]
+            "
+          >
             <Icon name="mapPin" size={25} />
             <label>
               <input
