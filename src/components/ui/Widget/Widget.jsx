@@ -21,18 +21,21 @@ export const Widget = ({ title, children }) => {
           rounded-br-none
           rounded-bl-none
           "
-        >
+          >
           {title}
         </Board>
         <div
           className="
-            h-65
-            pt-2.5 pb-4
-            text-white
-            bg-gray-500/20
+          h-65
+          pt-2.5 pb-4
+          text-white
+          border
+          border-slate-600
+          bg-gray-500/20
             rounded-tr-none
             rounded-tl-none
-         
+            rounded-br-lg
+            rounded-bl-lg
             
           "
         >
