@@ -222,7 +222,7 @@ export const Pomodoro = ({
             grid
             grid-cols-3
             gap-y-3
-            text-[0.8rem]
+            text-[1rem]
             translate-y-[-0.2rem]
             uppercase
             "
