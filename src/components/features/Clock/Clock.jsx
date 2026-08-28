@@ -87,27 +87,25 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
         !isEditingWeather ? (
           <div
             className="
-            
             text-center
-            translate-x-[-0.05rem]
-            translate-y-[-0.3rem]
+            space-y-2
             "
           >
             <div className="flex items-center gap-2">
               <Icon name="calendar" />
               <span>{currentDate}</span>
             </div>
+            <div className="flex items-center gap-2">
+              <Icon name="mapPin" />
+              <span className="block">{selectedCity}</span>
+            </div>
             <div className="flex gap-2">
-              <div className="flex items-center gap-2">
-                <Icon name="mapPin" />
-                <span className="block">{selectedCity}</span>
-                {weather && (
-                  <>
-                    <Icon name="thermometer" />
-                    <span className="block">{weather.temperature}°C</span>
-                  </>
-                )}
-              </div>
+              {weather && (
+                <>
+                  <Icon name="thermometer" />
+                  <span className="block">{weather.temperature}°C</span>
+                </>
+              )}
             </div>
           </div>
         ) : (

@@ -308,16 +308,18 @@ export const Pomodoro = ({
                 </span>
               </div>
               {/* POMODORO */}
-              <span>pomodoro:</span>
-              <div
-                className="
-                  flex
-                  items-center
-                  translate-x-[0.1rem]
-                  "
-              >
-                {displayedPomodoro} <Icon name="dot" size={20} /> {pomodoroGoal}
-              </div>
+             <div className="flex gap-2 justify-center">
+                <span>pomodoro:</span>
+                <div
+                  className="
+                    flex
+                    items-center
+                    translate-x-[0.1rem]
+                    "
+                >
+                  {displayedPomodoro} <Icon name="dot" size={20} /> {pomodoroGoal}
+                </div>
+             </div>
               {/* DONE */}
               <span
                 className={`block ${
