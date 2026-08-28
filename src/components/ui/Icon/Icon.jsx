@@ -1,47 +1,79 @@
 import {
+  // B
   Bookmark,
   Brain,
+  // C
+  Calendar,
   CirclePause,
   CirclePlay,
   Check,
+  // D
   Dot,
+  // E
   Ellipsis,
+  // F
   FolderClosed,
   FolderOpen,
-  Info,
   FolderPlus,
+  // I
+  Info,
+  // M
+  MapPin,
+  // N
   NotepadText,
+  // P
   PaintBucket,
   Pencil,
   Plus,
+  // R
+  RotateCcw,
+  // S
   Search,
   SquareText,
-  RotateCcw,
+  // T
+  Thermometer,
   Trash,
+  // V
   Volume,
   VolumeX
 } from "lucide-react";
 
 const icons = {
+  // B
   bookmark: Bookmark,
   brain: Brain,
+  // C
+  calendar: Calendar,
   circlePause: CirclePause,
   circlePlay: CirclePlay,
   check: Check,
+  // D
   dot: Dot,
+  // E
   ellipsis: Ellipsis,
+  // F
   folderClosed: FolderClosed,
   folderOpen: FolderOpen,
-  info: Info,
   folderPlus: FolderPlus,
+  // I
+  info: Info,
+  // M
+  mapPin: MapPin,
+  // N
   notepadText: NotepadText,
+  // P
   paintBucket: PaintBucket,
   pencil: Pencil,
   plus: Plus,
+  // R
+  rotateCcw: RotateCcw,
+  // S
   search: Search,
   squareText: SquareText,
-  rotateCcw: RotateCcw,
+  // T
+  thermometer: Thermometer,
   trash: Trash,
+  // V
   volume: Volume,
   volumeX: VolumeX
 };

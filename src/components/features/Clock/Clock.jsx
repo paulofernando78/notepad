@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { WidgetBody } from "@/components/ui/WidgetBody";
 import { WidgetControls } from "@/components/ui/WidgetControls";
+import { Icon } from "../../ui/Icon/Icon";
 
 export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
   const [time, setTime] = useState(new Date());
@@ -84,30 +85,44 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
       top={<span>{currentTime}</span>}
       middle={
         !isEditingWeather ? (
-          <div className="
+          <div
+            className="
             text-xl
             text-center
-            -translate-y-[0.3rem]
+            translate-x-[-0.05rem]
+            translate-y-[-0.3rem]
             "
           >
-            <span>{currentDate}</span>
+            <div className="flex items-center gap-2">
+              <Icon name="calendar" />
+              <span>{currentDate}</span>
+            </div>
             <div className="flex gap-2">
-              <span className="block">{selectedCity}</span>{" "}
-              {weather && (
-                <span className="block">{weather.temperature}°C</span>
-              )}
+              <div className="flex items-center gap-2">
+                <Icon name="mapPin" />
+                <span className="block">{selectedCity}</span>
+                {weather && (
+                  <>
+                    <Icon name="thermometer" />
+                    <span className="block">{weather.temperature}°C</span>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         ) : (
-          <label>
-            <input
-              type="text"
-              value={editCity}
-              onChange={(e) => setEditCity(e.target.value)}
-              placeholder="Type city"
-              className="w- border rounded px-2"
-            />
-          </label>
+          <div className="flex gap-2 translate-x-[-0.15rem]">
+            <Icon name="mapPin" size={25} />
+            <label>
+              <input
+                type="text"
+                value={editCity}
+                onChange={(e) => setEditCity(e.target.value)}
+                placeholder="Type city"
+                className="w- border rounded px-2"
+              />
+            </label>
+          </div>
         )
       }
       bottom={

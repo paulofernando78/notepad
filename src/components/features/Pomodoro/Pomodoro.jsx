@@ -223,7 +223,7 @@ export const Pomodoro = ({
             grid-cols-3
             gap-2
             text-[0.97rem]
-            translate-y-[-0.1rem]
+            translate-y-[-0.2rem]
             "
           >
             <NumberInput
@@ -259,7 +259,6 @@ export const Pomodoro = ({
         ) : (
           <div
             className="
-            text-[0.8rem]
             text-center
             uppercase
           "
@@ -271,9 +270,9 @@ export const Pomodoro = ({
                 flex
                 items-center
                 justify-center
-                text-sm
                 "
               >
+                {/* FOCUS */}
                 <span
                   className={
                     mode === "focus" && isRunning
@@ -306,27 +305,29 @@ export const Pomodoro = ({
                   Long
                 </span>
               </div>
+              {/* POMODORO */}
               <div className="flex gap-2 justify-center">
                 <span>pomodoro:</span>
                 <div
                   className="
-                      flex
-                      items-center
-                      translate-x-[0.1rem]
-                    "
-                >
+                  flex
+                  items-center
+                  translate-x-[0.1rem]
+                  "
+                  >
                   {displayedPomodoro} <Icon name="dot" size={20} />{" "}
                   {pomodoroGoal}
                 </div>
               </div>
+              {/* DONE */}
               <span
-                className={`block text-sm ${
+                className={`block ${
                   mode === "done"
-                    ? activePomodoroDoneModeClass
-                    : inactiveModeClass
+                  ? activePomodoroDoneModeClass
+                  : inactiveModeClass
                 }
-                    `}
-              >
+                `}
+                >
                 DONE
               </span>
             </div>

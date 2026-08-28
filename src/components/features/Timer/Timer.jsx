@@ -196,7 +196,6 @@ export const Timer = () => {
                     w-32
                     px-1
                     font-[Arial]
-                    text-sm
                     border-b
                     border-gray-700
                     placeholder:italic
@@ -205,7 +204,7 @@ export const Timer = () => {
               />
             </label>
             <span
-              className={`text-sm uppercase
+              className={`uppercase
             ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
             >
               Done
@@ -215,8 +214,7 @@ export const Timer = () => {
           <div className="
             flex
             gap-3
-            text-[0.97rem]
-            -translate-y-[0.7rem]
+            translate-y-[-0.7rem]
             "
           >
             <NumberInput
