@@ -212,7 +212,13 @@ export const Timer = () => {
             </span>
           </div>
         ) : (
-          <div className="flex gap-3 text-[0.97rem]">
+          <div className="
+            flex
+            gap-3
+            text-[0.97rem]
+            -translate-y-[0.7rem]
+            "
+          >
             <NumberInput
               label="h"
               name="hours"

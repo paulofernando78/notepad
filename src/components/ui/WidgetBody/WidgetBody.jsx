@@ -1,18 +1,20 @@
 export const WidgetBody = ({ top, middle, bottom }) => {
   return (
-    <div className="
-      grid
-      grid-rows-[auto_130px_auto]
-       "
+    <div
+      className="
+      flex
+      flex-col
+      justify-between
+      h-full
+      "
     >
-        
       {/* Top */}
       <div
         className="
-        text-center
         w-full
-        font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]
+        text-center
         text-3xl
+        font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]
         font-bold
         "
       >
@@ -20,7 +22,8 @@ export const WidgetBody = ({ top, middle, bottom }) => {
       </div>
 
       {/* Middle */}
-      <div className="
+      <div
+        className="
         flex
         flex-col
         items-center
@@ -31,7 +34,7 @@ export const WidgetBody = ({ top, middle, bottom }) => {
       </div>
 
       {/* Bottom */}
-      <div className="justify-self-center mt-2 mb-2">{bottom}</div>
+      <div className="self-center">{bottom}</div>
     </div>
   );
 };

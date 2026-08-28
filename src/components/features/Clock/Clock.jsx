@@ -84,7 +84,12 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
       top={<span>{currentTime}</span>}
       middle={
         !isEditingWeather ? (
-          <div className="text-xl text-center">
+          <div className="
+            text-xl
+            text-center
+            -translate-y-[0.3rem]
+            "
+          >
             <span>{currentDate}</span>
             <div className="flex gap-2">
               <span className="block">{selectedCity}</span>{" "}

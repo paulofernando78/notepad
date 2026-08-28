@@ -222,8 +222,8 @@ export const Pomodoro = ({
             grid
             grid-cols-3
             gap-2
-            justify-items-center
             text-[0.97rem]
+            -translate-y-[0.1rem]
             "
           >
             <NumberInput
