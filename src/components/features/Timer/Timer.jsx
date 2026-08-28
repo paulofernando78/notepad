@@ -193,14 +193,15 @@ export const Timer = () => {
               <input
                 type="text"
                 className="
-                    w-32
-                    px-1
+                    w-45
+                    px-[0.6rem] py-[0.4rem]
                     font-[Arial]
-                    border-b
-                    border-gray-700
+                    border
+                    border-gray-600
+                    rounded-lg
                     placeholder:italic
                   "
-                placeholder="ex: boiling water"
+                placeholder="ex: boiling water..."
               />
             </label>
             <span
