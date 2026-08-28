@@ -257,21 +257,17 @@ export const Pomodoro = ({
             />
           </div>
         ) : (
-          <div className="
+          <div
+            className="
             text-[0.8rem]
             text-center
             uppercase
-          ">
-            <div className="
-              flex
-              items-center
-              translate-x-[0.1rem]
-            ">
-              {displayedPomodoro} <Icon name="dot" size={20} /> {pomodoroGoal}
-            </div>
+          "
+          >
             {/* Focus • Break • Long  */}
             <div className="space-y-2">
-              <div className="
+              <div
+                className="
                 flex
                 items-center
                 justify-center
@@ -309,6 +305,19 @@ export const Pomodoro = ({
                 >
                   Long
                 </span>
+              </div>
+              <div className="flex gap-2 justify-center">
+                <span>pomodoro:</span>
+                <div
+                  className="
+                      flex
+                      items-center
+                      translate-x-[0.1rem]
+                    "
+                >
+                  {displayedPomodoro} <Icon name="dot" size={20} />{" "}
+                  {pomodoroGoal}
+                </div>
               </div>
               <span
                 className={`block text-sm ${

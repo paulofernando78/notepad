@@ -26,7 +26,7 @@ export const Widget = ({ title, children }) => {
             pt-2.5 pb-4
             text-white
             bg-gray-500/20
-            rounded
+            rounded-lg
             
           "
         >
