@@ -27,7 +27,7 @@ const statusOptions = [
 export const TaskBoard = () => {
   return (
     <div className="overflow-x-auto text-slate-100">
-      <div className="flex gap-2">
+      <div className="flex gap-2 mb-2 p-2 bg-gray-500/20 rounded-lg">
         <Icon name="messageCircleWarning" />
         <p>
           Break your big task into 'Micro-Wins'." Pick ONLY 3 things to do

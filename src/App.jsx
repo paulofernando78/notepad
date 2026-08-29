@@ -79,23 +79,23 @@ function App() {
         </WidgetContainer>
       </SectionPanel>
 
-      {/* TODO */}
-      <div className="">
+      <SectionPanel title="Task Board">
         <TaskBoard />
-      </div>
+      </SectionPanel>
 
-      {/* NOTES */}
-      <div className="grid grid-cols-[200px_1fr] gap-2 flex-1">
-        <Sidebar />
-        <div className="space-y-2">
-          <SearchBar />
-          New Note
-          <main className="flex flex-wrap gap-2 flex-1">
-            <Note />
-            <Note />
-          </main>
+      <SectionPanel title="Notes">
+        <div className="grid grid-cols-[200px_1fr] gap-2 flex-1">
+          <Sidebar />
+          <div className="space-y-2">
+            <SearchBar />
+            New Note
+            <main className="flex flex-wrap gap-2 flex-1">
+              <Note />
+              <Note />
+            </main>
+          </div>
         </div>
-      </div>
+      </SectionPanel>
     </div>
   );
 }
