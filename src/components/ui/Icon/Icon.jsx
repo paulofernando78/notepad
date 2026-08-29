@@ -81,19 +81,23 @@ const icons = {
   trash: Trash,
   // V
   volume: Volume,
-  volumeX: VolumeX
+  volumeX: VolumeX,
 };
 
-export const Icon = ({
-  name,
-  size = 20,
-  className = "",
-  ...props
-}) => {
+export const Icon = ({ name, size = 20, className = "", ...props }) => {
   const LucideIcon = icons[name];
   if (!LucideIcon) return null;
 
   return (
-    <LucideIcon size={size} className={`icon-color cursor-pointer ${className}`} {...props} />
+    <LucideIcon
+      size={size}
+      className={`
+        icon-color
+        shrink-0
+        cursor-pointer
+        ${className}
+        `}
+      {...props}
+    />
   );
 };
