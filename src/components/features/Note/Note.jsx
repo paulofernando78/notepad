@@ -39,7 +39,7 @@ export const Note = () => {
       </div>
       <div className="flex items-center gap-2 p-2">
         <Icon name="folderPlus" />
-        <span>Folder's name</span>
+        <span>Add to folder</span>
       </div>
     </Board>
   );

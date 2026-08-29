@@ -23,7 +23,7 @@ export const Sidebar = () => {
             <Icon name="bookmark" />
             <span>Favorites</span>
           </Link>
-          <hr className="my-3 text-gray-400" />
+          <hr className="my-3 text-gray-600" />
           <button className="flex items-center gap-2">
             <Icon name="plus" />
             <span>New folder</span>

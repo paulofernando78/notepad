@@ -12,7 +12,13 @@ export const WidgetControls = ({ children }) => {
         shadow-black/30
       "
     >
-      <div className="flex justify-between gap-4 p-2 translate-[0.03rem]">
+      <div className="
+        flex
+        justify-between
+        gap-4
+        p-2
+        translate-[0.03rem]
+        ">
         {children}
       </div>
     </div>
@@ -34,7 +40,10 @@ WidgetControls.Play = ({ isRunning, onClick, disabled = false }) => {
 WidgetControls.Reset = ({ onClick }) => {
   return (
     <button onClick={onClick}>
-      <Icon name="rotateCcw" size="27" />
+      <Icon
+        name="rotateCcw"
+        size="27"
+        className="translate-y-[0.01rem]"/>
     </button>
   );
 };
@@ -42,11 +51,17 @@ WidgetControls.Reset = ({ onClick }) => {
 WidgetControls.Edit = ({ isEditing, onEdit, onConfirm }) => {
   return isEditing ? (
     <button onClick={onConfirm}>
-      <Icon name="check" size="23" />
+      <Icon
+        name="check"
+        size="23"
+        className="translate-y-[0.01rem]"/>
     </button>
   ) : (
     <button onClick={onEdit}>
-      <Icon name="pencil" size="23" />
+      <Icon
+        name="pencil"
+        size="23"
+        className="translate-y-[0.01rem]"/>
     </button>
   );
 };

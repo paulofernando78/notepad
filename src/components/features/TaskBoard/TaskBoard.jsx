@@ -27,6 +27,14 @@ const statusOptions = [
 export const TaskBoard = () => {
   return (
     <div className="overflow-x-auto text-slate-100">
+      <div className="flex gap-2">
+        <Icon name="messageCircleWarning" size="24"/>
+        <p>
+          Break your big task into 'Micro-Wins'." Pick ONLY 3 things to do
+          today. If you do these, the day is a success. Everything else is a
+          bonus.
+        </p>
+      </div>
       <div className="grid grid-cols-4 gap-2 py-2 min-w-max">
         {statusOptions.map((status) => (
           <section key={status.id} className="flex flex-col gap-2">
@@ -34,10 +42,14 @@ export const TaskBoard = () => {
               className={`px-2 pt-1 pb-2 min-w-47.5 border-0 ${status.color}`}
             >
               <div className="flex items-center justify-between">
-                <span className="block mb-2 font-bold uppercase">{status.label}</span>
-                <Icon name="ellipsis" className="translate-y-[-0.4rem]"/>
+                <span className="block mb-2 font-bold uppercase">
+                  {status.label}
+                </span>
+                <Icon name="ellipsis" className="translate-y-[-0.4rem]" />
               </div>
-              <div className={`flex items-center gap-1 p-1 border rounded ${status.color}`}>
+              <div
+                className={`flex items-center gap-1 p-1 border rounded ${status.color}`}
+              >
                 <Icon name="plus" />
                 <span>Add task...</span>
               </div>

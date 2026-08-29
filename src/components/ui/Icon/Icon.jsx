@@ -20,6 +20,7 @@ import {
   Info,
   // M
   MapPin,
+  MessageCircleWarning,
   // N
   NotepadText,
   // P
@@ -36,7 +37,7 @@ import {
   Trash,
   // V
   Volume,
-  VolumeX
+  VolumeX,
 } from "lucide-react";
 
 const icons = {
@@ -61,6 +62,7 @@ const icons = {
   info: Info,
   // M
   mapPin: MapPin,
+  messageCircleWarning: MessageCircleWarning,
   // N
   notepadText: NotepadText,
   // P
