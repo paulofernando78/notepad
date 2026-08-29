@@ -30,6 +30,7 @@ export const SectionPanel = ({ title, children }) => {
           flex gap-2
           bg-gray-100/10
           p-2
+          w-max
           rounded-lg
         "
       >
