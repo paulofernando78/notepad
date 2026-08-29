@@ -19,7 +19,7 @@ export const WidgetContainer = ({ children, onAdd }) => {
           "
       >
         <div className="flex items-center gap-2">
-          <Icon name="circlePlus" size={25} />
+          <Icon name="circlePlus" />
         </div>
       </button>
     </div>
