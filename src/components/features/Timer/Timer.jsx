@@ -184,7 +184,7 @@ export const Timer = ({ onRemove }) => {
           <div className="
             flex
             gap-3
-            translate-y-[-0.7rem]
+            translate-y-[-0.1rem]
             "
           >
             <NumberInput
