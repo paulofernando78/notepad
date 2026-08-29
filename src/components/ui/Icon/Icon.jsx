@@ -6,6 +6,7 @@ import {
   Calendar,
   CirclePause,
   CirclePlay,
+  CirclePlus,
   Check,
   // D
   Dot,
@@ -46,6 +47,7 @@ const icons = {
   calendar: Calendar,
   circlePause: CirclePause,
   circlePlay: CirclePlay,
+  circlePlus: CirclePlus,
   check: Check,
   // D
   dot: Dot,

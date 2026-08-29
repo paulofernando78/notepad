@@ -33,7 +33,7 @@ function App() {
       </WidgetContainer>
 
       {/* TODO */}
-      <div className="overflow-hidden">
+      <div className="">
         <TaskBoard />
       </div>
 

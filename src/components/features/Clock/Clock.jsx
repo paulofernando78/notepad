@@ -91,7 +91,8 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
             space-y-2
             "
           >
-            <div className="
+            <div
+              className="
               flex
               items-center
               gap-2
@@ -100,7 +101,8 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
               <Icon name="calendar" />
               <span>{currentDate}</span>
             </div>
-            <div className="
+            <div
+              className="
               flex
               items-center
               gap-2
@@ -119,7 +121,8 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
             </div>
           </div>
         ) : (
-          <div className="
+          <div
+            className="
             flex
             gap-2
             translate-x-[-0.15rem]
@@ -139,13 +142,15 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
         )
       }
       bottom={
-        <WidgetControls>
-          <WidgetControls.Edit
-            isEditing={isEditingWeather}
-            onEdit={handleEditWeather}
-            onConfirm={handleConfirmWeather}
-          />
-        </WidgetControls>
+        <div className="translate-y-[0.1rem]">
+          <WidgetControls>
+            <WidgetControls.Edit
+              isEditing={isEditingWeather}
+              onEdit={handleEditWeather}
+              onConfirm={handleConfirmWeather}
+            />
+          </WidgetControls>
+        </div>
       }
     />
   );

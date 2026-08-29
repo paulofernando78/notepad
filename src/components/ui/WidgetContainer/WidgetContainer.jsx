@@ -1,8 +1,32 @@
+import { Icon } from "@/components/ui/Icon";
+
 export const WidgetContainer = ({ children }) => {
   return (
-    <div className="">
-      <span>Add</span>
-      <div className="flex w-full gap-4 overflow-x-auto">{children}</div>
-    </div>
+    <section
+      className="
+      flex
+      w-full
+      gap-4
+      overflow-x-auto
+      "
+    >
+      <button
+        className="
+        grid
+        place-items-center
+        p-2
+        w-max
+        h-[305px]
+        border
+        border-gray-600
+        rounded-lg
+        "
+      >
+        <div className="flex items-center gap-2">
+          <Icon name="circlePlus" size={25} />
+        </div>
+      </button>
+      {children}
+    </section>
   );
 };
