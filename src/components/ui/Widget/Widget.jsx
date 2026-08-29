@@ -14,13 +14,10 @@ export const Widget = ({
       <div className="">
         <Board
           className="
-          py-3
-          text-sm
+          py-1
           text-center
           uppercase
           border-b-0
-          border-slate-600
-          bg-gray-700
           rounded-br-none
           rounded-bl-none
           "
@@ -32,14 +29,12 @@ export const Widget = ({
           className="
           h-65
           pt-4 pb-5.25
-          text-white
-          border
-          border-slate-600
-          bg-gray-500/20
-            rounded-tr-none
-            rounded-tl-none
-            rounded-br-lg
-            rounded-bl-lg
+        text-white
+        bg-gray-500/30
+          rounded-tr-none
+          rounded-tl-none
+          rounded-br-lg
+          rounded-bl-lg
           "
         >
           {children}
