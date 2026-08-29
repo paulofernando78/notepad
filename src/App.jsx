@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { Sidebar } from "@/components/layout/Sidebar";
 import "./App.css";
 import { Header } from "@/components/layout/Header";
 
@@ -10,8 +9,9 @@ import { widgetCatalog } from "@/components/features/Widget/WidgetCatalog";
 import { Widget } from "@/components/ui/Widget";
 
 import { TaskBoard } from "@/components/features/TaskBoard";
-import { Note } from "@/components/features/Note";
-import { SearchBar } from "@/components/ui/SearchBar";
+// import { Note } from "@/components/features/Note";
+// import { Sidebar } from "@/components/layout/Sidebar";
+// import { SearchBar } from "@/components/ui/SearchBar";
 
 function App() {
   const [widgets, setWidgets] = useState([
@@ -83,7 +83,7 @@ function App() {
         <TaskBoard />
       </SectionPanel>
 
-      <SectionPanel title="Notes">
+      {/* <SectionPanel title="Notes">
         <div className="grid grid-cols-[200px_1fr] gap-2 flex-1">
           <Sidebar />
           <div className="space-y-2">
@@ -95,7 +95,7 @@ function App() {
             </main>
           </div>
         </div>
-      </SectionPanel>
+      </SectionPanel> */}
     </div>
   );
 }
