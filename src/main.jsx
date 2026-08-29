@@ -4,6 +4,9 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
+// Supports weights 100-900
+import '@fontsource-variable/montserrat/wght.css';
+
 // Supports weights 200-700
 import '@fontsource-variable/oswald/wght.css';
 
