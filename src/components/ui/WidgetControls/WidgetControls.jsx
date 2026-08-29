@@ -59,7 +59,7 @@ WidgetControls.Erase = ({ onClick }) => {
       aria-label="Delete widget"
       onClick={onClick}
     >
-      <Icon name="trash" size={27} />
+      <Icon name="trash" size={25} />
     </button>
   );
 };
