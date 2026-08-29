@@ -1,5 +1,3 @@
-import { Board } from "@/components/ui/Board";
-
 export const Widget = ({
   title,
   children,
@@ -11,20 +9,23 @@ export const Widget = ({
       font-['Oswald_Variable']
       "
     >
-      <div className="">
-        <Board
+      <div>
+        <header
           className="
             py-1
             text-center
             uppercase
             border-b-0
+            bg-black/50
+            rounded-tl-lg
+            rounded-tr-lg
             rounded-br-none
             rounded-bl-none
           "
         >
           {title}
           
-        </Board>
+        </header>
         <div
           className="
           h-68

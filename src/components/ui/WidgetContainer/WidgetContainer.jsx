@@ -11,11 +11,11 @@ export const WidgetContainer = ({ children, onAdd }) => {
           grid
           place-items-center
           p-2
-          w-max
           h-[305px]
           border
-          border-gray-600
+          border-gray-500
           rounded-lg
+          cursor-pointer
           "
       >
         <div className="flex items-center gap-2">
