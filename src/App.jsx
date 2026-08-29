@@ -1,35 +1,82 @@
-// import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 import { Sidebar } from "@/components/layout/Sidebar";
 import "./App.css";
 import { Header } from "@/components/layout/Header";
-import { Clock } from "@/components/features/Clock";
+
+import { widgetCatalog } from "./components/features/Widget/WidgetCatalog";
+import { Widget } from "./components/ui/Widget";
+import { Note } from "@/components/features/Note";
+import { WidgetContainer } from "./components/ui/WidgetContainer/WidgetContainer";
 
 import { TaskBoard } from "@/components/features/TaskBoard";
 import { SearchBar } from "@/components/ui/SearchBar";
 
-// import { Collapsible } from "./components/ui/Collapsible";
-import { Widget } from "./components/ui/Widget";
-import { Note } from "@/components/features/Note";
-import { Pomodoro } from "@/components/features/Pomodoro";
-import { Timer } from "@/components/features/Timer";
-import { WidgetContainer } from "./components/ui/WidgetContainer/WidgetContainer";
-
 function App() {
+  const [widgets, setWidgets] = useState([
+    {
+      id: crypto.randomUUID(),
+      type: "clock",
+      config: { ...widgetCatalog.clock.defaultConfig },
+    },
+    {
+      id: crypto.randomUUID(),
+      type: "pomodoro",
+      config: {},
+    },
+    {
+      id: crypto.randomUUID(),
+      type: "timer",
+      config: {},
+    },
+  ]);
+
+  function addWidget(type) {
+    const definition = widgetCatalog[type];
+
+    if (!definition) return;
+
+    const newWidget = {
+      id: crypto.randomUUID(),
+      type,
+      config: { ...definition.defaultConfig },
+    };
+
+    setWidgets((currentWidgets) => [...currentWidgets, newWidget]);
+  }
+
+  function removeWidget(id) {
+    setWidgets((currentWidgets) =>
+      currentWidgets.filter((widget) => widget.id !== id),
+    );
+  }
+
   return (
     <div className="flex flex-col gap-6 min-h-screen p-1">
       <Header />
 
-      <WidgetContainer>
-        <Widget title={"Clock • Weather"}>
-          <Clock city="São Paulo" latitude={-23.5505} longitude={-46.6333} />
-        </Widget>
-        <Widget title="Pomodoro">
-          <Pomodoro />
-        </Widget>
-        <Widget title="Timer">
-          <Timer />
-        </Widget>
+      <WidgetContainer onAdd={addWidget}>
+        {widgets.map((widgetInstance) => {
+          const definition = widgetCatalog[widgetInstance.type];
+          const Component = definition.Component;
+
+          const handleRemove = () => {
+            removeWidget(widgetInstance.id)
+          }
+
+          return (
+            <Widget
+              key={widgetInstance.id}
+              title={definition.title}
+              onRemove={() => removeWidget(widgetInstance.id)}
+            >
+              <Component
+                {...widgetInstance.config}
+                onRemove={handleRemove}  
+              />
+            </Widget>
+          );
+        })}
       </WidgetContainer>
 
       {/* TODO */}

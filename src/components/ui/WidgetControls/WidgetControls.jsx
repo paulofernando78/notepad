@@ -50,3 +50,16 @@ WidgetControls.Edit = ({ isEditing, onEdit, onConfirm }) => {
     </button>
   );
 };
+
+WidgetControls.Erase = ({ onClick }) => {
+  return (
+    <button
+      type="button"
+      title="Delete"
+      aria-label="Delete widget"
+      onClick={onClick}
+    >
+      <Icon name="trash" size={27} />
+    </button>
+  );
+};

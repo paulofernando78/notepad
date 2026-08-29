@@ -4,7 +4,12 @@ import { WidgetBody } from "@/components/ui/WidgetBody";
 import { WidgetControls } from "@/components/ui/WidgetControls";
 import { Icon } from "../../ui/Icon/Icon";
 
-export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
+export const Clock = ({
+  city = "São Paulo",
+  latitude,
+  longitude,
+  onRemove,
+}) => {
   const [time, setTime] = useState(new Date());
   const [weather, setWeather] = useState(null);
 
@@ -149,6 +154,7 @@ export const Clock = ({ city = "São Paulo", latitude, longitude }) => {
               onEdit={handleEditWeather}
               onConfirm={handleConfirmWeather}
             />
+            <WidgetControls.Erase onClick={onRemove} />
           </WidgetControls>
         </div>
       }

@@ -1,8 +1,11 @@
 import { Board } from "@/components/ui/Board";
 
-export const Widget = ({ title, children }) => {
+export const Widget = ({
+  title,
+  children,
+}) => {
   return (
-    <div
+    <article
       className="
       min-w-58.25
       font-['Oswald_Variable']
@@ -21,8 +24,9 @@ export const Widget = ({ title, children }) => {
           rounded-br-none
           rounded-bl-none
           "
-          >
+        >
           {title}
+          
         </Board>
         <div
           className="
@@ -36,12 +40,11 @@ export const Widget = ({ title, children }) => {
             rounded-tl-none
             rounded-br-lg
             rounded-bl-lg
-            
           "
         >
           {children}
         </div>
       </div>
-    </div>
+    </article>
   );
 };

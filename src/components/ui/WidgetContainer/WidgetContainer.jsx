@@ -1,6 +1,6 @@
 import { Icon } from "@/components/ui/Icon";
 
-export const WidgetContainer = ({ children }) => {
+export const WidgetContainer = ({ children, onAdd }) => {
   return (
     <section
       className="
@@ -10,7 +10,10 @@ export const WidgetContainer = ({ children }) => {
       overflow-x-auto
       "
     >
+      {children}
       <button
+        type="button"
+        onClick={() => onAdd("clock")}
         className="
         grid
         place-items-center
@@ -26,7 +29,6 @@ export const WidgetContainer = ({ children }) => {
           <Icon name="circlePlus" size={25} />
         </div>
       </button>
-      {children}
     </section>
   );
 };

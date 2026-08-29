@@ -38,6 +38,7 @@ export const Pomodoro = ({
   breakMinutes: initialBreakMinutes = DEFAULT_BREAK_MINUTES,
   longBreakMinutes: initialLongBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
   totalPomodoros: initialPomodoroGoal = 8,
+  onRemove
 }) => {
   const [focusMinutes, setFocusMinutes] = useState(initialFocusMinutes);
   const [breakMinutes, setBreakMinutes] = useState(initialBreakMinutes);
@@ -347,6 +348,7 @@ export const Pomodoro = ({
             onEdit={handleEdit}
             onConfirm={handleConfirmEdit}
           />
+          <WidgetControls.Erase onClick={onRemove} />
         </WidgetControls>
       }
     />
