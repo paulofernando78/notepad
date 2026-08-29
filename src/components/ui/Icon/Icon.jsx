@@ -8,6 +8,7 @@ import {
   CirclePlay,
   CirclePlus,
   Check,
+  ChevronRight,
   // D
   Dot,
   // E
@@ -25,12 +26,12 @@ import {
   NotepadText,
   // P
   PaintBucket,
-  Pencil,
   Plus,
   // R
   RotateCcw,
   // S
   Search,
+  SquarePen,
   SquareText,
   // T
   Thermometer,
@@ -50,6 +51,7 @@ const icons = {
   circlePlay: CirclePlay,
   circlePlus: CirclePlus,
   check: Check,
+  chevronRight: ChevronRight,
   // D
   dot: Dot,
   // E
@@ -67,12 +69,12 @@ const icons = {
   notepadText: NotepadText,
   // P
   paintBucket: PaintBucket,
-  pencil: Pencil,
   plus: Plus,
   // R
   rotateCcw: RotateCcw,
   // S
   search: Search,
+  squarePen: SquarePen,
   squareText: SquareText,
   // T
   thermometer: Thermometer,

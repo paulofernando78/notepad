@@ -28,7 +28,7 @@ export const TaskBoard = () => {
   return (
     <div className="overflow-x-auto text-slate-100">
       <div className="flex gap-2">
-        <Icon name="messageCircleWarning" size="24"/>
+        <Icon name="messageCircleWarning" />
         <p>
           Break your big task into 'Micro-Wins'." Pick ONLY 3 things to do
           today. If you do these, the day is a success. Everything else is a
@@ -48,10 +48,26 @@ export const TaskBoard = () => {
                 <Icon name="ellipsis" className="translate-y-[-0.4rem]" />
               </div>
               <div
-                className={`flex items-center gap-1 p-1 border rounded ${status.color}`}
+                className={`
+                  flex
+                  items-center
+                  gap-1
+                  w-full
+                  p-1
+                  border
+                  rounded
+                  ${status.color}
+                  `
+                }
               >
                 <Icon name="plus" />
-                <span>Add task...</span>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  placeholder="Add task..."
+                  className="w-full"
+                  />
               </div>
             </Board>
           </section>

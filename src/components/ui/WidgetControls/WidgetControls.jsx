@@ -12,13 +12,15 @@ export const WidgetControls = ({ children }) => {
         shadow-black/30
       "
     >
-      <div className="
+      <div
+        className="
         flex
         justify-between
         gap-4
         p-2
         translate-[0.03rem]
-        ">
+        "
+      >
         {children}
       </div>
     </div>
@@ -32,7 +34,8 @@ WidgetControls.Play = ({ isRunning, onClick, disabled = false }) => {
       disabled={disabled}
       className="disabled:cursor-not-allowed disabled:opacity-40"
     >
-      <Icon name={isRunning ? "circlePause" : "circlePlay"} size="27" />
+      <Icon
+        name={isRunning ? "circlePause" : "circlePlay"} />
     </button>
   );
 };
@@ -42,8 +45,7 @@ WidgetControls.Reset = ({ onClick }) => {
     <button onClick={onClick}>
       <Icon
         name="rotateCcw"
-        size="27"
-        className="translate-y-[0.01rem]"/>
+        className="translate-y-[0.01rem]" />
     </button>
   );
 };
@@ -53,15 +55,13 @@ WidgetControls.Edit = ({ isEditing, onEdit, onConfirm }) => {
     <button onClick={onConfirm}>
       <Icon
         name="check"
-        size="23"
-        className="translate-y-[0.01rem]"/>
+        className="translate-y-[0.01rem]" />
     </button>
   ) : (
     <button onClick={onEdit}>
       <Icon
-        name="pencil"
-        size="23"
-        className="translate-y-[0.01rem]"/>
+        name="squarePen"
+        className="translate-y-[0.01rem]" />
     </button>
   );
 };
@@ -74,7 +74,8 @@ WidgetControls.Erase = ({ onClick }) => {
       aria-label="Delete widget"
       onClick={onClick}
     >
-      <Icon name="trash" size={25} />
+      <Icon
+        name="trash" />
     </button>
   );
 };

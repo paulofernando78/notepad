@@ -4,12 +4,13 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import "./App.css";
 import { Header } from "@/components/layout/Header";
 
-import { widgetCatalog } from "./components/features/Widget/WidgetCatalog";
-import { Widget } from "./components/ui/Widget";
-import { Note } from "@/components/features/Note";
-import { WidgetContainer } from "./components/ui/WidgetContainer/WidgetContainer";
+import { SectionPanel } from "@/components/ui/SectionPanel";
+import { WidgetContainer } from "@/components/ui/WidgetContainer/WidgetContainer";
+import { widgetCatalog } from "@/components/features/Widget/WidgetCatalog";
+import { Widget } from "@/components/ui/Widget";
 
 import { TaskBoard } from "@/components/features/TaskBoard";
+import { Note } from "@/components/features/Note";
 import { SearchBar } from "@/components/ui/SearchBar";
 
 function App() {
@@ -55,29 +56,28 @@ function App() {
     <div className="flex flex-col gap-6 min-h-screen p-1">
       <Header />
 
-      <WidgetContainer onAdd={addWidget}>
-        {widgets.map((widgetInstance) => {
-          const definition = widgetCatalog[widgetInstance.type];
-          const Component = definition.Component;
+      <SectionPanel title="Widget">
+        <WidgetContainer onAdd={addWidget}>
+          {widgets.map((widgetInstance) => {
+            const definition = widgetCatalog[widgetInstance.type];
+            const Component = definition.Component;
 
-          const handleRemove = () => {
-            removeWidget(widgetInstance.id)
-          }
+            const handleRemove = () => {
+              removeWidget(widgetInstance.id);
+            };
 
-          return (
-            <Widget
-              key={widgetInstance.id}
-              title={definition.title}
-              onRemove={() => removeWidget(widgetInstance.id)}
-            >
-              <Component
-                {...widgetInstance.config}
-                onRemove={handleRemove}  
-              />
-            </Widget>
-          );
-        })}
-      </WidgetContainer>
+            return (
+              <Widget
+                key={widgetInstance.id}
+                title={definition.title}
+                onRemove={() => removeWidget(widgetInstance.id)}
+              >
+                <Component {...widgetInstance.config} onRemove={handleRemove} />
+              </Widget>
+            );
+          })}
+        </WidgetContainer>
+      </SectionPanel>
 
       {/* TODO */}
       <div className="">
