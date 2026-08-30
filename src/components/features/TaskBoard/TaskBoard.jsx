@@ -66,7 +66,7 @@ export const TaskBoard = () => {
                   name=""
                   id=""
                   placeholder="Add task..."
-                  className="w-full"
+                  className="pl-2 w-full"
                   />
               </div>
             </Board>

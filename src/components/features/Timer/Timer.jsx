@@ -166,7 +166,7 @@ export const Timer = ({ onRemove }) => {
                     px-[0.6rem] py-[0.4rem]
                     font-[Arial]
                     border
-                    border-gray-600
+                    border-gray-500
                     rounded-lg
                     placeholder:italic
                   "

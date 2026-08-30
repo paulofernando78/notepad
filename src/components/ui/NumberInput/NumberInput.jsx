@@ -18,7 +18,13 @@ export const NumberInput = ({
         min={min}
         max={max}
         onChange={(event) => onChange(Number(event.target.value))}
-        className={`border border-gray-500 rounded show-spinner ${className}`}
+        className={`
+          border
+          border-gray-500
+          rounded
+          show-spinner
+          ${className}
+        `}
       />
     </label>
   );

@@ -5,7 +5,7 @@ import { WidgetControls } from "@/components/ui/WidgetControls";
 import { Icon } from "@/components/ui/Icon";
 
 const DEFAULT_FOCUS_MINUTES = 25;
-const DEFAULT_BREAK_MINUTES = 1;
+const DEFAULT_BREAK_MINUTES = 5;
 const DEFAULT_LONG_BREAK_MINUTES = 15;
 const LONG_BREAK_INTERVAL = 4;
 
@@ -38,7 +38,7 @@ export const Pomodoro = ({
   breakMinutes: initialBreakMinutes = DEFAULT_BREAK_MINUTES,
   longBreakMinutes: initialLongBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
   totalPomodoros: initialPomodoroGoal = 8,
-  onRemove
+  onRemove,
 }) => {
   const [focusMinutes, setFocusMinutes] = useState(initialFocusMinutes);
   const [breakMinutes, setBreakMinutes] = useState(initialBreakMinutes);
@@ -67,8 +67,6 @@ export const Pomodoro = ({
   const [completedPomodoros, setCompletedPomodoros] = useState(0);
   const [isSoundEnabled, setIsSoundEnabled] = useState(true);
 
-  const minutesLeft = Math.floor(time / 60);
-  const secondLeft = time % 60;
   const displayedPomodoro =
     mode === "focus"
       ? Math.min(completedPomodoros + 1, pomodoroGoal)
@@ -134,10 +132,6 @@ export const Pomodoro = ({
     isSoundEnabled,
   ]);
 
-  const getFormattedTime = `
-    ${String(minutesLeft).padStart(2, "0")}:${String(secondLeft).padStart(2, "0")}
-    `;
-
   const activeFocusModeClass =
     "text-green-400 [text-shadow:0_0_8px_rgba(0,225,0,0.8)]";
 
@@ -148,6 +142,33 @@ export const Pomodoro = ({
   const activePomodoroDoneModeClass =
     "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)] animate-pulse";
   const inactiveModeClass = "text-gray-400";
+
+  function formatTime(totalSeconds) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+
+  function formatTotalTime(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }
+
+  function calculateTotalSeconds() {
+    if (mode === "done") {
+      return 0;
+    }
+
+    let total = time;
+
+    return total;
+  }
+
+  const totalTime = formatTotalTime(calculateTotalSeconds());
 
   function handleEdit() {
     setIsRunning(false);
@@ -205,8 +226,14 @@ export const Pomodoro = ({
   return (
     <WidgetBody
       top={
-        <div className="flex gap-4 justify-center">
-          <span> {getFormattedTime}</span>
+        <div
+          className="
+            flex
+            gap-4
+            justify-center
+          "
+        >
+          <span>{totalTime}</span>
           <button
             onClick={handleToggleSound}
             aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
@@ -217,123 +244,175 @@ export const Pomodoro = ({
         </div>
       }
       middle={
-        isEditing ? (
-          <div
-            className="
-            grid
-            grid-cols-3
-            gap-y-3
-            translate-y-[-0.1rem]
-            uppercase
-            "
-          >
-            <NumberInput
-              label="Focus"
-              name="focus"
-              value={editFocusMinutes}
-              onChange={setEditFocusMinutes}
-              min={1}
-              wrapperClassName="text-center"
-            />
-            <NumberInput
-              label="Break"
-              name="break"
-              value={editBreakMinutes}
-              onChange={setEditBreakMinutes}
-              min={1}
-            />
-            <NumberInput
-              label="Long"
-              name="long-break"
-              value={editLongBreakMinutes}
-              onChange={setEditLongBreakMinutes}
-              min={1}
-            />
-            <NumberInput
-              label="Pomodoros"
-              name="pomodoro-goal"
-              value={editPomodoroGoal}
-              onChange={setEditPomodoroGoal}
-              min={1}
-              wrapperClassName="col-start-2"
-            />
-          </div>
-        ) : (
-          <div
-            className="
+        <div
+          className="
             text-center
             uppercase
           "
-          >
-            {/* Focus • Break • Long  */}
-            <div className="space-y-2">
-              <div
-                className="
-                flex
+        >
+          {/* Focus • Break • Long  */}
+          <div className="space-y-2">
+            <div
+              className="
+                grid
+                grid-cols-[50px_auto_50px_auto_50px]
                 items-center
                 justify-center
+                
                 "
-              >
-                {/* FOCUS */}
+            >
+              {/* FOCUS */}
+              <div className="flex flex-col">
+                <>
+                  <span
+                    className={`${
+                      mode === "focus" && isRunning
+                        ? activeFocusModeClass
+                        : inactiveModeClass
+                    } text-[1rem]`}
+                  >
+                    Focus
+                  </span>
+                  {isEditing ? (
+                    <div
+                      className="
+                        h-[30.8px]
+                      ">
+                      <NumberInput
+                        label=""
+                        name="focus"
+                        value={editFocusMinutes}
+                        onChange={setEditFocusMinutes}
+                        min={1}
+                        wrapperClassName="text-center"
+                      />
+                    </div>
+                  ) : (
+                    <span
+                      className="
+                        h-[30.8px]
+                        translate-y-1
+                        pomo-middle-time
+                      "
+                    >
+                      {formatTime(mode === "focus" ? time : focusDuration)}
+                    </span>
+                  )}
+                </>
+              </div>
+
+              {/* <Icon name="dot" size={20} /> */}
+              <div aria-hidden="true" className="mx-2 w-px h-12 bg-gray-400" />
+
+              {/* BREAK */}
+              <div className="flex flex-col">
                 <span
-                  className={
-                    mode === "focus" && isRunning
-                      ? activeFocusModeClass
-                      : inactiveModeClass
-                  }
-                >
-                  Focus
-                </span>
-                <Icon name="dot" size={20} />
-                {/* BREAK */}
-                <span
-                  className={
+                  className={`${
                     mode === "break" && isRunning
                       ? activeBreakModeClass
                       : inactiveModeClass
-                  }
+                  } text-[1rem]`}
                 >
                   Break
                 </span>
-                <Icon name="dot" size={20} />
-                {/* LONG */}
+                {isEditing ? (
+                  <div className="h-[30.8px]">
+                    <NumberInput
+                      label=""
+                      name="break"
+                      value={editBreakMinutes}
+                      onChange={setEditBreakMinutes}
+                      min={1}
+                    />
+                  </div>
+                ) : (
+                  <span
+                    className="
+                      h-[30.8px]
+                      translate-y-1
+                      pomo-middle-time
+                    "
+                  >
+                  {formatTime(mode === "break" ? time : breakDuration)}
+                </span>
+                )}
+              </div>
+
+              {/* <Icon name="dot" size={20} /> */}
+              <div aria-hidden="true" className="mx-2 w-px h-12 bg-gray-400" />
+
+              {/* LONG */}
+              <div
+                className="
+                  flex
+                  flex-col
+                "
+              >
                 <span
-                  className={
+                  className={`${
                     mode === "long" && isRunning
                       ? activeLongModeClass
                       : inactiveModeClass
-                  }
+                  } text-[1rem]`}
                 >
                   Long
                 </span>
+                {isEditing ? (
+                  <div className="h-[30.8px]">
+                    <NumberInput
+                      label=""
+                      name="long-break"
+                      value={editLongBreakMinutes}
+                      onChange={setEditLongBreakMinutes}
+                      min={1}
+                    />
+                  </div>
+                ) : (
+                  <span
+                    className="
+                      h-[30.8px]
+                      translate-y-1
+                      pomo-middle-time
+                    "
+                  >
+                    {formatTime(mode === "long" ? time : longBreakDuration)}
+                  </span>
+                  )
+                }
               </div>
-              {/* POMODORO */}
-             <div className="flex gap-2 justify-center">
-                <span>pomodoro:</span>
-                <div
-                  className="
+            </div>
+
+            {/* OUT OF */}
+            <div className="flex gap-2">
+              <div
+                className="
                     flex
                     items-center
                     translate-x-[0.1rem]
                     "
-                >
-                  {displayedPomodoro} <Icon name="dot" size={20} /> {pomodoroGoal}
-                </div>
-             </div>
-              {/* DONE */}
-              <span
-                className={`block ${
-                  mode === "done"
-                    ? activePomodoroDoneModeClass
-                    : inactiveModeClass
-                }
-                `}
               >
-                DONE
-              </span>
+                <span className="space-x-2">
+                  <span>{displayedPomodoro}</span>
+                  <span>out of</span>
+                  <span>{pomodoroGoal}</span>
+                  <p> </p>{" "}
+                </span>
+              </div>
             </div>
+
+            {/* DONE */}
+            <span
+              className={`block ${
+                mode === "done"
+                  ? activePomodoroDoneModeClass
+                  : inactiveModeClass
+              }
+                `}
+            >
+              DONE
+            </span>
           </div>
-        )
+        </div>
       }
       bottom={
         <WidgetControls>
