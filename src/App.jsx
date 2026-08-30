@@ -7,6 +7,7 @@ import { SectionPanel } from "@/components/ui/SectionPanel";
 import { WidgetContainer } from "@/components/ui/WidgetContainer/WidgetContainer";
 import { widgetCatalog } from "@/components/features/Widget/WidgetCatalog";
 import { Widget } from "@/components/ui/Widget";
+import { WidgetPicker } from "@/components/features/WidgetPicker/WidgetPicker";
 
 import { TaskBoard } from "@/components/features/TaskBoard";
 // import { Note } from "@/components/features/Note";
@@ -57,7 +58,7 @@ function App() {
       <Header />
 
       <SectionPanel title="Widget">
-        <WidgetContainer onAdd={addWidget}>
+        <WidgetContainer>
           {widgets.map((widgetInstance) => {
             const definition = widgetCatalog[widgetInstance.type];
             const Component = definition.Component;
@@ -76,6 +77,7 @@ function App() {
               </Widget>
             );
           })}
+          <WidgetPicker onAdd={addWidget} />
         </WidgetContainer>
       </SectionPanel>
 
