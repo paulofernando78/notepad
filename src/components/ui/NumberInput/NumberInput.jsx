@@ -1,5 +1,6 @@
 export const NumberInput = ({
   label,
+  hideLabel = false,
   name,
   value,
   onChange,
@@ -10,7 +11,14 @@ export const NumberInput = ({
 }) => {
   return (
     <label className={`text-center ${wrapperClassName}`}>
-      <span className="block mb-1">{label}</span>{" "}
+      {hideLabel ? (
+        <>
+          <span className="sr-only">{label}</span>
+          <span aria-hidden="true" className="block mb-1"></span>
+        </>
+      ) : (
+        <span className="block mb-1">{label}</span>
+      )}
       <input
         type="number"
         name={name}

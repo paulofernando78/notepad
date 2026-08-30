@@ -299,13 +299,12 @@ export const Pomodoro = ({
                       "
                     >
                       <NumberInput
-                        label=""
+                        hideLabel
+                        label="focus"
                         name="focus"
                         value={editFocusMinutes}
                         onChange={setEditFocusMinutes}
-                        min={1}
-                        wrapperClassName="text-center"
-                      />
+                        min={1}                      />
                     </div>
                   ) : (
                     <span
@@ -337,7 +336,8 @@ export const Pomodoro = ({
                 {isEditing ? (
                   <div className="h-[30.8px]">
                     <NumberInput
-                      label=""
+                      hideLabel
+                      label="break"
                       name="break"
                       value={editBreakMinutes}
                       onChange={setEditBreakMinutes}
@@ -378,7 +378,8 @@ export const Pomodoro = ({
                 {isEditing ? (
                   <div className="h-[30.8px]">
                     <NumberInput
-                      label=""
+                      hideLabel
+                      label="long break"
                       name="long-break"
                       value={editLongBreakMinutes}
                       onChange={setEditLongBreakMinutes}
@@ -425,7 +426,8 @@ export const Pomodoro = ({
                   {isEditing ? (
                     <div className="translate-y-[-0.1rem]">
                       <NumberInput
-                        label=""
+                        hideLabel
+                        label="Pomodoro Goal"
                         name="pomodoro-goal"
                         value={editPomodoroGoal}
                         onChange={setEditPomodoroGoal}
