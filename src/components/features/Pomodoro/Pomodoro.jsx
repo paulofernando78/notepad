@@ -251,7 +251,7 @@ export const Pomodoro = ({
           "
         >
           {/* Focus • Break • Long  */}
-          <div className="space-y-2">
+          <div className="">
             <div
               className="
                 grid
@@ -382,7 +382,7 @@ export const Pomodoro = ({
               </div>
             </div>
 
-            {/* OUT OF */}
+            {/* OF */}
             <div className="flex gap-2">
               <div
                 className="
@@ -391,18 +391,19 @@ export const Pomodoro = ({
                     translate-x-[0.1rem]
                     "
               >
-                <span className="space-x-2">
+                <span className="space-x-2 ml-[0.1rem]">
                   <span>{displayedPomodoro}</span>
-                  <span>out of</span>
+                  <span>of</span>
                   <span>{pomodoroGoal}</span>
                   <p> </p>{" "}
                 </span>
               </div>
-            </div>
 
+            </div>
+          </div>
             {/* DONE */}
             <span
-              className={`block ${
+              className={`block mt-2 ${
                 mode === "done"
                   ? activePomodoroDoneModeClass
                   : inactiveModeClass
@@ -411,7 +412,6 @@ export const Pomodoro = ({
             >
               DONE
             </span>
-          </div>
         </div>
       }
       bottom={
