@@ -291,7 +291,7 @@ export const Pomodoro = ({
                     <span
                       className="
                         h-[30.8px]
-                        translate-y-1
+                        translate-y-[0.3rem]
                         pomo-middle-time
                       "
                     >
@@ -329,7 +329,7 @@ export const Pomodoro = ({
                   <span
                     className="
                       h-[30.8px]
-                      translate-y-1
+                      translate-y-[0.3rem]
                       pomo-middle-time
                     "
                   >
@@ -371,7 +371,7 @@ export const Pomodoro = ({
                   <span
                     className="
                       h-[30.8px]
-                      translate-y-1
+                      translate-y-[0.3rem]
                       pomo-middle-time
                     "
                   >
@@ -391,7 +391,7 @@ export const Pomodoro = ({
                     translate-x-[0.1rem]
                     "
               >
-                <span className="space-x-2 ml-[0.1rem]">
+                <span className="space-x-2 mt-[0.1rem] ml-[0.1rem]">
                   <span>{displayedPomodoro}</span>
                   <span>of</span>
                   <span>{pomodoroGoal}</span>
