@@ -412,7 +412,7 @@ export const Pomodoro = ({
                     "
               >
                   <span>{displayedPomodoro}</span>
-                  <span>of</span>
+                  <span className="translate-x-[0.1rem]">of</span>
                 {isEditing ? (
                     <div className="translate-y-[-0.1rem]">
                       <NumberInput
