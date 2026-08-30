@@ -9,6 +9,27 @@ const DEFAULT_BREAK_MINUTES = 5;
 const DEFAULT_LONG_BREAK_MINUTES = 15;
 const LONG_BREAK_INTERVAL = 4;
 
+function calculateSessionDuration({
+  pomodoroGoal,
+  focusDuration,
+  breakDuration,
+  longBreakDuration,
+}) {
+  const totalBreaks = Math.max(pomodoroGoal - 1, 0);
+
+  const totalLongBreaks = Math.floor(totalBreaks / LONG_BREAK_INTERVAL);
+
+  const totalShortBreaks = totalBreaks - totalLongBreaks;
+
+  const totalFocusTime = pomodoroGoal * focusDuration;
+
+  const totalShortBreakTime = totalShortBreaks * breakDuration;
+
+  const totalLongBreakTime = totalLongBreaks * longBreakDuration;
+
+  return totalFocusTime + totalShortBreakTime + totalLongBreakTime;
+}
+
 function playTick() {
   const audioContext = new AudioContext();
   const oscillator = audioContext.createOscillator();
@@ -50,6 +71,13 @@ export const Pomodoro = ({
   const focusDuration = focusMinutes * 60;
   const breakDuration = breakMinutes * 60;
   const longBreakDuration = longBreakMinutes * 60;
+
+  const sessionDuration = calculateSessionDuration({
+    pomodoroGoal,
+    focusDuration,
+    breakDuration,
+    longBreakDuration,
+  });
 
   const [time, setTime] = useState(focusDuration);
 
@@ -158,17 +186,7 @@ export const Pomodoro = ({
     return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
 
-  function calculateTotalSeconds() {
-    if (mode === "done") {
-      return 0;
-    }
-
-    let total = time;
-
-    return total;
-  }
-
-  const totalTime = formatTotalTime(calculateTotalSeconds());
+  const totalTime = formatTotalTime(sessionDuration);
 
   function handleEdit() {
     setIsRunning(false);
@@ -277,7 +295,8 @@ export const Pomodoro = ({
                     <div
                       className="
                         h-[30.8px]
-                      ">
+                      "
+                    >
                       <NumberInput
                         label=""
                         name="focus"
@@ -333,8 +352,8 @@ export const Pomodoro = ({
                       pomo-middle-time
                     "
                   >
-                  {formatTime(mode === "break" ? time : breakDuration)}
-                </span>
+                    {formatTime(mode === "break" ? time : breakDuration)}
+                  </span>
                 )}
               </div>
 
@@ -377,41 +396,48 @@ export const Pomodoro = ({
                   >
                     {formatTime(mode === "long" ? time : longBreakDuration)}
                   </span>
-                  )
-                }
+                )}
               </div>
             </div>
 
             {/* OF */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 h-[38px]">
               <div
                 className="
                     flex
                     items-center
+                    gap-2
                     translate-x-[0.1rem]
+                    translate-y-[0.1rem]
                     "
               >
-                <span className="space-x-2 mt-[0.1rem] ml-[0.1rem]">
                   <span>{displayedPomodoro}</span>
                   <span>of</span>
-                  <span>{pomodoroGoal}</span>
-                  <p> </p>{" "}
-                </span>
+                {isEditing ? (
+                    <div className="translate-y-[-0.1rem]">
+                      <NumberInput
+                        label=""
+                        name="pomodoro-goal"
+                        value={editPomodoroGoal}
+                        onChange={setEditPomodoroGoal}
+                        min={1}
+                      />
+                    </div>
+                ) : (
+                  <span className="pl-[0.31rem]">{pomodoroGoal}</span>
+                )}
               </div>
-
             </div>
           </div>
-            {/* DONE */}
-            <span
-              className={`block mt-2 ${
-                mode === "done"
-                  ? activePomodoroDoneModeClass
-                  : inactiveModeClass
-              }
+          {/* DONE */}
+          <span
+            className={`block mt-2 ${
+              mode === "done" ? activePomodoroDoneModeClass : inactiveModeClass
+            }
                 `}
-            >
-              DONE
-            </span>
+          >
+            DONE
+          </span>
         </div>
       }
       bottom={
