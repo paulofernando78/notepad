@@ -92,7 +92,7 @@ export const Icon = ({ name, size = 20, className = "", ...props }) => {
     <LucideIcon
       size={size}
       className={`
-        icon-color
+        text-gray-400
         shrink-0
         cursor-pointer
         ${className}

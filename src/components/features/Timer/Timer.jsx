@@ -177,7 +177,7 @@ export const Timer = ({ onRemove }) => {
               className={`uppercase
             ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
             >
-              Done
+              done
             </span>
           </div>
         ) : (

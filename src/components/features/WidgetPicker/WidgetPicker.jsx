@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Icon } from "@/components/ui/Icon";
+import { Border } from "@/components/ui/Border";
 
-export const WidgetPicker = ( { onAdd }) => {
-  const [isOpen, setIsOpen] = useState(false)
+export const WidgetPicker = ({ onAdd }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleClick() {
-    setIsOpen((currentIsOpen) => !currentIsOpen)
+    setIsOpen((currentIsOpen) => !currentIsOpen);
   }
 
   return (
@@ -17,26 +18,20 @@ export const WidgetPicker = ( { onAdd }) => {
         className="
           grid
           place-items-center
-          p-2
-          h-[305px]
-          border
-          border-gray-500
-          rounded-lg
+          
+          h-full
           cursor-pointer
         "
       >
-        <Icon name="circlePlus" />
+        <Icon name="plus" />
       </button>
-      {isOpen &&
-      <div className="flex flex-col gao-2 border">
-        <span>Clock</span>
-        <span>Pomodoro</span>
-        <span>Time</span>
-      </div>
-      }
-      <div>
-        
-      </div>
+      {isOpen && (
+        <Border className="flex flex-col gap-2">
+          <span>Clock</span>
+          <span>Pomodoro</span>
+          <span>Time</span>
+        </Border>
+      )}
     </>
   );
 };

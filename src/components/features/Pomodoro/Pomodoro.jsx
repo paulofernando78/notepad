@@ -264,6 +264,9 @@ export const Pomodoro = ({
       middle={
         <div
           className="
+            flex
+            flex-col
+            gap-2
             text-center
             uppercase
           "
@@ -274,9 +277,7 @@ export const Pomodoro = ({
               className="
                 grid
                 grid-cols-[50px_auto_50px_auto_50px]
-                items-center
-                justify-center
-                
+                items-center    
                 "
             >
               {/* FOCUS */}
@@ -320,7 +321,6 @@ export const Pomodoro = ({
                 </>
               </div>
 
-              {/* <Icon name="dot" size={20} /> */}
               <div aria-hidden="true" className="mx-2 w-px h-12 bg-gray-400" />
 
               {/* BREAK */}
@@ -357,7 +357,6 @@ export const Pomodoro = ({
                 )}
               </div>
 
-              {/* <Icon name="dot" size={20} /> */}
               <div aria-hidden="true" className="mx-2 w-px h-12 bg-gray-400" />
 
               {/* LONG */}
@@ -400,20 +399,26 @@ export const Pomodoro = ({
               </div>
             </div>
 
-            {/* OF */}
-            <div className="flex gap-2 h-[38px]">
-              <div
-                className="
-                    flex
-                    items-center
-                    gap-2
-                    translate-x-[0.1rem]
-                    translate-y-[0.1rem]
-                    "
-              >
-                  <span>{displayedPomodoro}</span>
-                  <span className="translate-x-[0.1rem]">of</span>
-                {isEditing ? (
+            <div className="translate-x-[0.15rem]">
+              {/* FOCUS + BREAK: 1 OF 8 */}
+              <div className="flex h-9.5">
+                <div
+                  className="
+                      flex
+                      items-center
+                      
+                      w-full
+                      h-8
+                      gap-2
+                      translate-y-[0.55rem]
+                      "
+                >
+                  <div className="space-x-2">
+                    <span className="">FOCUS + BREAK:</span>
+                    <span>{displayedPomodoro}</span>
+                    <span>of</span>
+                  </div>
+                  {isEditing ? (
                     <div className="translate-y-[-0.1rem]">
                       <NumberInput
                         label=""
@@ -423,20 +428,21 @@ export const Pomodoro = ({
                         min={1}
                       />
                     </div>
-                ) : (
-                  <span className="pl-[0.31rem]">{pomodoroGoal}</span>
-                )}
+                  ) : (
+                    <span className="pl-[0.31rem]">{pomodoroGoal}</span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
           {/* DONE */}
           <span
-            className={`block mt-2 ${
+            className={`block ${
               mode === "done" ? activePomodoroDoneModeClass : inactiveModeClass
             }
                 `}
           >
-            DONE
+            done
           </span>
         </div>
       }
