@@ -278,7 +278,7 @@ export const Pomodoro = ({
                 grid
                 grid-cols-[50px_auto_50px_auto_50px]
                 items-center    
-                "
+              "
             >
               {/* FOCUS */}
               <div className="flex flex-col">
@@ -399,7 +399,11 @@ export const Pomodoro = ({
               </div>
             </div>
 
-            <div className="translate-x-[0.15rem]">
+            <div
+              className="
+                translate-x-[0.15rem]
+                translate-y-[-0.14rem]
+              ">
               {/* FOCUS + BREAK: 1 OF 8 */}
               <div className="flex h-9.5">
                 <div
