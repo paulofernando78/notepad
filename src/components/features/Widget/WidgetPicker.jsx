@@ -25,7 +25,7 @@ export const WidgetPicker = ({ onAdd }) => {
           cursor-pointer
         "
       >
-        <Icon name="plus" />
+        {isOpen ? <Icon name="minus" /> : <Icon name="plus" />}
       </button>
       {isOpen && (
         <div

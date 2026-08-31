@@ -25,6 +25,7 @@ import {
   // M
   MapPin,
   MessageCircleWarning,
+  Minus,
   // N
   NotepadText,
   // P
@@ -73,6 +74,7 @@ const icons = {
   // M
   mapPin: MapPin,
   messageCircleWarning: MessageCircleWarning,
+  minus: Minus,
   // N
   notepadText: NotepadText,
   // P
