@@ -41,6 +41,8 @@ import {
   // V
   Volume,
   VolumeX,
+  // X
+  X,
 } from "lucide-react";
 
 const icons = {
@@ -86,6 +88,8 @@ const icons = {
   // V
   volume: Volume,
   volumeX: VolumeX,
+  // X
+  x: X,
 };
 
 export const Icon = ({ name, size = 20, className = "", ...props }) => {

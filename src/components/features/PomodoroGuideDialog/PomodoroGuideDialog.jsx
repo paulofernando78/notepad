@@ -47,7 +47,15 @@ export const PomodoroGuideDialog = () => {
       >
         <Icon name="info" />
       </button>
-      <Dialog dialogRef={dialogRef} className="space-y-2">
+      <Dialog dialogRef={dialogRef} className="relative space-y-2">
+        <button
+          type="button"
+          aria-label="Close Pomodoro guide"
+          onClick={() => dialogRef.current?.close()}
+          className="absolute top-2 right-2 cursor-pointer"
+        >
+          <Icon name="x" />
+        </button>
         <h3 className="font-bold uppercase">What is it?</h3>
         <p>A simple method to balance focus with deliberate breaks.</p>
         {/* 1 Focus */}
