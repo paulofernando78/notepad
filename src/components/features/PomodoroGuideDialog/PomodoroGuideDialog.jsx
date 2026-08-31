@@ -49,7 +49,7 @@ export const PomodoroGuideDialog = () => {
           1980s. He created the method as a university student because he
           struggled to focus on his studies and avoid distractions.
         </p>
-        <h3 className="font-bold uppercase">How does it works?</h3>
+        <h3 className="font-bold uppercase">How does it work?</h3>
         <ol className="space-y-3">
           <li>
             <span className="font-bold">1. Plan your tasks.</span>
@@ -89,10 +89,10 @@ export const PomodoroGuideDialog = () => {
             <div></div>
           </div>
           <li className="flex gap-2">
-            3. Take a long break at the fourth time.
+            3. After the fourth focus session, take a long break.
           </li>
         </ol>
-        <div className="flex gap-3 overflow-x-scroll">
+        <div className="flex gap-3 overflow-x-auto">
           <div className="flex items-center gap-3">
             <div
               className="
@@ -216,7 +216,7 @@ export const PomodoroGuideDialog = () => {
               </div>
               <div></div>
               <div className="self-center justify-self-center text-sm">
-                5min
+                15min
               </div>
             </div>
           </div>
