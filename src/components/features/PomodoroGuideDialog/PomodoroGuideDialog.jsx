@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import { Icon } from "@/components/ui/Icon";
 import { Dialog } from "@/components/ui/Dialog";
-import { WidgetControls } from "@/components/ui/Widget/WidgetControls";
+import { WidgetControls } from "@/components/ui/Widget";
 
 const phaseBase = "font-['Oswald_Variable'] self-center justify-self-center";
 
