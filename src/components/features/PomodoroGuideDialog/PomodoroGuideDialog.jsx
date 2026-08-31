@@ -71,10 +71,16 @@ export const PomodoroGuideDialog = () => {
             "
           >
             <PhaseLabel phase="focus" />
-            <Icon name="arrowRight" aria-hidden="true" className="self-center"/>
+            <Icon
+              name="arrowRight"
+              aria-hidden="true"
+              className="self-center"
+            />
             <PhaseLabel phase="break" />
-            <span className="self-center">=</span>
-            <Tomate className="relative top-[-0.01rem] left-1"/>
+
+            <span className="row-span-2 self-center">=</span>
+            <Tomate className="relative top-2 left-1 " />
+
             <div className="self-center justify-self-center text-sm">
               25mins
             </div>
@@ -84,14 +90,139 @@ export const PomodoroGuideDialog = () => {
             <div></div>
           </div>
           <li className="flex gap-2">
-            3. Repeat{" "}
-            <span className="flex">
-              4x
-              <Tomate className="ml-1 relative top-[-0.2rem]" />,
-            </span>
-            then take a long break.
+            3. Take a long break at the fourth time.
           </li>
         </ol>
+        <div className="flex gap-3">
+          <div className="flex items-center gap-3">
+            <div
+              className="
+                  grid grid-cols-[1fr_auto_1fr]
+                  grid-rows-[auto_auto]
+                  gap-x-1
+                  px-2
+                  w-max
+                  rounded-lg
+                "
+            >
+              <Tomate className="col-start-2 row-start-1 justify-self-center mb-1" />
+              <div></div>
+              <div></div>
+              <PhaseLabel phase="focus" />
+              <Icon
+                name="arrowRight"
+                aria-hidden="true"
+                className="self-center justify-self-center"
+              />
+              <PhaseLabel phase="break" />
+
+              <div className="self-center justify-self-center text-sm">
+                25mins
+              </div>
+              <div></div>
+              <div className="self-center justify-self-center text-sm">
+                5min
+              </div>
+            </div>
+            <Icon name="plus" />
+          </div>
+          <div className="flex items-center gap-3">
+            <div
+              className="
+                  grid grid-cols-[1fr_auto_1fr]
+                  grid-rows-[auto_auto]
+                  gap-x-1
+                  px-2
+                  w-max
+                  rounded-lg
+                "
+            >
+              <Tomate className="col-start-2 row-start-1 justify-self-center mb-1" />
+              <div></div>
+              <div></div>
+              <PhaseLabel phase="focus" />
+              <Icon
+                name="arrowRight"
+                aria-hidden="true"
+                className="self-center justify-self-center"
+              />
+              <PhaseLabel phase="break" />
+
+              <div className="self-center justify-self-center text-sm">
+                25mins
+              </div>
+              <div></div>
+              <div className="self-center justify-self-center text-sm">
+                5min
+              </div>
+            </div>
+            <Icon name="plus" />
+          </div>
+          <div className="flex items-center gap-3">
+            <div
+              className="
+                  grid grid-cols-[1fr_auto_1fr]
+                  grid-rows-[auto_auto]
+                  gap-x-1
+                  px-2
+                  w-max
+                  rounded-lg
+                "
+            >
+              <Tomate className="col-start-2 row-start-1 justify-self-center mb-1" />
+              <div></div>
+              <div></div>
+              <PhaseLabel phase="focus" />
+              <Icon
+                name="arrowRight"
+                aria-hidden="true"
+                className="self-center justify-self-center"
+              />
+              <PhaseLabel phase="break" />
+
+              <div className="self-center justify-self-center text-sm">
+                25mins
+              </div>
+              <div></div>
+              <div className="self-center justify-self-center text-sm">
+                5min
+              </div>
+            </div>
+            <Icon name="plus" />
+          </div>
+          <div className="flex items-center gap-3">
+            <div
+              className="
+                  grid grid-cols-[1fr_auto_1fr]
+                  grid-rows-[auto_auto]
+                  gap-x-1
+                  px-2
+                  w-max
+                  rounded-lg
+                "
+            >
+              <Tomate className="col-start-2 row-start-1 justify-self-center mb-1" />
+              <div></div>
+              <div></div>
+              <PhaseLabel phase="focus" />
+              <Icon
+                name="arrowRight"
+                aria-hidden="true"
+                className="self-center justify-self-center"
+              />
+              <PhaseLabel phase="long" />
+
+              <div className="self-center justify-self-center text-sm">
+                25mins
+              </div>
+              <div></div>
+              <div className="self-center justify-self-center text-sm">
+                5min
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>One complete cycle has 1:55 (one hour anf fifty minutes)</p>
       </Dialog>
     </>
   );

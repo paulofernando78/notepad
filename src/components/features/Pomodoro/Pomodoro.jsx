@@ -60,7 +60,7 @@ export const Pomodoro = ({
   minutes: initialFocusMinutes = DEFAULT_FOCUS_MINUTES,
   breakMinutes: initialBreakMinutes = DEFAULT_BREAK_MINUTES,
   longBreakMinutes: initialLongBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
-  totalPomodoros: initialPomodoroGoal = 8,
+  totalPomodoros: initialPomodoroGoal = 4,
   onRemove,
 }) => {
   const [focusMinutes, setFocusMinutes] = useState(initialFocusMinutes);
