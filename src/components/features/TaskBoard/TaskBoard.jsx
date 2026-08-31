@@ -30,7 +30,6 @@ const TaskBoardNotice = () => {
       className="
         flex
         gap-2
-        mb-2
         p-2
         bg-gray-500/20
         rounded-lg
@@ -82,9 +81,7 @@ const TaskBoardColumn = ({ status }) => {
         `}
       >
         <div className="flex items-center justify-between">
-          <span className="block mb-2 font-bold uppercase">
-            {status.label}
-          </span>
+          <span className="block mb-2 font-bold uppercase">{status.label}</span>
           <Icon name="ellipsis" className="translate-y-[-0.4rem]" />
         </div>
         <TaskComposer color={status.color} />
@@ -95,17 +92,20 @@ const TaskBoardColumn = ({ status }) => {
 
 export const TaskBoard = () => {
   return (
-    <div
-      className="
-        overflow-x-auto
-        text-slate-100
-      "
-    >
+    <div className="grid">
       <TaskBoardNotice />
-      <div className="grid gap-2 pt-2 [grid-template-columns:repeat(4,minmax(220px,1fr))]">
-        {statusOptions.map((status) => (
-          <TaskBoardColumn key={status.id} status={status} />
-        ))}
+      <div
+        className="
+      overflow-x-auto
+      text-slate-100
+      "
+      >
+        
+        <div className="grid gap-2 pt-2 [grid-template-columns:repeat(4,minmax(220px,1fr))]">
+          {statusOptions.map((status) => (
+            <TaskBoardColumn key={status.id} status={status} />
+          ))}
+        </div>
       </div>
     </div>
   );
