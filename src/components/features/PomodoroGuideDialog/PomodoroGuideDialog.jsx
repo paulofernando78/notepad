@@ -3,13 +3,13 @@ import { useRef } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { Dialog } from "../../ui/Dialog/Dialog";
 
+const phaseBase = "font-['Oswald_Variable'] self-center justify-self-center";
+
 const phaseColors = {
-  focus:
-    "text-green-500 font-['Oswald_Variable'] self-center justify-self-center",
-  break:
-    "text-yellow-500 font-['Oswald_Variable'] self-center justify-self-center",
-  long: "text-blue-500 font-['Oswald_Variable'] self-center justify-self-center",
-  done: "text-red-500 font-['Oswald_Variable'] self-center justify-self-center",
+  focus: `${phaseBase} text-green-500`,
+  break: `${phaseBase} text-yellow-500`,
+  long: `${phaseBase} text-blue-500`,
+  done: `${phaseBase} text-red-500`,
 };
 
 const pomodoroCycle = [
