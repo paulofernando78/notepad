@@ -8,7 +8,7 @@ export const Dialog = ({ dialogRef, children, className = "" }) => {
         w-[calc(100%-1rem)]
         m-auto
         px-3
-        pt-3
+        pt-[0.6rem]
         pb-1.5
         text-white
         text-left
