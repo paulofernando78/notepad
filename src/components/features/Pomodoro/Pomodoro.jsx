@@ -4,7 +4,6 @@ import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { Icon } from "@/components/ui/Icon";
 
-
 const DEFAULT_FOCUS_MINUTES = 25;
 const DEFAULT_BREAK_MINUTES = 5;
 const DEFAULT_LONG_BREAK_MINUTES = 15;
@@ -54,6 +53,24 @@ function playTick() {
     audioContext.close();
   });
 }
+
+const durationTitle = `
+  flex
+  flex-col
+  pt-2
+  px-2
+  pb-[0.1rem]
+  bg-gray-500/50
+  rounded-lg
+  justify-self-center
+`;
+
+const durationInput = `
+  h-[30.8px]
+  pt-[0.55rem]
+  pomo-middle-time
+  
+`;
 
 export const Pomodoro = ({
   minutes: initialFocusMinutes = DEFAULT_FOCUS_MINUTES,
@@ -291,12 +308,12 @@ export const Pomodoro = ({
               <div
                 className="
                   grid
-                  grid-cols-[50px_auto_50px_auto_50px]
-                  items-center    
+                  grid-cols-[62px_62px_62px]
+                  gap-2
                 "
               >
                 {/* FOCUS */}
-                <div className="flex flex-col">
+                <div className={durationTitle}>
                   <>
                     <span
                       className={`${
@@ -308,11 +325,7 @@ export const Pomodoro = ({
                       Focus
                     </span>
                     {isEditing ? (
-                      <div
-                        className="
-                          h-[30.8px]
-                        "
-                      >
+                      <div className="h-[30.8px]">
                         <NumberInput
                           hideLabel
                           label="focus"
@@ -323,26 +336,25 @@ export const Pomodoro = ({
                         />
                       </div>
                     ) : (
-                      <span
-                        className="
-                          h-[30.8px]
-                          translate-y-[0.3rem]
-                          pomo-middle-time
-                        "
-                      >
+                      <span className={durationInput}>
                         {formatTime(mode === "focus" ? time : focusDuration)}
                       </span>
                     )}
                   </>
                 </div>
 
-                <div
+                {/* <div
                   aria-hidden="true"
-                  className="mx-2 w-px h-12 bg-gray-400"
-                />
+                  className="
+                    mx-2
+                    w-px
+                    h-12
+                    bg-gray-400
+                  "
+                /> */}
 
                 {/* BREAK */}
-                <div className="flex flex-col">
+                <div className={durationTitle}>
                   <span
                     className={`${
                       mode === "break" && isRunning
@@ -364,30 +376,24 @@ export const Pomodoro = ({
                       />
                     </div>
                   ) : (
-                    <span
-                      className="
-                        h-[30.8px]
-                        translate-y-[0.3rem]
-                        pomo-middle-time
-                      "
-                    >
+                    <span className={durationInput}>
                       {formatTime(mode === "break" ? time : breakDuration)}
                     </span>
                   )}
                 </div>
 
-                <div
+                {/* <div
                   aria-hidden="true"
-                  className="mx-2 w-px h-12 bg-gray-400"
-                />
+                  className="
+                    mx-2
+                    w-px
+                    h-12
+                    bg-gray-400
+                  "
+                /> */}
 
                 {/* LONG */}
-                <div
-                  className="
-                    flex
-                    flex-col
-                  "
-                >
+                <div className={durationTitle}>
                   <span
                     className={`${
                       mode === "long" && isRunning
@@ -409,13 +415,7 @@ export const Pomodoro = ({
                       />
                     </div>
                   ) : (
-                    <span
-                      className="
-                        h-[30.8px]
-                        translate-y-[0.3rem]
-                        pomo-middle-time
-                      "
-                    >
+                    <span className={durationInput}>
                       {formatTime(mode === "long" ? time : longBreakDuration)}
                     </span>
                   )}
@@ -434,7 +434,6 @@ export const Pomodoro = ({
                     className="
                         flex
                         items-center
-                        
                         w-full
                         h-8
                         gap-2
