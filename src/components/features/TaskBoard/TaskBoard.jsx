@@ -40,7 +40,7 @@ export const TaskBoard = () => {
         rounded-lg
         "
       >
-        <Icon name="messageCircleWarning" />
+        <Icon name="messageCircleWarning" cursorNone />
         <p>
           Break your big task into 'Micro-Wins'." Pick ONLY 3 things to do
           today. If you do these, the day is a success. Everything else is a

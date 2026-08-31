@@ -2,9 +2,23 @@ import { useId, useState } from "react";
 
 import { Icon } from "@/components/ui/Icon";
 
-export const SectionPanel = ({ title, children }) => {
+export const SectionPanel = ({
+  title,
+  children,
+  className = "",
+  defaultOpen = true,
+  storageKey,
+}) => {
   const headingId = useId();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() => {
+    if (!storageKey) return defaultOpen;
+
+    const savedValue = localStorage.getItem(storageKey);
+
+    if (savedValue === null) return defaultOpen;
+
+    return savedValue === "true";
+  });
 
   function handleToggle() {
     setIsOpen((current) => {
@@ -27,7 +41,7 @@ export const SectionPanel = ({ title, children }) => {
         bg-gray-100/10
         rounded-lg
         overflow-x-auto
-       
+        ${className}
       `}
     >
       <header
@@ -59,7 +73,6 @@ export const SectionPanel = ({ title, children }) => {
           flex gap-2
           bg-gray-100/10
           p-2
-          w-max
           rounded-lg
         "
         >

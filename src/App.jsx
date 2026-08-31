@@ -19,7 +19,6 @@ import { TaskBoard } from "@/components/features/TaskBoard";
 // import { SearchBar } from "@/components/ui/SearchBar";
 
 function App() {
-
   const [widgets, setWidgets] = useState([
     {
       id: crypto.randomUUID(),
@@ -59,10 +58,19 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-6 min-h-screen w-full max-w-280 mx-auto p-3">
+    <div
+      className="
+        flex flex-col
+        gap-6
+        w-full
+        max-w-280
+        min-h-screen
+        mx-auto p-3
+      "
+    >
       <Header />
 
-      <SectionPanel title="Widget">
+      <SectionPanel title="Widget" storageKey="section-widget">
         <WidgetContainer>
           {widgets.map((widgetInstance) => {
             const definition = widgetCatalog[widgetInstance.type];
@@ -86,7 +94,10 @@ function App() {
         </WidgetContainer>
       </SectionPanel>
 
-      <SectionPanel title="Task Board" className="w-max">
+      <SectionPanel
+        title="Task Board"
+        storageKey="section-task-board"
+      >
         <TaskBoard />
       </SectionPanel>
 
