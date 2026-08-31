@@ -60,6 +60,7 @@ export const SectionPanel = ({
             flex
             items-center
             gap-2
+            w-full
             cursor-pointer
           "
         >

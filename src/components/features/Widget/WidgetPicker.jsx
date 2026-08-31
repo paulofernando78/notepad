@@ -17,11 +17,8 @@ export const WidgetPicker = ({ onAdd }) => {
         className="
           grid
           place-items-center
-          px-1
           h-full
-          border
-          border-gray-500
-          rounded-lg
+      
           cursor-pointer
         "
       >
