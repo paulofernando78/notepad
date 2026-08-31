@@ -66,8 +66,7 @@ export const PomodoroGuideDialog = () => {
               gap-x-1
               px-2
               w-max
-              
-              rounded-lg
+              border border-gray-500 bg-gray-600 p-2 rounded-lg
             "
           >
             <PhaseLabel phase="focus" />
@@ -93,7 +92,7 @@ export const PomodoroGuideDialog = () => {
             3. Take a long break at the fourth time.
           </li>
         </ol>
-        <div className="flex gap-3 border border-gray-500 bg-gray-600 p-2 rounded-lg overflow-x-scroll">
+        <div className="flex gap-3 overflow-x-scroll">
           <div className="flex items-center gap-3">
             <div
               className="
@@ -102,7 +101,7 @@ export const PomodoroGuideDialog = () => {
                   gap-x-1
                   px-2
                   w-max
-                  rounded-lg
+                  border border-gray-500 bg-gray-600 p-2 rounded-lg
                 "
             >
               <Tomate className="col-start-2 row-start-1 justify-self-center mb-1" />
@@ -134,7 +133,7 @@ export const PomodoroGuideDialog = () => {
                   gap-x-1
                   px-2
                   w-max
-                  rounded-lg
+                  border border-gray-500 bg-gray-600 p-2 rounded-lg
                 "
             >
               <Tomate className="col-start-2 row-start-1 justify-self-center mb-1" />
@@ -166,7 +165,7 @@ export const PomodoroGuideDialog = () => {
                   gap-x-1
                   px-2
                   w-max
-                  rounded-lg
+                  border border-gray-500 bg-gray-600 p-2 rounded-lg
                 "
             >
               <Tomate className="col-start-2 row-start-1 justify-self-center mb-1" />
@@ -198,7 +197,7 @@ export const PomodoroGuideDialog = () => {
                   gap-x-1
                   px-2
                   w-max
-                  rounded-lg
+                  border border-gray-500 bg-gray-600 p-2 rounded-lg
                 "
             >
               <Tomate className="col-start-2 row-start-1 justify-self-center mb-1" />
