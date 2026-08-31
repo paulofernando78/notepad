@@ -59,6 +59,14 @@ WidgetControls.Edit = ({ isEditing, onEdit, onConfirm }) => {
   );
 };
 
+WidgetControls.Info = ({ onClick, ...props }) => {
+  return (
+    <button type="button" onClick={onClick} {...props}>
+      <Icon name="info" />
+    </button>
+  );
+};
+
 WidgetControls.Erase = ({ onClick }) => {
   return (
     <button
@@ -72,10 +80,3 @@ WidgetControls.Erase = ({ onClick }) => {
   );
 };
 
-WidgetControls.Info = ({ onClick, ...props }) => {
-  return (
-    <button type="button" onClick={onClick} {...props}>
-      <Icon name="info" />
-    </button>
-  );
-};
