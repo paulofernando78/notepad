@@ -18,15 +18,25 @@ export const WidgetPicker = ({ onAdd }) => {
         className="
           grid
           place-items-center
-          
+          px-1
           h-full
+          border
+          border-gray-500
+          rounded-lg
           cursor-pointer
         "
       >
         <Icon name="plus" />
       </button>
       {isOpen && (
-        <Border className="flex flex-col gap-2 p-2 font-bold">
+        <Border
+          className="
+            flex
+            flex-col 
+            gap-2
+            font-bold
+          "
+        >
           <button>Clock</button>
           <button>Pomodoro</button>
           <button>Time</button>

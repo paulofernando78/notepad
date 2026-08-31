@@ -70,7 +70,7 @@ function App() {
     >
       <Header />
 
-      <SectionPanel title="Widget" storageKey="section-widget">
+      <SectionPanel title="Widgets" storageKey="section-widget">
         <WidgetContainer>
           {widgets.map((widgetInstance) => {
             const definition = widgetCatalog[widgetInstance.type];

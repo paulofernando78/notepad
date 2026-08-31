@@ -2,7 +2,9 @@ export const Border = ({ children, className }) => {
   return (
     <div
       className={`
-        px-2 py-[0.4rem]
+        p-2
+        border
+        border-gray-500
         rounded-lg
         ${className}
       `}

@@ -59,19 +59,19 @@ function playTick() {
 const durationTitle = `
   flex
   flex-col
-  pt-2
+  pt-3
   px-2
-  pb-[0.1rem]
+  pb-[0.7rem]
   bg-gray-500/50
   rounded-lg
   justify-self-center
 `;
 
-const durationInput = `
+const durationDisplay = `
   h-[30.8px]
-  pt-[0.55rem]
-  pomo-middle-time
-  
+  pt-[0.99rem]
+  font-['Segoe_UI',sans-serif]
+  font-bold
 `;
 
 export const Pomodoro = ({
@@ -306,7 +306,46 @@ export const Pomodoro = ({
             "
           >
             {/* Focus • Break • Long  */}
-            <div className="">
+            <div>
+              <div
+                className="
+                  translate-x-[0.15rem]
+                  translate-y-[-0.14rem]
+                "
+              >
+                {/* 1 OF 8 */}
+                <div className="flex h-9.5">
+                  <div
+                    className="
+                        flex
+                        items-center
+                        w-full
+                        h-8
+                        gap-2
+                        translate-y-[0.2rem]
+                        "
+                  >
+                    <div className="space-x-2">
+                      <span>{displayedPomodoro}</span>
+                      <span>of</span>
+                    </div>
+                    {isEditing ? (
+                      <div className="translate-y-[-0.15rem]">
+                        <NumberInput
+                          hideLabel
+                          label="Pomodoro Goal"
+                          name="pomodoro-goal"
+                          value={editPomodoroGoal}
+                          onChange={setEditPomodoroGoal}
+                          min={1}
+                        />
+                      </div>
+                    ) : (
+                      <span className="pl-[0.31rem]">{pomodoroGoal}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
               <div
                 className="
                   grid
@@ -338,22 +377,12 @@ export const Pomodoro = ({
                         />
                       </div>
                     ) : (
-                      <span className={durationInput}>
+                      <span className={durationDisplay}>
                         {formatTime(mode === "focus" ? time : focusDuration)}
                       </span>
                     )}
                   </>
                 </div>
-
-                {/* <div
-                  aria-hidden="true"
-                  className="
-                    mx-2
-                    w-px
-                    h-12
-                    bg-gray-400
-                  "
-                /> */}
 
                 {/* BREAK */}
                 <div className={`w-15.5 ${durationTitle}`}>
@@ -378,21 +407,11 @@ export const Pomodoro = ({
                       />
                     </div>
                   ) : (
-                    <span className={durationInput}>
+                    <span className={durationDisplay}>
                       {formatTime(mode === "break" ? time : breakDuration)}
                     </span>
                   )}
                 </div>
-
-                {/* <div
-                  aria-hidden="true"
-                  className="
-                    mx-2
-                    w-px
-                    h-12
-                    bg-gray-400
-                  "
-                /> */}
 
                 {/* LONG */}
                 <div className={`w-15.5 ${durationTitle}`}>
@@ -417,54 +436,14 @@ export const Pomodoro = ({
                       />
                     </div>
                   ) : (
-                    <span className={durationInput}>
+                    <span className={durationDisplay}>
                       {formatTime(mode === "long" ? time : longBreakDuration)}
                     </span>
                   )}
                 </div>
               </div>
-
-              <div
-                className="
-                  translate-x-[0.15rem]
-                  translate-y-[-0.14rem]
-                "
-              >
-                {/* FOCUS: 1 OF 8 */}
-                <div className="flex h-9.5">
-                  <div
-                    className="
-                        flex
-                        items-center
-                        w-full
-                        h-8
-                        gap-2
-                        translate-y-[0.55rem]
-                        "
-                  >
-                    <div className="space-x-2">
-                      <span className="">FOCUS:</span>
-                      <span>{displayedPomodoro}</span>
-                      <span>of</span>
-                    </div>
-                    {isEditing ? (
-                      <div className="translate-y-[-0.1rem]">
-                        <NumberInput
-                          hideLabel
-                          label="Pomodoro Goal"
-                          name="pomodoro-goal"
-                          value={editPomodoroGoal}
-                          onChange={setEditPomodoroGoal}
-                          min={1}
-                        />
-                      </div>
-                    ) : (
-                      <span className="pl-[0.31rem]">{pomodoroGoal}</span>
-                    )}
-                  </div>
-                </div>
-              </div>
             </div>
+
             {/* DONE */}
             <span
               className={`block ${

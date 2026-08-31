@@ -28,11 +28,6 @@ input[type="number"].show-spinner::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
-.pomo-middle-time {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bold;
-}
-
 * {
   scrollbar-width: thin;
   scrollbar-color: #6b7280 transparent;

@@ -28,7 +28,7 @@ export const NumberInput = ({
         onChange={(event) => onChange(Number(event.target.value))}
         className={`
           border
-          border-gray-500
+          border-gray-400
           rounded
           show-spinner
           ${className}
