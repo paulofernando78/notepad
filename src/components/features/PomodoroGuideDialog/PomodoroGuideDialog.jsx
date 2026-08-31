@@ -221,7 +221,7 @@ export const PomodoroGuideDialog = () => {
             </div>
           </div>
         </div>
-        <p>One complete cycle has 1:55 (one hour anf fifty minutes).</p>
+        <p>One complete cycle takes 1 hour and 55 minutes.</p>
       </Dialog>
     </>
   );
