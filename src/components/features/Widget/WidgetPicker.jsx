@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Icon } from "@/components/ui/Icon";
-import { Border } from "@/components/ui/Border";
 
 export const WidgetPicker = ({ onAdd }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,18 +28,41 @@ export const WidgetPicker = ({ onAdd }) => {
         <Icon name="plus" />
       </button>
       {isOpen && (
-        <Border
+        <div
           className="
-            flex
-            flex-col 
-            gap-2
-            font-bold
+            font-['Oswald_Variable']
+            uppercase
           "
         >
-          <button>Clock</button>
-          <button>Pomodoro</button>
-          <button>Time</button>
-        </Border>
+          <header
+            className="
+            p-3
+            text-center
+            bg-black/50
+            rounded-tl-lg
+            rounded-tr-lg
+            rounded-br-none
+            rounded-bl-none
+          "
+          >
+            select
+          </header>
+          <div
+            className="
+              flex
+              flex-col
+              gap-2
+              p-3
+              bg-gray-500/30
+              rounded-br-lg
+              rounded-bl-lg
+            "
+          >
+            <button onClick={() => onAdd("clock")}>Clock</button>
+            <button onClick={() => onAdd("pomodoro")}>Pomodoro</button>
+            <button onClick={() => onAdd("timer")}>Timer</button>
+          </div>
+        </div>
       )}
     </>
   );

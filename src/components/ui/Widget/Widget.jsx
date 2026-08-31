@@ -12,10 +12,9 @@ export const WidgetCard = ({ title, headerAction, children }) => {
         font-['Oswald_Variable']
       "
     >
-      <div>
+      <>
         <header
           className="
-            relative
             p-3
             text-center
             uppercase
@@ -56,7 +55,7 @@ export const WidgetCard = ({ title, headerAction, children }) => {
         >
           {children}
         </div>
-      </div>
+      </>
     </article>
   );
 };
