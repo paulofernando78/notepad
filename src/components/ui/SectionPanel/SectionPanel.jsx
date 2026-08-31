@@ -2,7 +2,7 @@ import { useId, useState } from "react";
 
 import { Icon } from "@/components/ui/Icon";
 
-export const SectionPanel = ({ title, children, className }) => {
+export const SectionPanel = ({ title, children }) => {
   const headingId = useId();
   const [isOpen, setIsOpen] = useState(true);
 
@@ -19,17 +19,18 @@ export const SectionPanel = ({ title, children, className }) => {
         bg-gray-100/10
         rounded-lg
         overflow-x-auto
-        ${className}
+       
       `}
     >
       <header
-        className="
+        className={`
           block
-          pb-3
           text-lg
           font-bold
           uppercase
-        "
+           ${isOpen ? "pb-3" : ""}
+          `
+        }
       >
         <button
           onClick={handleToggle}
@@ -40,21 +41,23 @@ export const SectionPanel = ({ title, children, className }) => {
             cursor-pointer
           "
         >
-          <Icon name={isOpen ? "chevronDown": "chevronRight"} size={23}/>
+          <Icon name={isOpen ? "chevronDown" : "chevronRight"} size={23} />
           <h2>{title}</h2>
         </button>
       </header>
-      <div
-        className="
+      {isOpen && (
+        <div
+          className="
           flex gap-2
           bg-gray-100/10
           p-2
           w-max
           rounded-lg
         "
-      >
-        {isOpen && children }
-      </div>
+        >
+          {children}
+        </div>
+      )}
     </section>
   );
 };
