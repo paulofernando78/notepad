@@ -26,10 +26,10 @@ export const WidgetPicker = ({ onAdd }) => {
         <Icon name="plus" />
       </button>
       {isOpen && (
-        <Border className="flex flex-col gap-2">
-          <span>Clock</span>
-          <span>Pomodoro</span>
-          <span>Time</span>
+        <Border className="flex flex-col gap-2 p-2 font-bold">
+          <button>Clock</button>
+          <button>Pomodoro</button>
+          <button>Time</button>
         </Border>
       )}
     </>

@@ -1,7 +1,4 @@
-export const Widget = ({
-  title,
-  children,
-}) => {
+export const Widget = ({ title, headerAction, children }) => {
   return (
     <article
       className="
@@ -12,7 +9,8 @@ export const Widget = ({
       <div>
         <header
           className="
-            py-1
+            relative
+            py-2
             text-center
             uppercase
             border-b-0
@@ -23,8 +21,18 @@ export const Widget = ({
             rounded-bl-none
           "
         >
-          {title}
-          
+          <h3>{title}</h3>
+          {headerAction && (
+            <div className="
+              absolute
+              right-[0.44rem]
+              top-[1.4rem]
+              -translate-y-1/2
+              "
+            >
+              {headerAction}
+            </div>
+          )}
         </header>
         <div
           className="

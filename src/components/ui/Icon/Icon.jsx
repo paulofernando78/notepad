@@ -1,4 +1,6 @@
 import {
+  // A
+  ArrowRight,
   // B
   Bookmark,
   Brain,
@@ -42,6 +44,8 @@ import {
 } from "lucide-react";
 
 const icons = {
+  // A
+  arrowRight: ArrowRight,
   // B
   bookmark: Bookmark,
   brain: Brain,

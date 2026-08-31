@@ -10,11 +10,13 @@ import { Widget } from "@/components/ui/Widget";
 import { WidgetPicker } from "@/components/features/WidgetPicker/WidgetPicker";
 
 import { TaskBoard } from "@/components/features/TaskBoard";
+import { PomodoroGuideDialog } from "./components/features/PomodoroGuideDialog/PomodoroGuideDialog";
 // import { Note } from "@/components/features/Note";
 // import { Sidebar } from "@/components/layout/Sidebar";
 // import { SearchBar } from "@/components/ui/SearchBar";
 
 function App() {
+
   const [widgets, setWidgets] = useState([
     {
       id: crypto.randomUUID(),
@@ -71,6 +73,7 @@ function App() {
               <Widget
                 key={widgetInstance.id}
                 title={definition.title}
+                headerAction={widgetInstance.type === "pomodoro" ? <PomodoroGuideDialog /> : null}
                 onRemove={() => removeWidget(widgetInstance.id)}
               >
                 <Component {...widgetInstance.config} onRemove={handleRemove} />

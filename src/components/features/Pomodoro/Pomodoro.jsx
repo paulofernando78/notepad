@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+
 import { WidgetBody } from "@/components/ui/WidgetBody";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { WidgetControls } from "@/components/ui/WidgetControls";
 import { Icon } from "@/components/ui/Icon";
+
 
 const DEFAULT_FOCUS_MINUTES = 25;
 const DEFAULT_BREAK_MINUTES = 5;
@@ -186,7 +188,16 @@ export const Pomodoro = ({
     return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
 
-  const totalTime = formatTotalTime(sessionDuration);
+  const editingSessionDuration = calculateSessionDuration({
+    pomodoroGoal: editPomodoroGoal,
+    focusDuration: editFocusMinutes * 60,
+    breakDuration: editBreakMinutes * 60,
+    longBreakDuration: editLongBreakMinutes * 60,
+  });
+
+  const totalTime = formatTotalTime(
+    isEditing ? editingSessionDuration : sessionDuration,
+  );
 
   function handleEdit() {
     setIsRunning(false);
@@ -242,69 +253,116 @@ export const Pomodoro = ({
   }
 
   return (
-    <WidgetBody
-      top={
-        <div
-          className="
-            flex
-            gap-4
-            justify-center
-          "
-        >
-          <span>{totalTime}</span>
-          <button
-            onClick={handleToggleSound}
-            aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
-            title={isSoundEnabled ? "Mute tick" : "Enable tick"}
+    <>
+      <WidgetBody
+        top={
+          <div
+            className="
+              flex
+              gap-4
+              justify-center
+            "
           >
-            {isSoundEnabled ? <Icon name="volumeX" /> : <Icon name="volume" />}
-          </button>
-        </div>
-      }
-      middle={
-        <div
-          className="
-            flex
-            flex-col
-            gap-2
-            text-center
-            uppercase
-          "
-        >
-          {/* Focus • Break • Long  */}
-          <div className="">
-            <div
-              className="
-                grid
-                grid-cols-[50px_auto_50px_auto_50px]
-                items-center    
-              "
+            <span>{totalTime}</span>
+            <button
+              onClick={handleToggleSound}
+              aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
+              title={isSoundEnabled ? "Mute tick" : "Enable tick"}
             >
-              {/* FOCUS */}
-              <div className="flex flex-col">
-                <>
+              {isSoundEnabled ? (
+                <Icon name="volumeX" />
+              ) : (
+                <Icon name="volume" />
+              )}
+            </button>
+          </div>
+        }
+        middle={
+          <div
+            className="
+              flex
+              flex-col
+              gap-2
+              text-center
+              uppercase
+            "
+          >
+            {/* Focus • Break • Long  */}
+            <div className="">
+              <div
+                className="
+                  grid
+                  grid-cols-[50px_auto_50px_auto_50px]
+                  items-center    
+                "
+              >
+                {/* FOCUS */}
+                <div className="flex flex-col">
+                  <>
+                    <span
+                      className={`${
+                        mode === "focus" && isRunning
+                          ? activeFocusModeClass
+                          : inactiveModeClass
+                      } text-[1rem]`}
+                    >
+                      Focus
+                    </span>
+                    {isEditing ? (
+                      <div
+                        className="
+                          h-[30.8px]
+                        "
+                      >
+                        <NumberInput
+                          hideLabel
+                          label="focus"
+                          name="focus"
+                          value={editFocusMinutes}
+                          onChange={setEditFocusMinutes}
+                          min={1}
+                        />
+                      </div>
+                    ) : (
+                      <span
+                        className="
+                          h-[30.8px]
+                          translate-y-[0.3rem]
+                          pomo-middle-time
+                        "
+                      >
+                        {formatTime(mode === "focus" ? time : focusDuration)}
+                      </span>
+                    )}
+                  </>
+                </div>
+
+                <div
+                  aria-hidden="true"
+                  className="mx-2 w-px h-12 bg-gray-400"
+                />
+
+                {/* BREAK */}
+                <div className="flex flex-col">
                   <span
                     className={`${
-                      mode === "focus" && isRunning
-                        ? activeFocusModeClass
+                      mode === "break" && isRunning
+                        ? activeBreakModeClass
                         : inactiveModeClass
                     } text-[1rem]`}
                   >
-                    Focus
+                    Break
                   </span>
                   {isEditing ? (
-                    <div
-                      className="
-                        h-[30.8px]
-                      "
-                    >
+                    <div className="h-[30.8px]">
                       <NumberInput
                         hideLabel
-                        label="focus"
-                        name="focus"
-                        value={editFocusMinutes}
-                        onChange={setEditFocusMinutes}
-                        min={1}                      />
+                        label="break"
+                        name="break"
+                        value={editBreakMinutes}
+                        onChange={setEditBreakMinutes}
+                        min={0}
+                      />
                     </div>
                   ) : (
                     <span
@@ -314,160 +372,129 @@ export const Pomodoro = ({
                         pomo-middle-time
                       "
                     >
-                      {formatTime(mode === "focus" ? time : focusDuration)}
+                      {formatTime(mode === "break" ? time : breakDuration)}
                     </span>
                   )}
-                </>
-              </div>
+                </div>
 
-              <div aria-hidden="true" className="mx-2 w-px h-12 bg-gray-400" />
+                <div
+                  aria-hidden="true"
+                  className="mx-2 w-px h-12 bg-gray-400"
+                />
 
-              {/* BREAK */}
-              <div className="flex flex-col">
-                <span
-                  className={`${
-                    mode === "break" && isRunning
-                      ? activeBreakModeClass
-                      : inactiveModeClass
-                  } text-[1rem]`}
-                >
-                  Break
-                </span>
-                {isEditing ? (
-                  <div className="h-[30.8px]">
-                    <NumberInput
-                      hideLabel
-                      label="break"
-                      name="break"
-                      value={editBreakMinutes}
-                      onChange={setEditBreakMinutes}
-                      min={1}
-                    />
-                  </div>
-                ) : (
-                  <span
-                    className="
-                      h-[30.8px]
-                      translate-y-[0.3rem]
-                      pomo-middle-time
-                    "
-                  >
-                    {formatTime(mode === "break" ? time : breakDuration)}
-                  </span>
-                )}
-              </div>
-
-              <div aria-hidden="true" className="mx-2 w-px h-12 bg-gray-400" />
-
-              {/* LONG */}
-              <div
-                className="
-                  flex
-                  flex-col
-                "
-              >
-                <span
-                  className={`${
-                    mode === "long" && isRunning
-                      ? activeLongModeClass
-                      : inactiveModeClass
-                  } text-[1rem]`}
-                >
-                  Long
-                </span>
-                {isEditing ? (
-                  <div className="h-[30.8px]">
-                    <NumberInput
-                      hideLabel
-                      label="long break"
-                      name="long-break"
-                      value={editLongBreakMinutes}
-                      onChange={setEditLongBreakMinutes}
-                      min={1}
-                    />
-                  </div>
-                ) : (
-                  <span
-                    className="
-                      h-[30.8px]
-                      translate-y-[0.3rem]
-                      pomo-middle-time
-                    "
-                  >
-                    {formatTime(mode === "long" ? time : longBreakDuration)}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div
-              className="
-                translate-x-[0.15rem]
-                translate-y-[-0.14rem]
-              ">
-              {/* FOCUS + BREAK: 1 OF 8 */}
-              <div className="flex h-9.5">
+                {/* LONG */}
                 <div
                   className="
-                      flex
-                      items-center
-                      
-                      w-full
-                      h-8
-                      gap-2
-                      translate-y-[0.55rem]
-                      "
+                    flex
+                    flex-col
+                  "
                 >
-                  <div className="space-x-2">
-                    <span className="">FOCUS + BREAK:</span>
-                    <span>{displayedPomodoro}</span>
-                    <span>of</span>
-                  </div>
+                  <span
+                    className={`${
+                      mode === "long" && isRunning
+                        ? activeLongModeClass
+                        : inactiveModeClass
+                    } text-[1rem]`}
+                  >
+                    Long
+                  </span>
                   {isEditing ? (
-                    <div className="translate-y-[-0.1rem]">
+                    <div className="h-[30.8px]">
                       <NumberInput
                         hideLabel
-                        label="Pomodoro Goal"
-                        name="pomodoro-goal"
-                        value={editPomodoroGoal}
-                        onChange={setEditPomodoroGoal}
-                        min={1}
+                        label="long break"
+                        name="long-break"
+                        value={editLongBreakMinutes}
+                        onChange={setEditLongBreakMinutes}
+                        min={0}
                       />
                     </div>
                   ) : (
-                    <span className="pl-[0.31rem]">{pomodoroGoal}</span>
+                    <span
+                      className="
+                        h-[30.8px]
+                        translate-y-[0.3rem]
+                        pomo-middle-time
+                      "
+                    >
+                      {formatTime(mode === "long" ? time : longBreakDuration)}
+                    </span>
                   )}
                 </div>
               </div>
+
+              <div
+                className="
+                  translate-x-[0.15rem]
+                  translate-y-[-0.14rem]
+                "
+              >
+                {/* FOCUS: 1 OF 8 */}
+                <div className="flex h-9.5">
+                  <div
+                    className="
+                        flex
+                        items-center
+                        
+                        w-full
+                        h-8
+                        gap-2
+                        translate-y-[0.55rem]
+                        "
+                  >
+                    <div className="space-x-2">
+                      <span className="">FOCUS:</span>
+                      <span>{displayedPomodoro}</span>
+                      <span>of</span>
+                    </div>
+                    {isEditing ? (
+                      <div className="translate-y-[-0.1rem]">
+                        <NumberInput
+                          hideLabel
+                          label="Pomodoro Goal"
+                          name="pomodoro-goal"
+                          value={editPomodoroGoal}
+                          onChange={setEditPomodoroGoal}
+                          min={1}
+                        />
+                      </div>
+                    ) : (
+                      <span className="pl-[0.31rem]">{pomodoroGoal}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
+            {/* DONE */}
+            <span
+              className={`block ${
+                mode === "done"
+                  ? activePomodoroDoneModeClass
+                  : inactiveModeClass
+              }
+                  `}
+            >
+              done
+            </span>
           </div>
-          {/* DONE */}
-          <span
-            className={`block ${
-              mode === "done" ? activePomodoroDoneModeClass : inactiveModeClass
-            }
-                `}
-          >
-            done
-          </span>
-        </div>
-      }
-      bottom={
-        <WidgetControls>
-          <WidgetControls.Play
-            isRunning={isRunning}
-            onClick={handleToggle}
-            disabled={mode === "done" && !isEditing}
-          />
-          <WidgetControls.Reset onClick={handleReset} />
-          <WidgetControls.Edit
-            isEditing={isEditing}
-            onEdit={handleEdit}
-            onConfirm={handleConfirmEdit}
-          />
-          <WidgetControls.Erase onClick={onRemove} />
-        </WidgetControls>
-      }
-    />
+        }
+        bottom={
+          <WidgetControls>
+            <WidgetControls.Play
+              isRunning={isRunning}
+              onClick={handleToggle}
+              disabled={mode === "done" && !isEditing}
+            />
+            <WidgetControls.Reset onClick={handleReset} />
+            <WidgetControls.Edit
+              isEditing={isEditing}
+              onEdit={handleEdit}
+              onConfirm={handleConfirmEdit}
+            />
+            <WidgetControls.Erase onClick={onRemove} />
+          </WidgetControls>
+        }
+      />
+    </>
   );
 };
