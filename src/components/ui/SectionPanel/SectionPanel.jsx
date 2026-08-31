@@ -36,7 +36,7 @@ export const SectionPanel = ({
     <section
       aria-labelledby={headingId}
       className={`
-        p-3
+        p-2
         w-full
         bg-gray-100/10
         rounded-lg
