@@ -10,6 +10,7 @@ import {
   CirclePlay,
   CirclePlus,
   Check,
+  ChevronDown,
   ChevronRight,
   // D
   Dot,
@@ -57,6 +58,7 @@ const icons = {
   circlePlay: CirclePlay,
   circlePlus: CirclePlus,
   check: Check,
+  chevronDown: ChevronDown,
   chevronRight: ChevronRight,
   // D
   dot: Dot,

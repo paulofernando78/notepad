@@ -1,7 +1,14 @@
-import { useId } from "react";
+import { useId, useState } from "react";
+
+import { Icon } from "@/components/ui/Icon";
 
 export const SectionPanel = ({ title, children, className }) => {
   const headingId = useId();
+  const [isOpen, setIsOpen] = useState(true);
+
+  function handleToggle() {
+    setIsOpen((current) => !current);
+  }
 
   return (
     <section
@@ -24,7 +31,18 @@ export const SectionPanel = ({ title, children, className }) => {
           uppercase
         "
       >
-        <h2>{title}</h2>
+        <button
+          onClick={handleToggle}
+          className="
+            flex
+            items-center
+            gap-2
+            cursor-pointer
+          "
+        >
+          <Icon name={isOpen ? "chevronDown": "chevronRight"} size={23}/>
+          <h2>{title}</h2>
+        </button>
       </header>
       <div
         className="
@@ -35,7 +53,7 @@ export const SectionPanel = ({ title, children, className }) => {
           rounded-lg
         "
       >
-        {children}
+        {isOpen && children }
       </div>
     </section>
   );

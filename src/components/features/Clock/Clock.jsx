@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
-import { Icon } from "../../ui/Icon/Icon";
+import { Icon } from "@/components/ui/Icon";
 
 export const Clock = ({
   city = "São Paulo",
