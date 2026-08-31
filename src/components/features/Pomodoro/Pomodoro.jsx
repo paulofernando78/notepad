@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { WidgetBody } from "@/components/ui/WidgetBody";
+import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 import { NumberInput } from "@/components/ui/NumberInput";
-import { WidgetControls } from "@/components/ui/WidgetControls";
 import { Icon } from "@/components/ui/Icon";
 
 

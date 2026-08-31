@@ -27,7 +27,6 @@ const statusOptions = [
 export const TaskBoard = () => {
   return (
     <div className="
-        max-w-[1008px]
         overflow-x-auto
         text-slate-100
        "

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { WidgetBody } from "@/components/ui/WidgetBody";
+import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 import { NumberInput } from "@/components/ui/NumberInput";
-import { WidgetControls } from "@/components/ui/WidgetControls";
 
 function playTone(frequency, startDelay = 0) {
   const audioContext = new AudioContext();

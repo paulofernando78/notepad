@@ -1,9 +1,13 @@
 @reference "tailwindcss";
 
+html, h1, h2, h3, h4, p, span {
+  line-height: 1;
+}
+
 body {
   background-color: #191919;
   color: white;
-  font-family: 'Montserrat Variable', sans-serif;
+  font-family: "Montserrat Variable", sans-serif;
 }
 
 .icon-color {
@@ -25,12 +29,12 @@ input[type="number"].show-spinner::-webkit-outer-spin-button {
 }
 
 .pomo-middle-time {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
 }
 
 * {
-  scrollbar-width:thin;
+  scrollbar-width: thin;
   scrollbar-color: #6b7280 transparent;
 }
 

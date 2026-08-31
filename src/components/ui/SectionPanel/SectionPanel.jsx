@@ -7,7 +7,7 @@ export const SectionPanel = ({ title, children, className }) => {
     <section
       aria-labelledby={headingId}
       className={`
-        p-2
+        p-3
         w-full
         bg-gray-100/10
         rounded-lg
@@ -18,7 +18,7 @@ export const SectionPanel = ({ title, children, className }) => {
       <header
         className="
           block
-          pb-2
+          pb-3
           text-lg
           font-bold
           uppercase

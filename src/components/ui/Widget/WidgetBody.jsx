@@ -16,6 +16,7 @@ export const WidgetBody = ({ top, middle, bottom }) => {
         text-3xl
         font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]
         font-bold
+        leading-none
         "
       >
         {top}

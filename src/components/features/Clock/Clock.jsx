@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { WidgetBody } from "@/components/ui/WidgetBody";
-import { WidgetControls } from "@/components/ui/WidgetControls";
+import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 import { Icon } from "../../ui/Icon/Icon";
 
 export const Clock = ({

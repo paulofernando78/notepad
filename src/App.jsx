@@ -4,13 +4,18 @@ import "./App.css";
 import { Header } from "@/components/layout/Header";
 
 import { SectionPanel } from "@/components/ui/SectionPanel";
-import { WidgetContainer } from "@/components/ui/WidgetContainer/WidgetContainer";
-import { widgetCatalog } from "@/components/features/Widget/WidgetCatalog";
-import { Widget } from "@/components/ui/Widget";
-import { WidgetPicker } from "@/components/features/WidgetPicker/WidgetPicker";
 
-import { TaskBoard } from "@/components/features/TaskBoard";
+// Widget / ui
+import { WidgetContainer, WidgetCard } from "@/components/ui/Widget";
+// Widget / features
+import { widgetCatalog, WidgetPicker } from "@/components/features/Widget";
+// Pomodoro
 import { PomodoroGuideDialog } from "./components/features/PomodoroGuideDialog/PomodoroGuideDialog";
+
+// Taskboard
+import { TaskBoard } from "@/components/features/TaskBoard";
+
+// Notes
 // import { Note } from "@/components/features/Note";
 // import { Sidebar } from "@/components/layout/Sidebar";
 // import { SearchBar } from "@/components/ui/SearchBar";
@@ -56,7 +61,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-6 min-h-screen w-full max-w-[1120px] mx-auto p-5">
+    <div className="flex flex-col gap-6 min-h-screen w-full max-w-[1120px] mx-auto p-3">
       <Header />
 
       <SectionPanel title="Widget">
@@ -70,14 +75,14 @@ function App() {
             };
 
             return (
-              <Widget
+              <WidgetCard
                 key={widgetInstance.id}
                 title={definition.title}
                 headerAction={widgetInstance.type === "pomodoro" ? <PomodoroGuideDialog /> : null}
                 onRemove={() => removeWidget(widgetInstance.id)}
               >
                 <Component {...widgetInstance.config} onRemove={handleRemove} />
-              </Widget>
+              </WidgetCard>
             );
           })}
           <WidgetPicker onAdd={addWidget} />

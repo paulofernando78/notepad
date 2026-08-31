@@ -1,4 +1,4 @@
-export const Widget = ({ title, headerAction, children }) => {
+export const WidgetCard = ({ title, headerAction, children }) => {
   return (
     <article
       className="
@@ -10,7 +10,7 @@ export const Widget = ({ title, headerAction, children }) => {
         <header
           className="
             relative
-            py-1
+            p-3
             text-center
             uppercase
             border-b-0
@@ -26,7 +26,7 @@ export const Widget = ({ title, headerAction, children }) => {
             <div className="
               absolute
               right-[0.44rem]
-              top-[1.2rem]
+              top-[1.04rem]
               -translate-y-1/2
               "
             >
