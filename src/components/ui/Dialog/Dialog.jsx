@@ -6,7 +6,7 @@ export const Dialog = ({ dialogRef, children, className = "" }) => {
       className={`
         max-w-200
         w-[calc(100vw-1rem)]
-        h-[calc(100dvh-2rem)]
+        h-[calc(100dvh-20rem)]
         m-auto
         px-3
         pt-[0.6rem]
