@@ -1,18 +1,19 @@
 import { useId } from "react";
 
-export const SectionPanel = ({ title, children }) => {
+export const SectionPanel = ({ title, children, className }) => {
   const headingId = useId();
 
   return (
     <section
       aria-labelledby={headingId}
-      className="
+      className={`
         p-2
         w-full
         bg-gray-100/10
         rounded-lg
         overflow-x-auto
-      "
+        ${className}
+      `}
     >
       <header
         className="

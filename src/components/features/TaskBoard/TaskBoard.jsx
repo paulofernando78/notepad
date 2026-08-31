@@ -26,8 +26,21 @@ const statusOptions = [
 
 export const TaskBoard = () => {
   return (
-    <div className="overflow-x-auto text-slate-100">
-      <div className="flex gap-2 mb-2 p-2 bg-gray-500/20 rounded-lg">
+    <div className="
+        max-w-[1008px]
+        overflow-x-auto
+        text-slate-100
+       "
+      >
+      <div className="
+        flex
+        gap-2
+        mb-2
+        p-2
+        bg-gray-500/20
+        rounded-lg
+        "
+      >
         <Icon name="messageCircleWarning" />
         <p>
           Break your big task into 'Micro-Wins'." Pick ONLY 3 things to do
@@ -35,7 +48,7 @@ export const TaskBoard = () => {
           bonus.
         </p>
       </div>
-      <div className="grid grid-cols-4 gap-2 py-2 min-w-max">
+      <div className="grid grid-cols-4 gap-2 pt-2 min-w-max">
         {statusOptions.map((status) => (
           <section key={status.id} className="flex flex-col gap-2">
             <Border

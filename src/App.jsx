@@ -56,7 +56,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-6 min-h-screen p-1">
+    <div className="flex flex-col gap-6 min-h-screen w-full max-w-[1120px] mx-auto p-5">
       <Header />
 
       <SectionPanel title="Widget">
@@ -84,7 +84,7 @@ function App() {
         </WidgetContainer>
       </SectionPanel>
 
-      <SectionPanel title="Task Board">
+      <SectionPanel title="Task Board" className="w-max">
         <TaskBoard />
       </SectionPanel>
 
