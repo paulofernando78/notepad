@@ -315,7 +315,7 @@ export const Pomodoro = ({
                 "
               >
                 {/* FOCUS */}
-                <div className={durationTitle}>
+                <div className={`w-15.5 ${durationTitle}`}>
                   <>
                     <span
                       className={`${
@@ -356,7 +356,7 @@ export const Pomodoro = ({
                 /> */}
 
                 {/* BREAK */}
-                <div className={durationTitle}>
+                <div className={`w-15.5 ${durationTitle}`}>
                   <span
                     className={`${
                       mode === "break" && isRunning
@@ -395,7 +395,7 @@ export const Pomodoro = ({
                 /> */}
 
                 {/* LONG */}
-                <div className={durationTitle}>
+                <div className={`w-15.5 ${durationTitle}`}>
                   <span
                     className={`${
                       mode === "long" && isRunning
