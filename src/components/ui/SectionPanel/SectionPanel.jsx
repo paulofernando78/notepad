@@ -7,7 +7,15 @@ export const SectionPanel = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   function handleToggle() {
-    setIsOpen((current) => !current);
+    setIsOpen((current) => {
+      const next = !current;
+
+      if (storageKey) {
+        localStorage.setItem(storageKey, String(next));
+      }
+
+      return next;
+    });
   }
 
   return (
@@ -24,13 +32,13 @@ export const SectionPanel = ({ title, children }) => {
     >
       <header
         className={`
-          block
+          flex
+          items-center
+          justify-between
           text-lg
           font-bold
-          uppercase
            ${isOpen ? "pb-3" : ""}
-          `
-        }
+          `}
       >
         <button
           onClick={handleToggle}

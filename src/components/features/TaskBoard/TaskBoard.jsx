@@ -47,11 +47,15 @@ export const TaskBoard = () => {
           bonus.
         </p>
       </div>
-      <div className="grid grid-cols-4 gap-2 pt-2 min-w-max">
+      <div className="grid grid-cols-4 gap-2 pt-2">
         {statusOptions.map((status) => (
           <section key={status.id} className="flex flex-col gap-2">
             <Border
-              className={`px-2 pt-1 pb-2 min-w-47.5 border-0 ${status.color}`}
+              className={`
+                p-2
+                border-0
+                ${status.color}
+              `}
             >
               <div className="flex items-center justify-between">
                 <span className="block mb-2 font-bold uppercase">

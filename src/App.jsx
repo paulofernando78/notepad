@@ -61,7 +61,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col gap-6 min-h-screen w-full max-w-[1120px] mx-auto p-3">
+    <div className="flex flex-col gap-6 min-h-screen w-full max-w-280 mx-auto p-3">
       <Header />
 
       <SectionPanel title="Widget">

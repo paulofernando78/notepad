@@ -86,25 +86,21 @@ export const Clock = ({
 
   return (
     <WidgetBody
-      top={<span>{currentTime}</span>}
+      top={
+        <>
+          <span className="block">{currentTime}</span>
+          <span className="text-lg">{currentDate}</span>
+        </>
+      }
       middle={
         !isEditingWeather ? (
           <div
             className="
-            text-center
-            space-y-2
+            flex
+            flex-col
+            gap-2
             "
           >
-            <div
-              className="
-              flex
-              items-center
-              gap-2
-              "
-            >
-              <Icon name="calendar" />
-              <span>{currentDate}</span>
-            </div>
             <div
               className="
               flex
