@@ -34,8 +34,7 @@ WidgetControls.Play = ({ isRunning, onClick, disabled = false }) => {
       disabled={disabled}
       className="disabled:cursor-not-allowed disabled:opacity-40"
     >
-      <Icon
-        name={isRunning ? "circlePause" : "circlePlay"} />
+      <Icon name={isRunning ? "circlePause" : "circlePlay"} />
     </button>
   );
 };
@@ -43,9 +42,7 @@ WidgetControls.Play = ({ isRunning, onClick, disabled = false }) => {
 WidgetControls.Reset = ({ onClick }) => {
   return (
     <button onClick={onClick}>
-      <Icon
-        name="rotateCcw"
-        className="translate-y-[0.01rem]" />
+      <Icon name="rotateCcw" className="translate-y-[0.01rem]" />
     </button>
   );
 };
@@ -53,15 +50,11 @@ WidgetControls.Reset = ({ onClick }) => {
 WidgetControls.Edit = ({ isEditing, onEdit, onConfirm }) => {
   return isEditing ? (
     <button onClick={onConfirm}>
-      <Icon
-        name="check"
-        className="translate-y-[0.01rem]" />
+      <Icon name="check" className="translate-y-[0.01rem]" />
     </button>
   ) : (
     <button onClick={onEdit}>
-      <Icon
-        name="squarePen"
-        className="translate-y-[0.01rem]" />
+      <Icon name="squarePen" className="translate-y-[0.01rem]" />
     </button>
   );
 };
@@ -74,8 +67,15 @@ WidgetControls.Erase = ({ onClick }) => {
       aria-label="Delete widget"
       onClick={onClick}
     >
-      <Icon
-        name="trash" />
+      <Icon name="trash" />
+    </button>
+  );
+};
+
+WidgetControls.Info = ({ onClick, ...props }) => {
+  return (
+    <button type="button" onClick={onClick} {...props}>
+      <Icon name="info" />
     </button>
   );
 };

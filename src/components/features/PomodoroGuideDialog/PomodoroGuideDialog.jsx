@@ -1,7 +1,8 @@
 import { useRef } from "react";
 
 import { Icon } from "@/components/ui/Icon";
-import { Dialog } from "../../ui/Dialog/Dialog";
+import { Dialog } from "@/components/ui/Dialog";
+import { WidgetControls } from "@/components/ui/Widget/WidgetControls";
 
 const phaseBase = "font-['Oswald_Variable'] self-center justify-self-center";
 
@@ -40,13 +41,11 @@ export const PomodoroGuideDialog = () => {
 
   return (
     <>
-      <button
-        type="button"
-        aria-label="How Pomodoro works"
+      <WidgetControls.Info
         onClick={() => dialogRef.current?.showModal()}
-      >
-        <Icon name="info" />
-      </button>
+        aria-label="How Pomodoro works"
+        title="How Pomodoro Works"
+      />
       <Dialog dialogRef={dialogRef} className="relative space-y-2">
         <button
           type="button"

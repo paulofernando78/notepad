@@ -4,6 +4,8 @@ import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 import { NumberInput } from "@/components/ui/NumberInput";
 import { Icon } from "@/components/ui/Icon";
 
+import { PomodoroGuideDialog } from "@/components/features/PomodoroGuideDialog";
+
 const DEFAULT_FOCUS_MINUTES = 25;
 const DEFAULT_BREAK_MINUTES = 5;
 const DEFAULT_LONG_BREAK_MINUTES = 15;
@@ -489,6 +491,7 @@ export const Pomodoro = ({
               onEdit={handleEdit}
               onConfirm={handleConfirmEdit}
             />
+            <PomodoroGuideDialog />
             <WidgetControls.Erase onClick={onRemove} />
           </WidgetControls>
         }

@@ -9,8 +9,6 @@ import { SectionPanel } from "@/components/ui/SectionPanel";
 import { WidgetContainer, WidgetCard } from "@/components/ui/Widget";
 // Widget / features
 import { widgetCatalog, WidgetPicker } from "@/components/features/Widget";
-// Pomodoro
-import { PomodoroGuideDialog } from "./components/features/PomodoroGuideDialog/PomodoroGuideDialog";
 
 // Taskboard
 import { TaskBoard } from "@/components/features/TaskBoard";
@@ -78,7 +76,6 @@ function App() {
               <WidgetCard
                 key={widgetInstance.id}
                 title={definition.title}
-                headerAction={widgetInstance.type === "pomodoro" ? <PomodoroGuideDialog /> : null}
                 onRemove={() => removeWidget(widgetInstance.id)}
               >
                 <Component {...widgetInstance.config} onRemove={handleRemove} />
