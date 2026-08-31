@@ -24,69 +24,87 @@ const statusOptions = [
   },
 ];
 
-export const TaskBoard = () => {
+const TaskBoardNotice = () => {
   return (
-    <div className="
-        overflow-x-auto
-        text-slate-100
-       "
-      >
-      <div className="
+    <div
+      className="
         flex
         gap-2
         mb-2
         p-2
         bg-gray-500/20
         rounded-lg
-        "
+      "
+    >
+      <Icon name="messageCircleWarning" cursorNone />
+      <p>
+        Break your big task into 'Micro-Wins'." Pick ONLY 3 things to do today.
+        If you do these, the day is a success. Everything else is a bonus.
+      </p>
+    </div>
+  );
+};
+
+const TaskComposer = ({ color }) => {
+  return (
+    <div
+      className={`
+        flex
+        items-center
+        gap-1
+        w-full
+        p-1
+        border
+        rounded
+        ${color}
+      `}
+    >
+      <Icon name="plus" />
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="Add task..."
+        className="pl-2 w-full"
+      />
+    </div>
+  );
+};
+
+const TaskBoardColumn = ({ status }) => {
+  return (
+    <section className="flex flex-col gap-2">
+      <Border
+        className={`
+          p-2
+          border-0
+          ${status.color}
+        `}
       >
-        <Icon name="messageCircleWarning" cursorNone />
-        <p>
-          Break your big task into 'Micro-Wins'." Pick ONLY 3 things to do
-          today. If you do these, the day is a success. Everything else is a
-          bonus.
-        </p>
-      </div>
-      <div className="grid grid-cols-4 gap-2 pt-2">
+        <div className="flex items-center justify-between">
+          <span className="block mb-2 font-bold uppercase">
+            {status.label}
+          </span>
+          <Icon name="ellipsis" className="translate-y-[-0.4rem]" />
+        </div>
+        <TaskComposer color={status.color} />
+      </Border>
+    </section>
+  );
+};
+
+export const TaskBoard = () => {
+  return (
+    <div
+      className="
+        overflow-x-auto
+        text-slate-100
+      "
+    >
+      <TaskBoardNotice />
+      <div className="grid gap-2 pt-2 [grid-template-columns:repeat(4,minmax(220px,1fr))]">
         {statusOptions.map((status) => (
-          <section key={status.id} className="flex flex-col gap-2">
-            <Border
-              className={`
-                p-2
-                border-0
-                ${status.color}
-              `}
-            >
-              <div className="flex items-center justify-between">
-                <span className="block mb-2 font-bold uppercase">
-                  {status.label}
-                </span>
-                <Icon name="ellipsis" className="translate-y-[-0.4rem]" />
-              </div>
-              <div
-                className={`
-                  flex
-                  items-center
-                  gap-1
-                  w-full
-                  p-1
-                  border
-                  rounded
-                  ${status.color}
-                  `
-                }
-              >
-                <Icon name="plus" />
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="Add task..."
-                  className="pl-2 w-full"
-                  />
-              </div>
-            </Border>
-          </section>
+          <TaskBoardColumn key={status.id} status={status} />
         ))}
       </div>
     </div>
