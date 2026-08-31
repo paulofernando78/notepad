@@ -93,7 +93,7 @@ export const PomodoroGuideDialog = () => {
             3. Take a long break at the fourth time.
           </li>
         </ol>
-        <div className="flex gap-3">
+        <div className="flex gap-3 border border-gray-500 bg-gray-600 p-2 rounded-lg overflow-x-scroll">
           <div className="flex items-center gap-3">
             <div
               className="
@@ -222,7 +222,7 @@ export const PomodoroGuideDialog = () => {
             </div>
           </div>
         </div>
-        <p>One complete cycle has 1:55 (one hour anf fifty minutes)</p>
+        <p>One complete cycle has 1:55 (one hour anf fifty minutes).</p>
       </Dialog>
     </>
   );
