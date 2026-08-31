@@ -94,10 +94,7 @@ function App() {
         </WidgetContainer>
       </SectionPanel>
 
-      <SectionPanel
-        title="Task Board"
-        storageKey="section-task-board"
-      >
+      <SectionPanel title="Task Board" storageKey="section-task-board">
         <TaskBoard />
       </SectionPanel>
 

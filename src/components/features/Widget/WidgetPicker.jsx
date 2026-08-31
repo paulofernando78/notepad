@@ -8,6 +8,11 @@ export const WidgetPicker = ({ onAdd }) => {
     setIsOpen((currentIsOpen) => !currentIsOpen);
   }
 
+  function handleAdd(type) {
+    onAdd(type)
+    setIsOpen(false)
+  }
+
   return (
     <>
       <button
@@ -55,9 +60,9 @@ export const WidgetPicker = ({ onAdd }) => {
               rounded-bl-lg
             "
           >
-            <button onClick={() => onAdd("clock")}>Clock</button>
-            <button onClick={() => onAdd("pomodoro")}>Pomodoro</button>
-            <button onClick={() => onAdd("timer")}>Timer</button>
+            <button onClick={() => handleAdd("clock")}>Clock</button>
+            <button onClick={() => handleAdd("pomodoro")}>Pomodoro</button>
+            <button onClick={() => handleAdd("timer")}>Timer</button>
           </div>
         </div>
       )}
