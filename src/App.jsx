@@ -25,16 +25,6 @@ function App() {
       type: "clock",
       config: { ...widgetCatalog.clock.defaultConfig },
     },
-    {
-      id: crypto.randomUUID(),
-      type: "pomodoro",
-      config: {},
-    },
-    {
-      id: crypto.randomUUID(),
-      type: "timer",
-      config: {},
-    },
   ]);
 
   function addWidget(type) {
