@@ -68,7 +68,8 @@ export const Clock = ({
   }, [selectedLatitude, selectedLongitude]);
 
   function handleEditWeather() {
-    setEditLocation(selectedLocation);
+    setEditLocation("");
+    setEditLocation([]);
     setIsEditingWeather(true);
   }
 
@@ -157,7 +158,7 @@ export const Clock = ({
               flex
               gap-2
               h-25
-              translate-x-[-0.15rem]
+              translate-x-[-0.02rem]
               translate-y-[0.15rem]
             "
           >
@@ -203,12 +204,14 @@ export const Clock = ({
                       type="button"
                       key={location.id}
                       className="
-                        flex
                         w-full
+                        p-1
                         text-left
+                        truncate
+                        hover:bg-gray-600
                       "
                     >
-                      <span>{location.name}</span>{" "}
+                      <span>{location.name}</span>,{" "}
                       <span>
                         {location.admin1 ? `${location.admin1}, ` : ""}
                         {location.country}

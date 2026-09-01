@@ -298,54 +298,43 @@ export const Pomodoro = ({
         middle={
           <div
             className="
-              flex
-              flex-col
-              gap-2
               text-center
               uppercase
+              translate-y-[-0.2rem]
             "
           >
-            {/* Focus • Break • Long  */}
-            <div>
+            <div className="flex flex-col gap-2">
+              {/* 1 OF 4 */}
               <div
                 className="
-                  translate-x-[0.15rem]
-                  translate-y-[-0.14rem]
-                "
+                    flex
+                    items-center
+                    pl-1.5
+                    w-max
+                    h-8
+                    gap-2
+                  "
               >
-                {/* 1 OF 8 */}
-                <div className="flex h-9.5">
-                  <div
-                    className="
-                        flex
-                        items-center
-                        w-full
-                        h-8
-                        gap-2
-                        translate-y-[0.2rem]
-                        "
-                  >
-                    <div className="space-x-2">
-                      <span>{displayedPomodoro}</span>
-                      <span>of</span>
-                    </div>
-                    {isEditing ? (
-                      <div className="translate-y-[-0.15rem]">
-                        <NumberInput
-                          hideLabel
-                          label="Pomodoro Goal"
-                          name="pomodoro-goal"
-                          value={editPomodoroGoal}
-                          onChange={setEditPomodoroGoal}
-                          min={1}
-                        />
-                      </div>
-                    ) : (
-                      <span className="pl-[0.31rem]">{pomodoroGoal}</span>
-                    )}
-                  </div>
+                <div className="space-x-2">
+                  <span>{displayedPomodoro}</span>
+                  <span>of</span>
                 </div>
+                {isEditing ? (
+                  <div className="translate-y-[-0.14rem]">
+                    <NumberInput
+                      hideLabel
+                      label="Pomodoro Goal"
+                      name="pomodoro-goal"
+                      value={editPomodoroGoal}
+                      onChange={setEditPomodoroGoal}
+                      min={1}
+                    />
+                  </div>
+                ) : (
+                  <span className="pl-[0.31rem]">{pomodoroGoal}</span>
+                )}
               </div>
+              {/* Focus • Break • Long  */}
               <div
                 className="
                   grid
@@ -442,19 +431,20 @@ export const Pomodoro = ({
                   )}
                 </div>
               </div>
+              {/* DONE */}
+              <span
+                className={`block pt-2 ${
+                  mode === "done"
+                    ? activePomodoroDoneModeClass
+                    : inactiveModeClass
+                }
+                  `}
+              >
+                done
+              </span>
             </div>
 
             {/* DONE */}
-            <span
-              className={`block ${
-                mode === "done"
-                  ? activePomodoroDoneModeClass
-                  : inactiveModeClass
-              }
-                  `}
-            >
-              done
-            </span>
           </div>
         }
         bottom={

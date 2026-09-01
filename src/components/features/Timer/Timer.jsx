@@ -173,7 +173,7 @@ export const Timer = ({ onRemove }) => {
               />
             </label>
             <span
-              className={`uppercase
+              className={`uppercase pt-2
             ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
             >
               done
