@@ -96,7 +96,7 @@ export const WidgetControls = ({ children }) => {
         bg-gray-700/50
         border
         border-gray-700
-        rounded-3xl
+        rounded-lg
         shadow-md
         shadow-black/30
       "

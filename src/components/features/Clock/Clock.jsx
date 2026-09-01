@@ -3,21 +3,29 @@ import { useState, useEffect } from "react";
 import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 import { Icon } from "@/components/ui/Icon";
 
+import { submitOnEnter } from "@/utils/keyboard";
+
 export const Clock = ({
-  city = "São Paulo",
+  location = "São Paulo",
   latitude,
   longitude,
   onRemove,
 }) => {
+  // Clock
   const [time, setTime] = useState(new Date());
-  const [weather, setWeather] = useState(null);
 
-  const [selectedCity, setSelectedCity] = useState(city);
+  // Selected weather location
+  const [selectedLocation, setSelectedLocation] = useState(location);
   const [selectedLatitude, setSelectedLatitude] = useState(latitude);
   const [selectedLongitude, setSelectedLongitude] = useState(longitude);
 
-  const [editCity, setEditCity] = useState(city);
+  // Loaded weather data
+  const [weather, setWeather] = useState(null);
+
+  // Weather edit state
   const [isEditingWeather, setIsEditingWeather] = useState(false);
+  const [editLocation, setEditLocation] = useState(location);
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
 
   useEffect(() => {
     const intervalID = setInterval(() => {
@@ -37,7 +45,7 @@ export const Clock = ({
     weekday: "short",
     month: "short",
     day: "numeric",
-    // year: "numeric",
+    year: "numeric",
   });
 
   useEffect(() => {
@@ -60,17 +68,17 @@ export const Clock = ({
   }, [selectedLatitude, selectedLongitude]);
 
   function handleEditWeather() {
-    setEditCity(selectedCity);
+    setEditLocation(selectedLocation);
     setIsEditingWeather(true);
   }
 
   async function handleConfirmWeather() {
-    const cityName = editCity.trim();
+    const locationName = editLocation.trim();
 
-    if (!cityName) return;
+    if (!locationName) return;
 
     const response = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&language=pt&format=json`,
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(locationName)}&count=1&language=pt&format=json`,
     );
 
     const data = await response.json();
@@ -78,10 +86,32 @@ export const Clock = ({
 
     if (!location) return;
 
-    setSelectedCity(location.name);
+    setSelectedLocation(location.name);
     setSelectedLatitude(location.latitude);
     setSelectedLongitude(location.longitude);
     setIsEditingWeather(false);
+  }
+
+  async function handleLocationChange(event) {
+    const value = event.target.value;
+
+    setEditLocation(value);
+
+    if (value.trim().length < 2) {
+      setLocationSuggestions([]);
+      return;
+    }
+
+    const response = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+        value,
+      )}&count=5&language=pt&format=json`,
+    );
+
+    const data = await response.json();
+
+    setLocationSuggestions(data.results ?? []);
+    console.log(data.results);
   }
 
   return (
@@ -109,7 +139,7 @@ export const Clock = ({
               "
             >
               <Icon name="mapPin" />
-              <span className="block">{selectedCity}</span>
+              <span className="block">{selectedLocation}</span>
             </div>
             <div className="flex items-center gap-2">
               {weather && (
@@ -123,21 +153,71 @@ export const Clock = ({
         ) : (
           <div
             className="
-            flex
-            gap-2
-            translate-x-[-0.15rem]
+            relative
+              flex
+              gap-2
+              h-25
+              translate-x-[-0.15rem]
+              translate-y-[0.15rem]
             "
           >
-            <Icon name="mapPin" size={25} />
-            <label>
-              <input
-                type="text"
-                value={editCity}
-                onChange={(e) => setEditCity(e.target.value)}
-                placeholder="Type city"
-                className="w- border rounded px-2"
-              />
-            </label>
+            {/* <Icon name="mapPin" size={25} /> */}
+            <div className="">
+              <label>
+                <input
+                  type="text"
+                  value={editLocation}
+                  onChange={handleLocationChange}
+                  onKeyDown={(event) =>
+                    submitOnEnter(event, handleConfirmWeather)
+                  }
+                  placeholder="Type location"
+                  className="  
+                    w-53
+                    border
+                    rounded
+                    px-2
+                    pt-1
+                    pb-1
+                  "
+                />
+              </label>
+              <div
+                className="
+                  absolute
+                  left-0
+                  z-10
+                  mt-2
+                  p-2
+                  w-53
+                  h-14.25
+                  bg-gray-700
+                  rounded
+                  shadow-lg
+                  overflow-y-auto
+                "
+              >
+                {locationSuggestions.map((location) => {
+                  return (
+                    <button
+                      type="button"
+                      key={location.id}
+                      className="
+                        flex
+                        w-full
+                        text-left
+                      "
+                    >
+                      <span>{location.name}</span>{" "}
+                      <span>
+                        {location.admin1 ? `${location.admin1}, ` : ""}
+                        {location.country}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         )
       }
