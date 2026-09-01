@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "./App.css";
 import { Header } from "@/components/layout/Header";
@@ -26,6 +26,15 @@ function App() {
       config: { ...widgetCatalog.clock.defaultConfig },
     },
   ]);
+  const widgetPickerRef = useRef(null);
+
+  useEffect(() => {
+    widgetPickerRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "end",
+    });
+  }, [widgets.length]);
 
   function addWidget(type) {
     const definition = widgetCatalog[type];
@@ -80,7 +89,7 @@ function App() {
               </WidgetCard>
             );
           })}
-          <WidgetPicker onAdd={addWidget} />
+          <WidgetPicker ref={widgetPickerRef} onAdd={addWidget} />
         </WidgetContainer>
       </SectionPanel>
 

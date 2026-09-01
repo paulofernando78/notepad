@@ -1,20 +1,35 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 
-export const WidgetPicker = ({ onAdd }) => {
+export const WidgetPicker = ({ onAdd, ref }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const pickerRef = useRef(null);
 
   function handleClick() {
-    setIsOpen((currentIsOpen) => !currentIsOpen);
+    setIsOpen((currentIsOpen) => {
+      const nextIsOpen = !currentIsOpen;
+
+      if (nextIsOpen) {
+        requestAnimationFrame(() => {
+          pickerRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "end",
+          });
+        });
+      }
+
+      return nextIsOpen;
+    });
   }
 
   function handleAdd(type) {
-    onAdd(type)
-    setIsOpen(false)
+    onAdd(type);
+    setIsOpen(false);
   }
 
   return (
-    <>
+    <div ref={ref} className="flex gap-2 scroll-mr-2">
       <button
         type="button"
         aria-label="Add widget"
@@ -23,7 +38,6 @@ export const WidgetPicker = ({ onAdd }) => {
           grid
           place-items-center
           h-full
-      
           cursor-pointer
         "
       >
@@ -31,9 +45,11 @@ export const WidgetPicker = ({ onAdd }) => {
       </button>
       {isOpen && (
         <div
+          ref={pickerRef}
           className="
             font-['Oswald_Variable']
             uppercase
+            scroll-mr-2
           "
         >
           <header
@@ -66,6 +82,6 @@ export const WidgetPicker = ({ onAdd }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
