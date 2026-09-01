@@ -40,7 +40,6 @@ export const SectionPanel = ({
         w-full
         bg-gray-100/10
         rounded-lg
-        overflow-x-auto
         ${className}
       `}
     >
@@ -75,6 +74,8 @@ export const SectionPanel = ({
           bg-gray-100/10
           p-2
           rounded-lg
+        overflow-x-auto
+
         "
         >
           {children}

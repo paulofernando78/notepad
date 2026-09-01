@@ -4,7 +4,7 @@ export const WidgetContainer = ({ children }) => {
   return <div className="flex gap-2">{children}</div>;
 };
 
-export const WidgetCard = ({ title, headerAction, children }) => {
+export const WidgetCard = ({ title, children }) => {
   return (
     <article
       className="
@@ -27,18 +27,6 @@ export const WidgetCard = ({ title, headerAction, children }) => {
           "
         >
           <h3>{title}</h3>
-          {headerAction && (
-            <div
-              className="
-                absolute
-                right-[0.44rem]
-                top-[1.04rem]
-                -translate-y-1/2
-              "
-            >
-              {headerAction}
-            </div>
-          )}
         </header>
         <div
           className="
