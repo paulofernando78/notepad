@@ -92,13 +92,13 @@ export const WaterIntake = ({ onConfigChange, onRemove }) => {
                   onClick={() => handleGlassClick(index)}
                 >
                   <Border className="flex items-center gap-2 p-3 bg-gray-500/30">
+                    <span>{glass.ml}</span>
                     <Icon
                       name="glassWater"
                       className={
                         isCompleted ? "text-blue-500" : "text-gray-400"
                       }
                     />
-                    <span>{glass.ml}</span>
                   </Border>
                 </button>
               );
