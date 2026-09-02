@@ -47,7 +47,7 @@ export const Timer = ({
   onConfigChange,
   onRemove,
 }) => {
-  const initialTime = 0;
+  const initialTime = hours * 3600 + minutes * 60 + seconds;
 
   const [time, setTime] = useState(initialTime);
 
@@ -73,11 +73,11 @@ export const Timer = ({
   }
 
   function applyEditSettings(shouldStart) {
-    const hours = Math.max(0, Number(editHours));
-    const minutes = Math.min(59, Math.max(0, Number(editMinutes)));
-    const seconds = Math.min(59, Math.max(0, Number(editSeconds)));
+    const nextHours = Math.max(0, Number(editHours));
+    const nextMinutes = Math.min(59, Math.max(0, Number(editMinutes)));
+    const nextSeconds = Math.min(59, Math.max(0, Number(editSeconds)));
 
-    const newTime = hours * 3600 + minutes * 60 + seconds;
+    const newTime = nextHours * 3600 + nextMinutes * 60 + nextSeconds;
 
     setTime(newTime);
     setMode("idle");
@@ -86,9 +86,9 @@ export const Timer = ({
     setIsRunning(shouldStart && newTime > 0);
 
     onConfigChange?.({
-      hours,
-      minutes,
-      seconds,
+      hours: nextHours,
+      minutes: nextMinutes,
+      seconds: nextSeconds,
     });
   }
 
