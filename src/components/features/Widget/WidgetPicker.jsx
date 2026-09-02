@@ -106,7 +106,7 @@ export const WidgetPicker = ({ onAdd, ref }) => {
               onClick={() => handleAdd("waterIntake")}
               className="uppercase clickable"
             >
-              cater Intake
+              water Intake
             </button>
             {/* --- */}
             <hr />
