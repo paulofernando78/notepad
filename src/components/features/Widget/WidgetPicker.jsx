@@ -78,7 +78,7 @@ export const WidgetPicker = ({ onAdd, ref }) => {
             <button onClick={() => handleAdd("clock")}>Clock</button>
             <button onClick={() => handleAdd("pomodoro")}>Pomodoro</button>
             <button onClick={() => handleAdd("timer")}>Timer</button>
-            <button onClick={() => handleAdd("water-intake")}>Water Intake</button>
+            <button onClick={() => handleAdd("waterIntake")}>Water Intake</button>
             <hr />
             <button onClick={() => handleAdd("calculator")}>Calculator</button>
             <button onClick={() => handleAdd("currency")}>Currency</button>

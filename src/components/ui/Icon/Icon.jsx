@@ -40,6 +40,8 @@ import {
   // T
   Thermometer,
   Trash,
+  // W
+  GlassWater,
   // V
   Volume,
   VolumeX,
@@ -89,6 +91,8 @@ const icons = {
   // T
   thermometer: Thermometer,
   trash: Trash,
+  // W
+  glassWater: GlassWater,
   // V
   volume: Volume,
   volumeX: VolumeX,

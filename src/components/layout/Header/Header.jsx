@@ -7,6 +7,7 @@ export const Header = () => {
         <Icon name="brain" />
         <h1 className="text-lg text-white font-bold uppercase">my workstation</h1>
       </div>
+      <button>English</button>
     </div>
   );
 };

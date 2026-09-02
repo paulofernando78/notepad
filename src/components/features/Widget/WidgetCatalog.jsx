@@ -1,6 +1,7 @@
 import { Clock } from "@/components/features/Clock";
 import { Pomodoro } from "@/components/features/Pomodoro";
 import { Timer } from "@/components/features/Timer";
+import { WaterIntake } from "@/components/features/WaterIntake";
 
 export const widgetCatalog = {
   clock: {
@@ -31,5 +32,10 @@ export const widgetCatalog = {
       minutes: 0,
       seconds: 0,
     },
+  },
+  waterIntake: {
+    title: "Water Intake",
+    Component: WaterIntake,
+    defaultConfig: {},
   },
 };

@@ -9,7 +9,7 @@ export const WidgetCard = ({ title, children, ref }) => {
     <article
       ref={ref}
       className="
-        min-w-58.25
+        min-w-62.5
         font-['Oswald_Variable']
         scroll-mr-2
       "
@@ -60,8 +60,9 @@ export const WidgetBody = ({ top, middle, bottom }) => {
         h-full
       "
     >
-      <div
-        className="
+      {top && (
+        <div
+          className="
           w-full
           text-center
           text-3xl
@@ -69,22 +70,25 @@ export const WidgetBody = ({ top, middle, bottom }) => {
           font-bold
           leading-none
         "
-      >
-        {top}
-      </div>
+        >
+          {top}
+        </div>
+      )}
 
-      <div
-        className="
+      {middle && (
+        <div
+          className="
           flex
           flex-col
           items-center
           justify-center
         "
-      >
-        {middle}
-      </div>
+        >
+          {middle}
+        </div>
+      )}
 
-      <div className="self-center">{bottom}</div>
+      {bottom && <div className="self-center">{bottom}</div>}
     </div>
   );
 };

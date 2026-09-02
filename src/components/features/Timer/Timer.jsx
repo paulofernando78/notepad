@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 import { Icon } from "@/components/ui/Icon";
+import { Border } from "@/components/ui/Border";
 
 import { NumberInput } from "@/components/ui/NumberInput";
 
@@ -185,43 +186,40 @@ export const Timer = ({
     "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)] animate-pulse";
   const inactiveModeClass = "text-gray-400";
 
+  const addshortCuts = [1, 5];
+
   return (
     <WidgetBody
       top={<span>{getFormattedTime}</span>}
       middle={
         !isEditing ? (
-          <div className="flex flex-col items-center gap-2">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => addMinutes(1)}
-                  className="flex items-center gap-2"
+          <div
+            className="
+            flex
+            flex-col
+            items-center
+            gap-2
+            "
+          >
+            <div className="flex gap-2">
+              {addshortCuts.map((minutes) => (
+                <Border
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                  "
                 >
-                  <Icon name="plus" />
-                </button>
-                <span>1 min</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => addMinutes(5)}
-                  className="flex items-center gap-2"
-                >
-                  <Icon name="plus" />
-                </button>
-                <span>5 min</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => addMinutes(10)}
-                  className="flex items-center gap-2"
-                >
-                  <Icon name="plus" />
-                </button>
-                <span>10 min</span>
-              </div>
+                  <button
+                    key={minutes}
+                    type="button"
+                    onClick={() => addMinutes(minutes)}
+                  >
+                    <Icon name="plus" />
+                  </button>
+                  <span>{minutes}:00</span>
+                </Border>
+              ))}
             </div>
             <label>
               <input

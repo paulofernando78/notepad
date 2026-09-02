@@ -27,6 +27,8 @@ export const NumberInput = ({
         max={max}
         onChange={(event) => onChange(Number(event.target.value))}
         className={`
+          w-10
+          pl-1
           border
           border-gray-400
           rounded

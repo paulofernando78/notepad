@@ -16,9 +16,6 @@ body {
 
 input[type="number"].show-spinner {
   color-scheme: dark;
-  width: 40px;
-  /* margin-right: 5px; */
-  padding-left: 4px;
 }
 
 input[type="number"].show-spinner::-webkit-inner-spin-button,
