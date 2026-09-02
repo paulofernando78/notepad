@@ -17,8 +17,12 @@ export const WaterIntake = ({ onConfigChange, onRemove }) => {
   const totalMl = goalGlasses * glassMl;
 
   function handleGlassClick(index) {
-    const nextCompletedGlasses = index + 1;
+    const clickedGlassNumber = index + 1;
 
+    const nextCompletedGlasses =
+      clickedGlassNumber === completedGlasses
+        ? completedGlasses - 1
+        : clickedGlassNumber;
     setCompletedGlasses(nextCompletedGlasses);
   }
 
