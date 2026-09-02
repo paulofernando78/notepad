@@ -97,12 +97,7 @@ export const WidgetControls = ({ children }) => {
   return (
     <div
       className="
-        bg-gray-700/50
-        border
-        border-gray-700
-        rounded-lg
-        shadow-sm
-        shadow-black/30
+       clickable
       "
     >
       <div
@@ -110,7 +105,6 @@ export const WidgetControls = ({ children }) => {
           flex
           justify-between
           gap-4
-          p-2
           translate-[0.03rem]
         "
       >

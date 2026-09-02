@@ -203,11 +203,12 @@ export const Timer = ({
           >
             <div className="flex gap-2">
               {addshortCuts.map((minutes) => (
-                <Border
+                <div
                   className="
                     flex
                     items-center
                     gap-2
+                    clickable
                   "
                 >
                   <button
@@ -218,7 +219,7 @@ export const Timer = ({
                     <Icon name="plus" />
                   </button>
                   <span>{minutes}:00</span>
-                </Border>
+                </div>
               ))}
             </div>
             <label>

@@ -1,6 +1,12 @@
 @reference "tailwindcss";
 
-html, h1, h2, h3, h4, p, span {
+html,
+h1,
+h2,
+h3,
+h4,
+p,
+span {
   line-height: 1;
 }
 
@@ -35,10 +41,22 @@ input[type="number"].show-spinner::-webkit-outer-spin-button {
 }
 
 button {
-  cursor: pointer
+  cursor: pointer;
 }
 
 hr {
   margin-block: 0.5rem;
   color: gray;
+}
+
+.clickable {
+  @apply
+    p-2
+    border
+    border-gray-700
+    bg-gray-700/50
+    rounded-lg
+    shadow-sm
+    shadow-black/40
+    cursor-pointer
 }
