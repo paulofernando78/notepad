@@ -14,19 +14,41 @@ import { widgetCatalog, WidgetPicker } from "@/components/features/Widget";
 import { TaskBoard } from "@/components/features/TaskBoard";
 
 // Notes
-import { Note } from "@/components/features/Note";
-import { Sidebar } from "@/components/layout/Sidebar";
-import { SearchBar } from "@/components/ui/SearchBar";
+// import { Note } from "@/components/features/Note";
+// import { Sidebar } from "@/components/layout/Sidebar";
+// import { SearchBar } from "@/components/ui/SearchBar";
 
-function App() {
-  const [widgets, setWidgets] = useState([
+const WIDGETS_STORAGE_KEY = "widgets";
+
+function createDefaultWidgets() {
+  return [
     {
       id: crypto.randomUUID(),
       type: "clock",
       config: { ...widgetCatalog.clock.defaultConfig },
     },
-  ]);
+  ];
+}
+
+function getSavedWidgets() {
+  const savedWidgets = localStorage.getItem(WIDGETS_STORAGE_KEY);
+
+  if (!savedWidgets) return createDefaultWidgets();
+
+  try {
+    return JSON.parse(savedWidgets);
+  } catch {
+    return createDefaultWidgets();
+  }
+}
+
+function App() {
+  const [widgets, setWidgets] = useState(getSavedWidgets);
   const widgetPickerRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem(WIDGETS_STORAGE_KEY, JSON.stringify(widgets));
+  }, [widgets]);
 
   useEffect(() => {
     widgetPickerRef.current?.scrollIntoView({
@@ -53,6 +75,16 @@ function App() {
   function removeWidget(id) {
     setWidgets((currentWidgets) =>
       currentWidgets.filter((widget) => widget.id !== id),
+    );
+  }
+
+  function updateWidgetConfig(id, nextConfig) {
+    setWidgets((currentWidgets) =>
+      currentWidgets.map((widget) =>
+        widget.id === id
+          ? { ...widget, config: { ...widget.config, ...nextConfig } }
+          : widget,
+      ),
     );
   }
 
@@ -85,7 +117,13 @@ function App() {
                 title={definition.title}
                 onRemove={() => removeWidget(widgetInstance.id)}
               >
-                <Component {...widgetInstance.config} onRemove={handleRemove} />
+                <Component
+                  {...widgetInstance.config}
+                  onConfigChange={(nextConfig) =>
+                    updateWidgetConfig(widgetInstance.id, nextConfig)
+                  }
+                  onRemove={handleRemove}
+                />
               </WidgetCard>
             );
           })}
@@ -97,7 +135,7 @@ function App() {
         <TaskBoard />
       </SectionPanel>
 
-      <SectionPanel title="Notes">
+      {/* <SectionPanel title="Notes">
         <div className="grid grid-cols-[200px_1fr] gap-2 flex-1">
           <Sidebar />
           <div className="space-y-2">
@@ -109,7 +147,7 @@ function App() {
             </main>
           </div>
         </div>
-      </SectionPanel>
+      </SectionPanel> */}
     </div>
   );
 }

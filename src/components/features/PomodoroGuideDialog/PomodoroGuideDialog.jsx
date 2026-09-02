@@ -46,7 +46,7 @@ export const PomodoroGuideDialog = () => {
         aria-label="How Pomodoro works"
         title="How Pomodoro Works"
       />
-      <Dialog dialogRef={dialogRef} className="relative space-y-2">
+      <Dialog dialogRef={dialogRef} className="relative space-y-4">
         <button
           type="button"
           aria-label="Close Pomodoro guide"
@@ -66,11 +66,11 @@ export const PomodoroGuideDialog = () => {
         <h3 className="font-bold uppercase">How does it work?</h3>
         <ol className="space-y-3">
           <li>
-            <span className="font-bold">1. Plan your tasks.</span>
+            <span className="block mb-1 font-bold">1. Plan your tasks.</span>
             <p>How many pomodoros might you need?</p>
           </li>
           <li>
-            <span className="font-bold">2. Do 1 FOCUS (Pomodoro)</span>
+            <span className="block mb-1 font-bold">2. Do 1 FOCUS (Pomodoro)</span>
             <p>Time for 25 minutes then take a 5 minute break.</p>
           </li>
           <div

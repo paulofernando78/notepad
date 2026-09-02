@@ -1,50 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 import { Icon } from "@/components/ui/Icon";
 
 import { submitOnEnter } from "@/utils/keyboard";
 
-const CLOCK_LOCATION_STORAGE_KEY = "clock-location";
-
-const DEFAULT_CLOCK_LOCATION = {
-  location: "São Paulo, São Paulo, Brasil",
-  latitude: -23.55052,
-  longitude: -46.63331,
-  timezone: "America/Sao_Paulo",
-};
-
-function getSavedClockLocation() {
-  const savedLocation = localStorage.getItem(CLOCK_LOCATION_STORAGE_KEY);
-
-  if (!savedLocation) return DEFAULT_CLOCK_LOCATION;
-
-  try {
-    return JSON.parse(savedLocation);
-  } catch {
-    return DEFAULT_CLOCK_LOCATION;
-  }
-}
-
-export const Clock = ({ onRemove }) => {
-  const savedClockLocation = getSavedClockLocation();
+export const Clock = ({
+  location = "São Paulo, São Paulo, Brasil",
+  latitude = -23.55052,
+  longitude = -46.63331,
+  timezone = "America/Sao_Paulo",
+  onConfigChange,
+  onRemove,
+}) => {
+  const locationInputRef = useRef(null);
 
   // Clock
   const [time, setTime] = useState(new Date());
 
   // Selected weather location
-  const [selectedLocation, setSelectedLocation] = useState(
-    savedClockLocation.location,
-  );
-  const [selectedLatitude, setSelectedLatitude] = useState(
-    savedClockLocation.latitude,
-  );
-  const [selectedLongitude, setSelectedLongitude] = useState(
-    savedClockLocation.longitude,
-  );
-  const [selectedTimezone, setSelectedTimezone] = useState(
-    savedClockLocation.timezone,
-  );
+  const [selectedLocation, setSelectedLocation] = useState(location);
+  const [selectedLatitude, setSelectedLatitude] = useState(latitude);
+  const [selectedLongitude, setSelectedLongitude] = useState(longitude);
+  const [selectedTimezone, setSelectedTimezone] = useState(timezone);
 
   // Loaded weather data
   const [weather, setWeather] = useState(null);
@@ -102,12 +80,11 @@ export const Clock = ({ onRemove }) => {
     setIsEditingWeather(true);
   }
 
-  function saveClockLocation(locationData) {
-    localStorage.setItem(
-      CLOCK_LOCATION_STORAGE_KEY,
-      JSON.stringify(locationData),
-    );
-  }
+  useEffect(() => {
+    if (!isEditingWeather) return;
+
+    locationInputRef.current?.focus();
+  }, [isEditingWeather]);
 
   async function handleConfirmWeather() {
     const locationName = editLocation.trim();
@@ -139,7 +116,7 @@ export const Clock = ({ onRemove }) => {
     setSelectedLatitude(selectedLocationData.latitude);
     setSelectedLongitude(selectedLocationData.longitude);
     setSelectedTimezone(selectedLocationData.timezone);
-    saveClockLocation(selectedLocationData);
+    onConfigChange?.(selectedLocationData);
     setIsEditingWeather(false);
     setEditLocation("");
     setLocationSuggestions([]);
@@ -180,7 +157,7 @@ export const Clock = ({ onRemove }) => {
     setSelectedLatitude(selectedLocationData.latitude);
     setSelectedLongitude(selectedLocationData.longitude);
     setSelectedTimezone(selectedLocationData.timezone);
-    saveClockLocation(selectedLocationData);
+    onConfigChange?.(selectedLocationData);
     setEditLocation("");
     setLocationSuggestions([]);
     setIsEditingWeather(false);
@@ -201,6 +178,7 @@ export const Clock = ({ onRemove }) => {
             flex
             flex-col
             gap-2
+            h-12.5
             "
           >
             <div
@@ -208,10 +186,11 @@ export const Clock = ({ onRemove }) => {
               flex
               items-center
               gap-2
+              w-50
               "
             >
               <Icon name="mapPin" />
-              <span className="block">{selectedLocation}</span>
+              <span className="truncate">{selectedLocation}</span>
             </div>
             <div className="flex items-center gap-2">
               {weather && (
@@ -237,6 +216,7 @@ export const Clock = ({ onRemove }) => {
             <div className="">
               <label>
                 <input
+                  ref={locationInputRef}
                   type="text"
                   value={editLocation}
                   onChange={handleLocationChange}

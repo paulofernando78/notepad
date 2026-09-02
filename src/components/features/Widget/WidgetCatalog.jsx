@@ -4,12 +4,13 @@ import { Timer } from "@/components/features/Timer";
 
 export const widgetCatalog = {
   clock: {
-    title: "Clock • Weather",
+    title: "Clock",
     Component: Clock,
     defaultConfig: {
-      city: "São Paulo",
-      latitude: -23.5505,
-      longitude: -46.6333,
+      location: "São Paulo, São Paulo, Brasil",
+      latitude: -23.55052,
+      longitude: -46.63331,
+      timezone: "America/Sao_Paulo",
     },
   },
   pomodoro: {
