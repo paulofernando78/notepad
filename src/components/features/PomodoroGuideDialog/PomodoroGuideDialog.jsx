@@ -70,7 +70,7 @@ export const PomodoroGuideDialog = () => {
             <p>How many pomodoros might you need?</p>
           </li>
           <li>
-            <span className="block mb-1 font-bold">2. Do 1 FOCUS (Pomodoro)</span>
+            <span className="block mb-1 ofont-bold">2. Do 1 FOCUS (Pomodoro)</span>
             <p>Time for 25 minutes then take a 5 minute break.</p>
           </li>
           <div

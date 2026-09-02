@@ -40,7 +40,13 @@ function playAlarm() {
   playTone(1320, 0.22);
 }
 
-export const Timer = ({ onRemove }) => {
+export const Timer = ({
+  hours = 0,
+  minutes = 0,
+  seconds = 0,
+  onConfigChange,
+  onRemove,
+}) => {
   const initialTime = 0;
 
   const [time, setTime] = useState(initialTime);
@@ -78,6 +84,12 @@ export const Timer = ({ onRemove }) => {
     setIsAlarmPlaying(false);
     setIsEditing(false);
     setIsRunning(shouldStart && newTime > 0);
+
+    onConfigChange?.({
+      hours,
+      minutes,
+      seconds,
+    });
   }
 
   function handleConfirmEdit() {
@@ -101,9 +113,9 @@ export const Timer = ({ onRemove }) => {
 
     setTime(initialTime);
 
-    setEditHours(0);
-    setEditMinutes(0);
-    setEditSeconds(0);
+    setEditHours(hours);
+    setEditMinutes(minutes);
+    setEditSeconds(seconds);
 
     setMode("idle");
   }
@@ -180,7 +192,8 @@ export const Timer = ({ onRemove }) => {
             </span>
           </div>
         ) : (
-          <div className="
+          <div
+            className="
             flex
             gap-3
             translate-y-[-0.1rem]

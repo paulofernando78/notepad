@@ -175,24 +175,31 @@ export const Clock = ({
         !isEditingWeather ? (
           <div
             className="
-            flex
-            flex-col
-            gap-2
-            h-12.5
+              flex
+              flex-col
+              gap-2
+              h-12.5
+              translate-x-[-0.14rem]
             "
           >
             <div
               className="
-              flex
-              items-center
-              gap-2
-              w-50
+                flex
+                items-center
+                gap-2
+                w-50
               "
             >
               <Icon name="mapPin" />
               <span className="truncate">{selectedLocation}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div
+              className="
+                flex
+                items-center
+                gap-2
+              "
+            >
               {weather && (
                 <>
                   <Icon name="thermometer" />
@@ -204,7 +211,7 @@ export const Clock = ({
         ) : (
           <div
             className="
-            relative
+              relative
               flex
               gap-2
               h-25
@@ -237,18 +244,18 @@ export const Clock = ({
               {locationSuggestions.length > 0 && (
                 <div
                   className="
-                  absolute
-                  left-0
-                  z-10
-                  mt-2
-                  p-1
-                  w-53
-                  h-14.25
-                  bg-gray-700
-                  rounded
-                  shadow-lg
-                  overflow-y-auto
-                "
+                    absolute
+                    left-0
+                    z-10
+                    mt-2
+                    p-1
+                    w-53
+                    h-14.25
+                    bg-gray-700
+                    rounded
+                    shadow-lg
+                    overflow-y-auto
+                  "
                 >
                   {locationSuggestions.map((location) => {
                     return (
@@ -257,13 +264,13 @@ export const Clock = ({
                         key={location.id}
                         onClick={() => handleSelectLocation(location)}
                         className="
-                        w-full
-                        p-1
-                        text-left
-                        truncate
-                        cursor-pointer
-                        hover:bg-gray-600
-                      "
+                          w-full
+                          p-1
+                          text-left
+                          truncate
+                          cursor-pointer
+                          hover:bg-gray-600
+                        "
                       >
                         <span>{location.name}</span>,{" "}
                         <span>

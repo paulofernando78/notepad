@@ -75,10 +75,11 @@ const durationDisplay = `
 `;
 
 export const Pomodoro = ({
-  minutes: initialFocusMinutes = DEFAULT_FOCUS_MINUTES,
+  focusMinutes: initialFocusMinutes = DEFAULT_FOCUS_MINUTES,
   breakMinutes: initialBreakMinutes = DEFAULT_BREAK_MINUTES,
   longBreakMinutes: initialLongBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
-  totalPomodoros: initialPomodoroGoal = 4,
+  pomodoroGoal: initialPomodoroGoal = 4,
+  onConfigChange,
   onRemove,
 }) => {
   const [focusMinutes, setFocusMinutes] = useState(initialFocusMinutes);
@@ -227,15 +228,23 @@ export const Pomodoro = ({
   }
 
   function applyEditSettings(shouldStart) {
-    setFocusMinutes(editFocusMinutes);
-    setBreakMinutes(editBreakMinutes);
-    setLongBreakMinutes(editLongBreakMinutes);
-    setPomodoroGoal(editPomodoroGoal);
-    setTime(editFocusMinutes * 60);
+    const nextConfig = {
+      focusMinutes: editFocusMinutes,
+      breakMinutes: editBreakMinutes,
+      longBreakMinutes: editLongBreakMinutes,
+      pomodoroGoal: editPomodoroGoal,
+    };
+
+    setFocusMinutes(nextConfig.focusMinutes);
+    setBreakMinutes(nextConfig.breakMinutes);
+    setLongBreakMinutes(nextConfig.longBreakMinutes);
+    setPomodoroGoal(nextConfig.pomodoroGoal);
+    setTime(nextConfig.focusMinutes * 60);
     setCompletedPomodoros(0);
     setMode("focus");
     setIsRunning(shouldStart);
     setIsEditing(false);
+    onConfigChange?.(nextConfig);
   }
 
   function handleConfirmEdit() {
@@ -267,7 +276,7 @@ export const Pomodoro = ({
 
     setCompletedPomodoros(0);
     setMode("focus");
-    setTime(initialFocusMinutes * 60);
+    setTime(focusMinutes * 60);
   }
 
   return (

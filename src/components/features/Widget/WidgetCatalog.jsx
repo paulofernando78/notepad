@@ -16,10 +16,20 @@ export const widgetCatalog = {
   pomodoro: {
     title: "Pomodoro",
     Component: Pomodoro,
-    defaultConfig: {},
+    defaultConfig: {
+      focusMinutes: 25,
+      breakMinutes: 5,
+      longBreakMinutes: 15,
+      pomodoroGoal: 4,
+    },
   },
   timer: {
     title: "Timer",
     Component: Timer,
-    defaultConfig: {} },
+    defaultConfig: {
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    },
+  },
 };
