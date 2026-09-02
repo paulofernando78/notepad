@@ -40,3 +40,8 @@ input[type="number"].show-spinner::-webkit-outer-spin-button {
 button {
   cursor: pointer
 }
+
+hr {
+  margin-block: 0.5rem;
+  color: gray;
+}
