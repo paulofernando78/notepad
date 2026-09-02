@@ -5,26 +5,53 @@ import { Icon } from "@/components/ui/Icon";
 
 import { submitOnEnter } from "@/utils/keyboard";
 
-export const Clock = ({
-  location = "São Paulo",
-  latitude,
-  longitude,
-  onRemove,
-}) => {
+const CLOCK_LOCATION_STORAGE_KEY = "clock-location";
+
+const DEFAULT_CLOCK_LOCATION = {
+  location: "São Paulo, São Paulo, Brasil",
+  latitude: -23.55052,
+  longitude: -46.63331,
+  timezone: "America/Sao_Paulo",
+};
+
+function getSavedClockLocation() {
+  const savedLocation = localStorage.getItem(CLOCK_LOCATION_STORAGE_KEY);
+
+  if (!savedLocation) return DEFAULT_CLOCK_LOCATION;
+
+  try {
+    return JSON.parse(savedLocation);
+  } catch {
+    return DEFAULT_CLOCK_LOCATION;
+  }
+}
+
+export const Clock = ({ onRemove }) => {
+  const savedClockLocation = getSavedClockLocation();
+
   // Clock
   const [time, setTime] = useState(new Date());
 
   // Selected weather location
-  const [selectedLocation, setSelectedLocation] = useState(location);
-  const [selectedLatitude, setSelectedLatitude] = useState(latitude);
-  const [selectedLongitude, setSelectedLongitude] = useState(longitude);
+  const [selectedLocation, setSelectedLocation] = useState(
+    savedClockLocation.location,
+  );
+  const [selectedLatitude, setSelectedLatitude] = useState(
+    savedClockLocation.latitude,
+  );
+  const [selectedLongitude, setSelectedLongitude] = useState(
+    savedClockLocation.longitude,
+  );
+  const [selectedTimezone, setSelectedTimezone] = useState(
+    savedClockLocation.timezone,
+  );
 
   // Loaded weather data
   const [weather, setWeather] = useState(null);
 
   // Weather edit state
   const [isEditingWeather, setIsEditingWeather] = useState(false);
-  const [editLocation, setEditLocation] = useState(location);
+  const [editLocation, setEditLocation] = useState("");
   const [locationSuggestions, setLocationSuggestions] = useState([]);
 
   useEffect(() => {
@@ -39,6 +66,7 @@ export const Clock = ({
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
+    timeZone: selectedTimezone,
   });
 
   const currentDate = time.toLocaleDateString("en-US", {
@@ -46,6 +74,7 @@ export const Clock = ({
     month: "short",
     day: "numeric",
     year: "numeric",
+    timeZone: selectedTimezone,
   });
 
   useEffect(() => {
@@ -69,14 +98,26 @@ export const Clock = ({
 
   function handleEditWeather() {
     setEditLocation("");
-    setEditLocation([]);
+    setLocationSuggestions([]);
     setIsEditingWeather(true);
+  }
+
+  function saveClockLocation(locationData) {
+    localStorage.setItem(
+      CLOCK_LOCATION_STORAGE_KEY,
+      JSON.stringify(locationData),
+    );
   }
 
   async function handleConfirmWeather() {
     const locationName = editLocation.trim();
 
-    if (!locationName) return;
+    if (!locationName) {
+      setEditLocation("");
+      setLocationSuggestions([]);
+      setIsEditingWeather(false);
+      return;
+    }
 
     const response = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(locationName)}&count=1&language=pt&format=json`,
@@ -87,10 +128,21 @@ export const Clock = ({
 
     if (!location) return;
 
-    setSelectedLocation(location.name);
-    setSelectedLatitude(location.latitude);
-    setSelectedLongitude(location.longitude);
+    const selectedLocationData = {
+      location: `${location.name}${location.admin1 ? `, ${location.admin1}` : ""}, ${location.country}`,
+      latitude: location.latitude,
+      longitude: location.longitude,
+      timezone: location.timezone ?? "America/Sao_Paulo",
+    };
+
+    setSelectedLocation(selectedLocationData.location);
+    setSelectedLatitude(selectedLocationData.latitude);
+    setSelectedLongitude(selectedLocationData.longitude);
+    setSelectedTimezone(selectedLocationData.timezone);
+    saveClockLocation(selectedLocationData);
     setIsEditingWeather(false);
+    setEditLocation("");
+    setLocationSuggestions([]);
   }
 
   async function handleLocationChange(event) {
@@ -112,7 +164,26 @@ export const Clock = ({
     const data = await response.json();
 
     setLocationSuggestions(data.results ?? []);
-    console.log(data.results);
+  }
+
+  function handleSelectLocation(selectedSuggestion) {
+    const selectedLocationData = {
+      location: `${selectedSuggestion.name}${
+        selectedSuggestion.admin1 ? `, ${selectedSuggestion.admin1}` : ""
+      }, ${selectedSuggestion.country}`,
+      latitude: selectedSuggestion.latitude,
+      longitude: selectedSuggestion.longitude,
+      timezone: selectedSuggestion.timezone ?? "America/Sao_Paulo",
+    };
+
+    setSelectedLocation(selectedLocationData.location);
+    setSelectedLatitude(selectedLocationData.latitude);
+    setSelectedLongitude(selectedLocationData.longitude);
+    setSelectedTimezone(selectedLocationData.timezone);
+    saveClockLocation(selectedLocationData);
+    setEditLocation("");
+    setLocationSuggestions([]);
+    setIsEditingWeather(false);
   }
 
   return (
@@ -158,7 +229,7 @@ export const Clock = ({
               flex
               gap-2
               h-25
-              translate-x-[-0.02rem]
+              translate-x-[-0.04rem]
               translate-y-[0.15rem]
             "
           >
@@ -183,13 +254,14 @@ export const Clock = ({
                   "
                 />
               </label>
-              <div
-                className="
+              {locationSuggestions.length > 0 && (
+                <div
+                  className="
                   absolute
                   left-0
                   z-10
                   mt-2
-                  p-2
+                  p-1
                   w-53
                   h-14.25
                   bg-gray-700
@@ -197,29 +269,32 @@ export const Clock = ({
                   shadow-lg
                   overflow-y-auto
                 "
-              >
-                {locationSuggestions.map((location) => {
-                  return (
-                    <button
-                      type="button"
-                      key={location.id}
-                      className="
+                >
+                  {locationSuggestions.map((location) => {
+                    return (
+                      <button
+                        type="button"
+                        key={location.id}
+                        onClick={() => handleSelectLocation(location)}
+                        className="
                         w-full
                         p-1
                         text-left
                         truncate
+                        cursor-pointer
                         hover:bg-gray-600
                       "
-                    >
-                      <span>{location.name}</span>,{" "}
-                      <span>
-                        {location.admin1 ? `${location.admin1}, ` : ""}
-                        {location.country}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                      >
+                        <span>{location.name}</span>,{" "}
+                        <span>
+                          {location.admin1 ? `${location.admin1}, ` : ""}
+                          {location.country}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         )
