@@ -129,7 +129,7 @@ WidgetControls.Play = ({ isRunning, onClick, disabled = false }) => {
 WidgetControls.Reset = ({ onClick }) => {
   return (
     <button onClick={onClick}>
-      <Icon name="rotateCcw" className="translate-y-[0.01rem]" />
+      <Icon name="rotateCcw" />
     </button>
   );
 };
@@ -137,11 +137,11 @@ WidgetControls.Reset = ({ onClick }) => {
 WidgetControls.Edit = ({ isEditing, onEdit, onConfirm }) => {
   return isEditing ? (
     <button onClick={onConfirm}>
-      <Icon name="check" className="translate-y-[0.01rem]" />
+      <Icon name="check" />
     </button>
   ) : (
     <button onClick={onEdit}>
-      <Icon name="squarePen" className="translate-y-[0.01rem]" />
+      <Icon name="squarePen"/>
     </button>
   );
 };

@@ -287,7 +287,7 @@ export const Clock = ({
         )
       }
       bottom={
-        <div className="translate-y-[0.1rem]">
+        <div>
           <WidgetControls>
             <WidgetControls.Edit
               isEditing={isEditingWeather}
