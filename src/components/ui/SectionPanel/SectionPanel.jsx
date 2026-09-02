@@ -60,7 +60,6 @@ export const SectionPanel = ({
             items-center
             gap-2
             w-full
-            cursor-pointer
           "
         >
           <Icon name={isOpen ? "chevronDown" : "chevronRight"} size={23} />

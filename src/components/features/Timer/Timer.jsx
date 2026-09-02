@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
+import { Icon } from "@/components/ui/Icon";
+
 import { NumberInput } from "@/components/ui/NumberInput";
 
 function playTone(frequency, startDelay = 0) {
@@ -49,6 +51,7 @@ export const Timer = ({
 }) => {
   const initialTime = hours * 3600 + minutes * 60 + seconds;
 
+  const [configuredTime, setConfiguredTime] = useState(initialTime);
   const [time, setTime] = useState(initialTime);
 
   // Editing
@@ -79,6 +82,7 @@ export const Timer = ({
 
     const newTime = nextHours * 3600 + nextMinutes * 60 + nextSeconds;
 
+    setConfiguredTime(newTime);
     setTime(newTime);
     setMode("idle");
     setIsAlarmPlaying(false);
@@ -107,15 +111,33 @@ export const Timer = ({
     setIsRunning((current) => !current);
   }
 
+  function addMinutes(minutesToAdd) {
+    const secondsToAdd = minutesToAdd * 60;
+    const nextTime = time + secondsToAdd;
+
+    const nextHours = Math.floor(nextTime / 3600);
+    const nextMinutes = Math.floor((nextTime % 3600) / 60);
+    const nextSeconds = nextTime % 60;
+
+    setConfiguredTime(nextTime);
+    setTime(nextTime);
+
+    onConfigChange?.({
+      hours: nextHours,
+      minutes: nextMinutes,
+      seconds: nextSeconds,
+    });
+  }
+
   function handleReset() {
     setIsRunning(false);
     setIsAlarmPlaying(false);
 
-    setTime(initialTime);
+    setTime(configuredTime);
 
-    setEditHours(hours);
-    setEditMinutes(minutes);
-    setEditSeconds(seconds);
+    setEditHours(Math.floor(configuredTime / 3600));
+    setEditMinutes(Math.floor((configuredTime % 3600) / 60));
+    setEditSeconds(configuredTime % 60);
 
     setMode("idle");
   }
@@ -169,6 +191,38 @@ export const Timer = ({
       middle={
         !isEditing ? (
           <div className="flex flex-col items-center gap-2">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => addMinutes(1)}
+                  className="flex items-center gap-2"
+                >
+                  <Icon name="plus" />
+                </button>
+                <span>1 min</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => addMinutes(5)}
+                  className="flex items-center gap-2"
+                >
+                  <Icon name="plus" />
+                </button>
+                <span>5 min</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => addMinutes(10)}
+                  className="flex items-center gap-2"
+                >
+                  <Icon name="plus" />
+                </button>
+                <span>10 min</span>
+              </div>
+            </div>
             <label>
               <input
                 type="text"

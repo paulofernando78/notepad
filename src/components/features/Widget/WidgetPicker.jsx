@@ -38,7 +38,6 @@ export const WidgetPicker = ({ onAdd, ref }) => {
           grid
           place-items-center
           h-full
-          cursor-pointer
         "
       >
         {isOpen ? <Icon name="minus" /> : <Icon name="plus" />}

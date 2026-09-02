@@ -36,3 +36,7 @@ input[type="number"].show-spinner::-webkit-outer-spin-button {
 *::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
 }
+
+button {
+  cursor: pointer
+}

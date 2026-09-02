@@ -268,7 +268,6 @@ export const Clock = ({
                           p-1
                           text-left
                           truncate
-                          cursor-pointer
                           hover:bg-gray-600
                         "
                       >
