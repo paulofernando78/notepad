@@ -101,12 +101,12 @@ const icons = {
 };
 
 export const Icon = ({
-    name,
-    size = 20,
-    className = "",
-    cursorNone = false,
-    ...props
-  }) => {
+  name,
+  size = 20,
+  className = "text-gray-400",
+  cursorNone = false,
+  ...props
+}) => {
   const LucideIcon = icons[name];
   if (!LucideIcon) return null;
 
@@ -114,9 +114,8 @@ export const Icon = ({
     <LucideIcon
       size={size}
       className={`
-        text-gray-400
         shrink-0
-        ${cursorNone ? "cursor-default" : "cursor-pointer hover:text-gray-500"}
+        ${cursorNone ? "cursor-default" : "cursor-pointe"}
         ${className}
         `}
       {...props}

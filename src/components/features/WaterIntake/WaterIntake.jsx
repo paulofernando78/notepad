@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
-import { Border } from "@/components/ui/Border";
 import { Icon } from "@/components/ui/Icon";
 import { NumberInput } from "@/components/ui/NumberInput";
 

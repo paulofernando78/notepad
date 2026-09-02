@@ -29,7 +29,15 @@ export const WidgetPicker = ({ onAdd, ref }) => {
   }
 
   return (
-    <div ref={ref} className="flex gap-2 scroll-mr-2">
+    <div
+      ref={ref}
+      className="
+      flex
+      gap-2
+      uppercase
+      scroll-mr-2
+      "
+    >
       <button
         type="button"
         aria-label="Add widget"
@@ -47,7 +55,6 @@ export const WidgetPicker = ({ onAdd, ref }) => {
           ref={pickerRef}
           className="
             font-['Oswald_Variable']
-            uppercase
             scroll-mr-2
           "
         >
@@ -68,20 +75,53 @@ export const WidgetPicker = ({ onAdd, ref }) => {
             className="
               flex
               flex-col
-              gap-2
-              p-3
+              gap-3
+              p-2
+              h-68
               bg-gray-500/30
               rounded-br-lg
               rounded-bl-lg
+              overflow-scroll
             "
           >
-            <button onClick={() => handleAdd("clock")}>Clock</button>
-            <button onClick={() => handleAdd("pomodoro")}>Pomodoro</button>
-            <button onClick={() => handleAdd("timer")}>Timer</button>
-            <button onClick={() => handleAdd("waterIntake")}>Water Intake</button>
+            <button
+              onClick={() => handleAdd("clock")}
+              className="uppercase clickable"
+            >
+              clock
+            </button>
+            <button
+              onClick={() => handleAdd("pomodoro")}
+              className="uppercase clickable"
+            >
+              pomodoro
+            </button>
+            <button
+              onClick={() => handleAdd("timer")}
+              className="uppercase clickable"
+            >
+              timer
+            </button>
+            <button
+              onClick={() => handleAdd("waterIntake")}
+              className="uppercase clickable"
+            >
+              cater Intake
+            </button>
+            {/* --- */}
             <hr />
-            <button onClick={() => handleAdd("calculator")}>Calculator</button>
-            <button onClick={() => handleAdd("currency")}>Currency</button>
+            <button
+              onClick={() => handleAdd("calculator")}
+              className="uppercase clickable"
+            >
+              calculator
+            </button>
+            <button
+              onClick={() => handleAdd("markets")}
+              className="uppercase clickable"
+            >
+              markets
+            </button>
           </div>
         </div>
       )}

@@ -269,6 +269,7 @@ export const Clock = ({
                           text-left
                           truncate
                           hover:bg-gray-600
+                          rounded
                         "
                       >
                         <span>{location.name}</span>,{" "}
