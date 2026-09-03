@@ -51,7 +51,6 @@ export const Timer = ({
 }) => {
   const initialTime = hours * 3600 + minutes * 60 + seconds;
 
-  const [configuredTime, setConfiguredTime] = useState(initialTime);
   const [time, setTime] = useState(initialTime);
 
   // Editing
@@ -82,7 +81,6 @@ export const Timer = ({
 
     const newTime = nextHours * 3600 + nextMinutes * 60 + nextSeconds;
 
-    setConfiguredTime(newTime);
     setTime(newTime);
     setMode("idle");
     setIsAlarmPlaying(false);
@@ -113,19 +111,18 @@ export const Timer = ({
 
   function addMinutes(minutesToAdd) {
     const secondsToAdd = minutesToAdd * 60;
-    const nextTime = time + secondsToAdd;
+    const nextTime = Math.max(0, time + secondsToAdd);
 
-    // const nextHours = Math.floor(nextTime / 3600);
-    // const nextMinutes = Math.floor((nextTime % 3600) / 60);
-    // const nextSeconds = nextTime % 60;
+    const nextHours = Math.floor(nextTime / 3600);
+    const nextMinutes = Math.floor((nextTime % 3600) / 60);
+    const nextSeconds = nextTime % 60;
 
-    setConfiguredTime(nextTime);
     setTime(nextTime);
 
     onConfigChange?.({
-      // hours: nextHours,
-      // minutes: nextMinutes,
-      // seconds: nextSeconds,
+      hours: nextHours,
+      minutes: nextMinutes,
+      seconds: nextSeconds,
     });
   }
 
@@ -133,13 +130,19 @@ export const Timer = ({
     setIsRunning(false);
     setIsAlarmPlaying(false);
 
-    setTime(configuredTime);
+    setTime(0);
 
-    setEditHours(Math.floor(configuredTime / 3600));
-    setEditMinutes(Math.floor((configuredTime % 3600) / 60));
-    setEditSeconds(configuredTime % 60);
+    setEditHours(0);
+    setEditMinutes(0);
+    setEditSeconds(0);
 
     setMode("idle");
+
+    onConfigChange?.({
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    });
   }
 
   useEffect(() => {
@@ -185,7 +188,15 @@ export const Timer = ({
     "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)] animate-pulse";
   const inactiveModeClass = "text-gray-400";
 
-  const shortCuts = [1, 5];
+  const shortCuts = [0.5, 1, 5];
+
+  function formatShortcut(minutes) {
+    if (minutes < 1) {
+      return `0:${String(minutes * 60).padStart(2, "0")}`;
+    }
+
+    return `${minutes}:00`;
+  }
 
   return (
     <WidgetBody
@@ -218,7 +229,7 @@ export const Timer = ({
                   >
                     <Icon name="minus" />
                   </button>
-                  <span>{minutes}:00</span>
+                  <span>{formatShortcut(minutes)}</span>
                   <button
                     type="button"
                     onClick={() => addMinutes(minutes)}

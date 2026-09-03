@@ -32,7 +32,7 @@ export const WidgetCard = ({ title, children, ref }) => {
         </header>
         <div
           className="
-            h-70
+            h-76
             text-white
             bg-gray-500/30
             rounded-tr-none
