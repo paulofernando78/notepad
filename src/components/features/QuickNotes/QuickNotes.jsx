@@ -33,11 +33,11 @@ export const QuickNotes = ({ note = "", onConfigChange, onRemove }) => {
               text-gray-700
               font-['Indie_Flower',cursive]
               leading-6
-              bg-gradient-to-tl from-yellow-100 via-yellow-200 to-yellow-300
+              bg-linear-to-tl from-white to-gray-300
               border-0
               resize-none
               outline-none
-              rounded-sm
+              rounded
               shadow-lg
             "
         />
