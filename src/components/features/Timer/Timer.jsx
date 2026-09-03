@@ -244,12 +244,6 @@ export const Timer = ({
                 placeholder="ex: boiling water..."
               />
             </label> */}
-            <span
-              className={`uppercase pt-2
-            ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
-            >
-              done
-            </span>
           </div>
         ) : (
           <div
@@ -281,6 +275,14 @@ export const Timer = ({
             />
           </div>
         )
+      }
+      subMiddle={
+        <span
+          className={`uppercase
+            ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
+        >
+          done
+        </span>
       }
       bottom={
         <WidgetControls>

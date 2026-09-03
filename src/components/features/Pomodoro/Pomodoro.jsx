@@ -445,7 +445,7 @@ export const Pomodoro = ({
         }
         subMiddle={
           <span
-            className={`block pt-2 uppercase ${
+            className={`block uppercase ${
               mode === "done" ? activePomodoroDoneModeClass : inactiveModeClass
             }
                   `}

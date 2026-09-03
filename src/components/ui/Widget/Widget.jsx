@@ -33,7 +33,6 @@ export const WidgetCard = ({ title, children, ref }) => {
         <div
           className="
             h-70
-            pb-5.25
             text-white
             bg-gray-500/30
             rounded-tr-none
@@ -56,14 +55,14 @@ export const WidgetBody = ({ top, middle, subMiddle, bottom }) => {
       className="
         flex
         flex-col
-        justify-between
+        gap-4
+        py-4
         h-full
       "
     >
       {top && (
         <div
           className="
-            pt-4
             w-full
             text-center
             text-3xl
@@ -97,7 +96,6 @@ export const WidgetBody = ({ top, middle, subMiddle, bottom }) => {
           flex
           flex-col
           items-center
-          justify-center
         "
         >
           {subMiddle}
@@ -114,10 +112,7 @@ export const WidgetControls = ({ children }) => {
       <div
         className="
           flex
-          justify-between
-          gap-2
-          translate-[0.03rem]
-          
+          gap-2          
         "
       >
         {children}
