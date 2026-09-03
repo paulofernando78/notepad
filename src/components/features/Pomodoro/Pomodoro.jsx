@@ -279,6 +279,10 @@ export const Pomodoro = ({
     setTime(focusMinutes * 60);
   }
 
+  const inputAlign = `
+    translate-y-[-0.08rem]
+  `;
+
   return (
     <>
       <WidgetBody
@@ -309,7 +313,6 @@ export const Pomodoro = ({
             className="
               text-center
               uppercase
-              translate-y-[-0.2rem]
             "
           >
             {isEditing ? (
@@ -322,6 +325,7 @@ export const Pomodoro = ({
                   value={editPomodoroGoal}
                   onChange={setEditPomodoroGoal}
                   min={1}
+                  className={inputAlign}
                 />
                 <span className="self-center">minutes</span>
                 <NumberInput
@@ -331,6 +335,7 @@ export const Pomodoro = ({
                   value={editFocusMinutes}
                   onChange={setEditFocusMinutes}
                   min={1}
+                  className={inputAlign}
                 />
                 <span className="self-center">break</span>
                 <NumberInput
@@ -340,6 +345,7 @@ export const Pomodoro = ({
                   value={editBreakMinutes}
                   onChange={setEditBreakMinutes}
                   min={0}
+                  className={inputAlign}
                 />
                 <span className="self-center">long</span>
                 <NumberInput
@@ -349,6 +355,7 @@ export const Pomodoro = ({
                   value={editLongBreakMinutes}
                   onChange={setEditLongBreakMinutes}
                   min={0}
+                  className={inputAlign}
                 />
               </div>
             ) : (
@@ -360,7 +367,6 @@ export const Pomodoro = ({
                     items-center
                     pl-1.5
                     w-max
-                    h-8
                     gap-2
                   "
                 >
@@ -368,7 +374,7 @@ export const Pomodoro = ({
                     <span>{displayedPomodoro}</span>
                     <span>of</span>
                   </div>
-                  <span className="pl-[0.31rem]">{pomodoroGoal}</span>
+                  <span>{pomodoroGoal}</span>
                 </div>
                 {/* Focus • Break • Long  */}
                 <div
