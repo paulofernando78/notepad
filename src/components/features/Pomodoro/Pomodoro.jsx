@@ -312,10 +312,50 @@ export const Pomodoro = ({
               translate-y-[-0.2rem]
             "
           >
-            <div className="flex flex-col gap-2">
-              {/* 1 OF 4 */}
-              <div
-                className="
+            {isEditing ? (
+              <div className="grid grid-cols-2 gap-1">
+                <span className="self-center">focus</span>
+                <NumberInput
+                  hideLabel
+                  label="Pomodoro Goal"
+                  name="pomodoro-goal"
+                  value={editPomodoroGoal}
+                  onChange={setEditPomodoroGoal}
+                  min={1}
+                />
+                <span className="self-center">minutes</span>
+                <NumberInput
+                  hideLabel
+                  label="focus"
+                  name="focus"
+                  value={editFocusMinutes}
+                  onChange={setEditFocusMinutes}
+                  min={1}
+                />
+                <span className="self-center">break</span>
+                <NumberInput
+                  hideLabel
+                  label="break"
+                  name="break"
+                  value={editBreakMinutes}
+                  onChange={setEditBreakMinutes}
+                  min={0}
+                />
+                <span className="self-center">long</span>
+                <NumberInput
+                  hideLabel
+                  label="long break"
+                  name="long-break"
+                  value={editLongBreakMinutes}
+                  onChange={setEditLongBreakMinutes}
+                  min={0}
+                />
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2">
+                {/* 1 OF 4 */}
+                <div
+                  className="
                     flex
                     items-center
                     pl-1.5
@@ -323,124 +363,74 @@ export const Pomodoro = ({
                     h-8
                     gap-2
                   "
-              >
-                <div className="space-x-2">
-                  <span>{displayedPomodoro}</span>
-                  <span>of</span>
-                </div>
-                {isEditing ? (
-                  <div className="translate-y-[-0.14rem]">
-                    <NumberInput
-                      hideLabel
-                      label="Pomodoro Goal"
-                      name="pomodoro-goal"
-                      value={editPomodoroGoal}
-                      onChange={setEditPomodoroGoal}
-                      min={1}
-                    />
+                >
+                  <div className="space-x-2">
+                    <span>{displayedPomodoro}</span>
+                    <span>of</span>
                   </div>
-                ) : (
                   <span className="pl-[0.31rem]">{pomodoroGoal}</span>
-                )}
-              </div>
-              {/* Focus • Break • Long  */}
-              <div
-                className="
+                </div>
+                {/* Focus • Break • Long  */}
+                <div
+                  className="
                   grid
                   grid-cols-[62px_62px_62px]
                   gap-2
                 "
-              >
-                {/* FOCUS */}
-                <div className={`w-15.5 ${durationTitle}`}>
-                  <>
-                    <span
-                      className={`${
-                        mode === "focus" && isRunning
-                          ? activeFocusModeClass
-                          : inactiveModeClass
-                      } text-[1rem]`}
-                    >
-                      Focus
-                    </span>
-                    {isEditing ? (
-                      <div className="h-[30.8px]">
-                        <NumberInput
-                          hideLabel
-                          label="focus"
-                          name="focus"
-                          value={editFocusMinutes}
-                          onChange={setEditFocusMinutes}
-                          min={1}
-                        />
-                      </div>
-                    ) : (
+                >
+                  {/* FOCUS */}
+                  <div className={`w-15.5 ${durationTitle}`}>
+                    <>
+                      <span
+                        className={`${
+                          mode === "focus" && isRunning
+                            ? activeFocusModeClass
+                            : inactiveModeClass
+                        } text-[1rem]`}
+                      >
+                        Focus
+                      </span>
+
                       <span className={durationDisplay}>
                         {formatTime(mode === "focus" ? time : focusDuration)}
                       </span>
-                    )}
-                  </>
-                </div>
+                    </>
+                  </div>
 
-                {/* BREAK */}
-                <div className={`w-15.5 ${durationTitle}`}>
-                  <span
-                    className={`${
-                      mode === "break" && isRunning
-                        ? activeBreakModeClass
-                        : inactiveModeClass
-                    } text-[1rem]`}
-                  >
-                    Break
-                  </span>
-                  {isEditing ? (
-                    <div className="h-[30.8px]">
-                      <NumberInput
-                        hideLabel
-                        label="break"
-                        name="break"
-                        value={editBreakMinutes}
-                        onChange={setEditBreakMinutes}
-                        min={0}
-                      />
-                    </div>
-                  ) : (
+                  {/* BREAK */}
+                  <div className={`w-15.5 ${durationTitle}`}>
+                    <span
+                      className={`${
+                        mode === "break" && isRunning
+                          ? activeBreakModeClass
+                          : inactiveModeClass
+                      } text-[1rem]`}
+                    >
+                      Break
+                    </span>
                     <span className={durationDisplay}>
                       {formatTime(mode === "break" ? time : breakDuration)}
                     </span>
-                  )}
-                </div>
+                  </div>
 
-                {/* LONG */}
-                <div className={`w-15.5 ${durationTitle}`}>
-                  <span
-                    className={`${
-                      mode === "long" && isRunning
-                        ? activeLongModeClass
-                        : inactiveModeClass
-                    } text-[1rem]`}
-                  >
-                    Long
-                  </span>
-                  {isEditing ? (
-                    <div className="h-[30.8px]">
-                      <NumberInput
-                        hideLabel
-                        label="long break"
-                        name="long-break"
-                        value={editLongBreakMinutes}
-                        onChange={setEditLongBreakMinutes}
-                        min={0}
-                      />
-                    </div>
-                  ) : (
+                  {/* LONG */}
+                  <div className={`w-15.5 ${durationTitle}`}>
+                    <span
+                      className={`${
+                        mode === "long" && isRunning
+                          ? activeLongModeClass
+                          : inactiveModeClass
+                      } text-[1rem]`}
+                    >
+                      Long
+                    </span>
                     <span className={durationDisplay}>
                       {formatTime(mode === "long" ? time : longBreakDuration)}
                     </span>
-                  )}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         }
         subMiddle={
