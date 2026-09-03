@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import "./App.css";
 import { Header } from "@/components/layout/Header";
@@ -87,6 +87,7 @@ function App() {
       ),
     );
   }
+
 
   return (
     <div

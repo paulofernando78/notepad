@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useState, useId, useRef } from "react";
 
 import { Icon } from "@/components/ui/Icon";
 
@@ -7,7 +7,7 @@ export const SectionPanel = ({
   children,
   defaultOpen = true,
   storageKey,
-  count
+  count,
 }) => {
   const headingId = useId();
   const [isOpen, setIsOpen] = useState(() => {
@@ -30,6 +30,47 @@ export const SectionPanel = ({
 
       return next;
     });
+  }
+
+  // <header data-widget-drag-handle>
+  // Assim o scroll não começa no header do card.
+  function shouldIgnoreDrag(target) {
+    return target.closest(
+      "button, input, textarea, select, a, [data-widget-drag-handle]",
+    );
+  }
+
+  const scrollRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+
+  // #1 Function DOWN
+  function handlePointerDown(event) {
+    if (shouldIgnoreDrag(event.target)) return;
+
+    isDraggingRef.current = true;
+    startXRef.current = event.clientX;
+    scrollLeftRef.current = scrollRef.current.scrollLeft;
+
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+
+  // #2 Function MOVE
+  function handlePointerMove(event) {
+    if (!isDraggingRef.current) return;
+
+    const distance = event.clientX - startXRef.current;
+    scrollRef.current.scrollLeft = scrollLeftRef.current - distance;
+  }
+
+  // #3 Function UP
+  function handlePointerUp(event) {
+    isDraggingRef.current = false;
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
   }
 
   return (
@@ -63,11 +104,16 @@ export const SectionPanel = ({
         >
           <Icon name={isOpen ? "chevronDown" : "chevronRight"} size={23} />
           <h2>{title}</h2>
-        {count !== undefined && <span className="ml-1">{count}</span>}
+          {count !== undefined && <span className="ml-1">{count}</span>}
         </button>
       </header>
       {isOpen && (
         <div
+          ref={scrollRef}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
           className="
             flex
             gap-2
@@ -76,6 +122,10 @@ export const SectionPanel = ({
             rounded-lg
             overflow-x-auto
             no-scrollbar
+            cursor-grab
+            active:cursor-grabbing
+            select-none
+            touch-pan-x
           "
         >
           {children}
