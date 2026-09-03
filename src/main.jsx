@@ -10,6 +10,8 @@ import '@fontsource-variable/montserrat/wght.css';
 // Supports weights 200-700
 import '@fontsource-variable/oswald/wght.css';
 
+import '@fontsource/indie-flower';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>

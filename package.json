@@ -16,6 +16,7 @@
     "@fontsource-variable/montserrat": "^5.3.0",
     "@fontsource-variable/oswald": "^5.3.0",
     "@fontsource/black-ops-one": "^5.3.0",
+    "@fontsource/indie-flower": "^5.3.0",
     "lucide-react": "^1.33.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

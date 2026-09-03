@@ -76,10 +76,7 @@ export const WidgetPicker = ({ onAdd, ref }) => {
               flex
               flex-col
               gap-2
-              pt-2
-              pr-1
-              pl-2
-              pb-2
+              p-2
               h-70
               bg-gray-500/30
               rounded-br-lg
@@ -92,6 +89,12 @@ export const WidgetPicker = ({ onAdd, ref }) => {
               className="uppercase clickable"
             >
               clock
+            </button>
+            <button
+              onClick={() => handleAdd("quickNotes")}
+              className="uppercase clickable"
+            >
+              quick notes
             </button>
             <button
               onClick={() => handleAdd("pomodoro")}

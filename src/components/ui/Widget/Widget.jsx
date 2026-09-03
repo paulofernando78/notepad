@@ -83,13 +83,25 @@ export const WidgetBody = ({ top, middle, subMiddle, bottom }) => {
           flex-col
           items-center
           justify-center
+          flex-1
+          w-full
+          min-h-0
         "
         >
           {middle}
         </div>
       )}
       {subMiddle && (
-        {subMiddle}
+        <div
+          className="
+          flex
+          flex-col
+          items-center
+          justify-center
+        "
+        >
+          {subMiddle}
+        </div>
       )}
       {bottom && <div className="self-center">{bottom}</div>}
     </div>

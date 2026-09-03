@@ -1,4 +1,5 @@
 import { Clock } from "@/components/features/Clock";
+import { QuickNotes } from "@/components/features/QuickNotes";
 import { Pomodoro } from "@/components/features/Pomodoro";
 import { Timer } from "@/components/features/Timer";
 import { WaterIntake } from "@/components/features/WaterIntake";
@@ -16,8 +17,15 @@ export const widgetCatalog = {
       timezone: "America/Sao_Paulo",
     },
   },
+  quickNotes: {
+    title: "quick notes",
+    Component: QuickNotes,
+    defaultConfig: {
+      note: "",
+    },
+  },
   pomodoro: {
-    title: "Pomodoro",
+    title: "pomodoro",
     Component: Pomodoro,
     defaultConfig: {
       focusMinutes: 25,
@@ -27,7 +35,7 @@ export const widgetCatalog = {
     },
   },
   timer: {
-    title: "Timer",
+    title: "timer",
     Component: Timer,
     defaultConfig: {
       hours: 0,
@@ -36,12 +44,12 @@ export const widgetCatalog = {
     },
   },
   waterIntake: {
-    title: "Water Intake",
+    title: "water intake",
     Component: WaterIntake,
     defaultConfig: {},
   },
   calculator: {
-    title: "Calculator",
+    title: "calculator",
     Component: Calculator,
     defaultConfig: {},
   },

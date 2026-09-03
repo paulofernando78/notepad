@@ -1,4 +1,5 @@
-import { useState, useId, useRef } from "react";
+import { useState, useId } from "react";
+import { useDragScroll } from "@/hooks/useDragScroll";
 
 import { Icon } from "@/components/ui/Icon";
 
@@ -10,6 +11,7 @@ export const SectionPanel = ({
   count,
 }) => {
   const headingId = useId();
+  const dragScroll = useDragScroll();
   const [isOpen, setIsOpen] = useState(() => {
     if (!storageKey) return defaultOpen;
 
@@ -30,47 +32,6 @@ export const SectionPanel = ({
 
       return next;
     });
-  }
-
-  // <header data-widget-drag-handle>
-  // Assim o scroll não começa no header do card.
-  function shouldIgnoreDrag(target) {
-    return target.closest(
-      "button, input, textarea, select, a, [data-widget-drag-handle]",
-    );
-  }
-
-  const scrollRef = useRef(null);
-  const isDraggingRef = useRef(false);
-  const startXRef = useRef(0);
-  const scrollLeftRef = useRef(0);
-
-  // #1 Function DOWN
-  function handlePointerDown(event) {
-    if (shouldIgnoreDrag(event.target)) return;
-
-    isDraggingRef.current = true;
-    startXRef.current = event.clientX;
-    scrollLeftRef.current = scrollRef.current.scrollLeft;
-
-    event.currentTarget.setPointerCapture(event.pointerId)
-  }
-
-  // #2 Function MOVE
-  function handlePointerMove(event) {
-    if (!isDraggingRef.current) return;
-
-    const distance = event.clientX - startXRef.current;
-    scrollRef.current.scrollLeft = scrollLeftRef.current - distance;
-  }
-
-  // #3 Function UP
-  function handlePointerUp(event) {
-    isDraggingRef.current = false;
-
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
   }
 
   return (
@@ -109,11 +70,7 @@ export const SectionPanel = ({
       </header>
       {isOpen && (
         <div
-          ref={scrollRef}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
+          {...dragScroll}
           className="
             flex
             gap-2

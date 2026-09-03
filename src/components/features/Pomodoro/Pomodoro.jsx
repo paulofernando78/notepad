@@ -440,21 +440,18 @@ export const Pomodoro = ({
                   )}
                 </div>
               </div>
-              {/* DONE */}
-              <span
-                className={`block pt-2 ${
-                  mode === "done"
-                    ? activePomodoroDoneModeClass
-                    : inactiveModeClass
-                }
-                  `}
-              >
-                done
-              </span>
             </div>
-
-            {/* DONE */}
           </div>
+        }
+        subMiddle={
+          <span
+            className={`block pt-2 uppercase ${
+              mode === "done" ? activePomodoroDoneModeClass : inactiveModeClass
+            }
+                  `}
+          >
+            done
+          </span>
         }
         bottom={
           <WidgetControls>
