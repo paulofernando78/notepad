@@ -48,7 +48,8 @@ hr {
     rounded-lg
     shadow-sm
     shadow-black/40
-    cursor-pointer;
+    cursor-pointer
+    hover:bg-gray-700;
 }
 
 * {
