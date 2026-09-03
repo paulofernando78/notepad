@@ -33,7 +33,6 @@ export const WidgetCard = ({ title, children, ref }) => {
         <div
           className="
             h-70
-            pt-4
             pb-5.25
             text-white
             bg-gray-500/30
@@ -64,13 +63,14 @@ export const WidgetBody = ({ top, middle, subMiddle, bottom }) => {
       {top && (
         <div
           className="
-          w-full
-          text-center
-          text-3xl
-          font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]
-          font-bold
-          leading-none
-        "
+            pt-4
+            w-full
+            text-center
+            text-3xl
+            font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]
+            font-bold
+            leading-none
+          "
         >
           {top}
         </div>
@@ -83,8 +83,8 @@ export const WidgetBody = ({ top, middle, subMiddle, bottom }) => {
           flex-col
           items-center
           justify-center
-          flex-1
           w-full
+          h-full
           min-h-0
         "
         >
