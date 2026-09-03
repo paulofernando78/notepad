@@ -200,28 +200,37 @@ export const Timer = ({
             gap-2
             "
           >
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2">
               {addshortCuts.map((minutes) => (
                 <div
                   className="
                     flex
                     items-center
                     gap-2
-                    clickable
+                    
                   "
                 >
                   <button
                     key={minutes}
                     type="button"
                     onClick={() => addMinutes(minutes)}
+                    className="clickable"
+                  >
+                    <Icon name="minus" />
+                  </button>
+                  <span>{minutes}:00</span>
+                  <button
+                    key={minutes}
+                    type="button"
+                    onClick={() => addMinutes(minutes)}
+                    className="clickable"
                   >
                     <Icon name="plus" />
                   </button>
-                  <span>{minutes}:00</span>
                 </div>
               ))}
             </div>
-            <label>
+            {/* <label>
               <input
                 type="text"
                 className="
@@ -235,7 +244,7 @@ export const Timer = ({
                   "
                 placeholder="ex: boiling water..."
               />
-            </label>
+            </label> */}
             <span
               className={`uppercase pt-2
             ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}

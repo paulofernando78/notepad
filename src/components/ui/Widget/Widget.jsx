@@ -9,7 +9,7 @@ export const WidgetCard = ({ title, children, ref }) => {
     <article
       ref={ref}
       className="
-        min-w-62.5
+        min-w-60
         font-['Oswald_Variable']
         scroll-mr-2
       "

@@ -37,7 +37,7 @@ export const SectionPanel = ({
       aria-labelledby={headingId}
       className={`
         p-2
-        w-full
+        max-w-[1045px]
         bg-gray-100/10
         rounded-lg
         ${className}
@@ -73,8 +73,7 @@ export const SectionPanel = ({
           bg-gray-100/10
           p-2
           rounded-lg
-        overflow-x-auto
-
+          overflow-x-auto
         "
         >
           {children}
