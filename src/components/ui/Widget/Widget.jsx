@@ -95,22 +95,19 @@ export const WidgetBody = ({ top, middle, bottom }) => {
 
 export const WidgetControls = ({ children }) => {
   return (
-    <div
-      className="
-       clickable
-      "
-    >
+    <>
       <div
         className="
           flex
           justify-between
-          gap-4
+          gap-2
           translate-[0.03rem]
+          
         "
       >
         {children}
       </div>
-    </div>
+    </>
   );
 };
 
@@ -119,7 +116,7 @@ WidgetControls.Play = ({ isRunning, onClick, disabled = false }) => {
     <button
       onClick={onClick}
       disabled={disabled}
-      className="disabled:cursor-not-allowed disabled:opacity-40"
+      className="disabled:cursor-not-allowed disabled:opacity-40 clickable"
     >
       <Icon name={isRunning ? "circlePause" : "circlePlay"} />
     </button>
@@ -128,7 +125,7 @@ WidgetControls.Play = ({ isRunning, onClick, disabled = false }) => {
 
 WidgetControls.Reset = ({ onClick }) => {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} className="clickable">
       <Icon name="rotateCcw" />
     </button>
   );
@@ -136,19 +133,19 @@ WidgetControls.Reset = ({ onClick }) => {
 
 WidgetControls.Edit = ({ isEditing, onEdit, onConfirm }) => {
   return isEditing ? (
-    <button onClick={onConfirm}>
+    <button onClick={onConfirm} className="clickable">
       <Icon name="check" />
     </button>
   ) : (
-    <button onClick={onEdit}>
-      <Icon name="squarePen"/>
+    <button onClick={onEdit} className="clickable">
+      <Icon name="squarePen" />
     </button>
   );
 };
 
 WidgetControls.Info = ({ onClick, ...props }) => {
   return (
-    <button type="button" onClick={onClick} {...props}>
+    <button type="button" onClick={onClick} {...props} className="clickable">
       <Icon name="info" />
     </button>
   );
@@ -161,6 +158,7 @@ WidgetControls.Erase = ({ onClick }) => {
       title="Delete"
       aria-label="Delete widget"
       onClick={onClick}
+      className="clickable"
     >
       <Icon name="trash" />
     </button>

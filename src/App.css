@@ -50,13 +50,12 @@ hr {
 }
 
 .clickable {
-  @apply
-    p-2
+  @apply p-2
     border
     border-gray-700
     bg-gray-700/30
     rounded-lg
     shadow-sm
     shadow-black/40
-    cursor-pointer
+    cursor-pointer;
 }
