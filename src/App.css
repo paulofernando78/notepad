@@ -31,21 +31,12 @@ input[type="number"].show-spinner::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #6b7280 transparent;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
-}
-
 button {
   cursor: pointer;
 }
 
 hr {
-  margin-block: 0.5rem;
+  margin-block: 0.3rem;
   color: gray;
 }
 
@@ -58,4 +49,22 @@ hr {
     shadow-sm
     shadow-black/40
     cursor-pointer;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6b7280 transparent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none
 }

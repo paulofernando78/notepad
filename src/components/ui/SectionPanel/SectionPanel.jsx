@@ -69,14 +69,14 @@ export const SectionPanel = ({
       {isOpen && (
         <div
           className="
-          flex
-          gap-2
-          p-2
-          bg-gray-100/10
-          rounded-lg
-          overflow-x-scroll
-          
-        "
+            flex
+            gap-2
+            p-2
+            bg-gray-100/10
+            rounded-lg
+            overflow-x-auto
+            no-scrollbar
+          "
         >
           {children}
         </div>

@@ -75,13 +75,16 @@ export const WidgetPicker = ({ onAdd, ref }) => {
             className="
               flex
               flex-col
-              gap-3
-              p-2
-              h-68
+              gap-2
+              pt-2
+              pr-1
+              pl-2
+              pb-2
+              h-70
               bg-gray-500/30
               rounded-br-lg
               rounded-bl-lg
-              overflow-scroll
+              overflow-y-auto
             "
           >
             <button
