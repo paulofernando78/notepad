@@ -115,17 +115,17 @@ export const Timer = ({
     const secondsToAdd = minutesToAdd * 60;
     const nextTime = time + secondsToAdd;
 
-    const nextHours = Math.floor(nextTime / 3600);
-    const nextMinutes = Math.floor((nextTime % 3600) / 60);
-    const nextSeconds = nextTime % 60;
+    // const nextHours = Math.floor(nextTime / 3600);
+    // const nextMinutes = Math.floor((nextTime % 3600) / 60);
+    // const nextSeconds = nextTime % 60;
 
     setConfiguredTime(nextTime);
     setTime(nextTime);
 
     onConfigChange?.({
-      hours: nextHours,
-      minutes: nextMinutes,
-      seconds: nextSeconds,
+      // hours: nextHours,
+      // minutes: nextMinutes,
+      // seconds: nextSeconds,
     });
   }
 
@@ -185,7 +185,7 @@ export const Timer = ({
     "text-red-400 [text-shadow:0_0_8px_rgba(248,113,113,0.8)] animate-pulse";
   const inactiveModeClass = "text-gray-400";
 
-  const addshortCuts = [1, 5];
+  const shortCuts = [1, 5];
 
   return (
     <WidgetBody
@@ -201,8 +201,9 @@ export const Timer = ({
             "
           >
             <div className="flex flex-col gap-2">
-              {addshortCuts.map((minutes) => (
+              {shortCuts.map((minutes) => (
                 <div
+                  key={minutes}
                   className="
                     flex
                     items-center
@@ -211,16 +212,14 @@ export const Timer = ({
                   "
                 >
                   <button
-                    key={minutes}
                     type="button"
-                    onClick={() => addMinutes(minutes)}
+                    onClick={() => addMinutes(-minutes)}
                     className="clickable"
                   >
                     <Icon name="minus" />
                   </button>
                   <span>{minutes}:00</span>
                   <button
-                    key={minutes}
                     type="button"
                     onClick={() => addMinutes(minutes)}
                     className="clickable"

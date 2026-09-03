@@ -5,9 +5,9 @@ import { Icon } from "@/components/ui/Icon";
 export const SectionPanel = ({
   title,
   children,
-  className = "",
   defaultOpen = true,
   storageKey,
+  count
 }) => {
   const headingId = useId();
   const [isOpen, setIsOpen] = useState(() => {
@@ -37,10 +37,9 @@ export const SectionPanel = ({
       aria-labelledby={headingId}
       className={`
         p-2
-        max-w-[1045px]
+        w-full
         bg-gray-100/10
         rounded-lg
-        ${className}
       `}
     >
       <header
@@ -64,16 +63,19 @@ export const SectionPanel = ({
         >
           <Icon name={isOpen ? "chevronDown" : "chevronRight"} size={23} />
           <h2>{title}</h2>
+        {count !== undefined && <span className="ml-1">{count}</span>}
         </button>
       </header>
       {isOpen && (
         <div
           className="
-          flex gap-2
-          bg-gray-100/10
+          flex
+          gap-2
           p-2
+          bg-gray-100/10
           rounded-lg
-          overflow-x-auto
+          overflow-x-scroll
+          
         "
         >
           {children}

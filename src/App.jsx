@@ -94,14 +94,18 @@ function App() {
         flex flex-col
         gap-6
         w-full
-        max-w-280
+        max-w-267
         min-h-screen
         mx-auto p-3
       "
     >
       <Header />
 
-      <SectionPanel title="Widgets" storageKey="section-widget">
+      <SectionPanel
+        title="Widgets"
+        storageKey="section-widget"
+        count={widgets.length}
+      >
         <WidgetContainer>
           {widgets.map((widgetInstance) => {
             const definition = widgetCatalog[widgetInstance.type];

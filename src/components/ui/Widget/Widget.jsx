@@ -32,8 +32,9 @@ export const WidgetCard = ({ title, children, ref }) => {
         </header>
         <div
           className="
-            h-68
-            pt-4 pb-5.25
+            h-70
+            pt-4
+            pb-5.25
             text-white
             bg-gray-500/30
             rounded-tr-none
@@ -50,7 +51,7 @@ export const WidgetCard = ({ title, children, ref }) => {
   );
 };
 
-export const WidgetBody = ({ top, middle, bottom }) => {
+export const WidgetBody = ({ top, middle, subMiddle, bottom }) => {
   return (
     <div
       className="
@@ -87,7 +88,9 @@ export const WidgetBody = ({ top, middle, bottom }) => {
           {middle}
         </div>
       )}
-
+      {subMiddle && (
+        {subMiddle}
+      )}
       {bottom && <div className="self-center">{bottom}</div>}
     </div>
   );
