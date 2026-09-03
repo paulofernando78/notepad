@@ -31,6 +31,7 @@ export const QuickNotes = ({ note = "", onConfigChange, onRemove }) => {
               p-3
               text-gray-700
               font-['Indie_Flower',cursive]
+              leading-5
               bg-gradient-to-tl from-yellow-100 via-yellow-200 to-yellow-300
               border-0
               resize-none
