@@ -41,11 +41,11 @@ export const WidgetCard = ({
           <h3>{title}</h3>
         </header>
         <div
-        style={widgetStyle}
+          style={widgetStyle}
           className={`
             relative
             overflow-hidden
-            h-76
+            h-85
             text-white
             rounded-tr-none
             rounded-tl-none

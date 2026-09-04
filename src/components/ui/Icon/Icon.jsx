@@ -13,7 +13,10 @@ import {
   ChevronDown,
   ChevronRight,
   // D
+  Delete,
+  Divide,
   Dot,
+  Equal,
   // E
   Ellipsis,
   // F
@@ -64,7 +67,10 @@ const icons = {
   chevronDown: ChevronDown,
   chevronRight: ChevronRight,
   // D
+  delete: Delete,
+  divide: Divide,
   dot: Dot,
+  equal: Equal,
   // E
   ellipsis: Ellipsis,
   // F
