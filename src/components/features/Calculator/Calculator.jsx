@@ -8,15 +8,15 @@ export const Calculator = ({
   onConfigChange,
   onRemove,
 }) => {
+  const [expressionLabel, setExpressionLabel] = useState("");
   const [display, setDisplay] = useState(savedDisplay);
-  const [previousValue, setPreviousValue] = useState(null);
-  const [operator, setOperator] = useState(null);
   const [shouldResetDisplay, setShouldResetDisplay] = useState(false);
 
   function inputDigit(digit) {
-    if (shouldResetDisplay) {
+    if (shouldResetDisplay || display === "Error") {
       updateDisplay(digit);
       setShouldResetDisplay(false);
+      setExpressionLabel("");
       return;
     }
 
@@ -25,106 +25,152 @@ export const Calculator = ({
       return;
     }
 
-    updateDisplay(display + digit);
+    const lastCharacter = getLastCharacter(display);
+
+    if (lastCharacter === ")") {
+      updateDisplay(`${display} * ${digit}`);
+      return;
+    }
+
+    updateDisplay(`${display}${digit}`);
   }
 
   function inputDecimal() {
-    if (shouldResetDisplay) {
+    if (shouldResetDisplay || display === "Error") {
+      setExpressionLabel("");
       updateDisplay("0.");
       setShouldResetDisplay(false);
       return;
     }
 
-    if (display.includes(".")) return;
+    if (getLastNumber(display).includes(".")) return;
 
-    updateDisplay(display + ".");
+    const lastCharacter = getLastCharacter(display);
+
+    if (isOperator(lastCharacter) || lastCharacter === "(") {
+      updateDisplay(`${display}0.`);
+      return;
+    }
+
+    updateDisplay(`${display}.`);
   }
 
   function inputPercent() {
-    const percentageValue = Number(display) / 100;
+    const lastNumber = getLastNumber(display);
+    if (!lastNumber) return;
 
-    updateDisplay(String(percentageValue));
+    const expressionBeforeNumber = display.slice(
+      0,
+      display.length - lastNumber.length,
+    );
+    const previousOperator = getLastOperator(expressionBeforeNumber);
+    const previousValue = getLeftSideValue(expressionBeforeNumber);
+    const numberValue = Number(lastNumber);
+    let percentageValue = numberValue / 100;
+
+    if (
+      (previousOperator === "+" || previousOperator === "-") &&
+      previousValue !== null
+    ) {
+      percentageValue = previousValue * (numberValue / 100);
+    }
+
+    updateDisplay(replaceLastNumber(display, String(percentageValue)));
     setShouldResetDisplay(true);
   }
 
-  function toggleSign() {
-    if (display === "0") return;
+  function inputParentheses() {
+    if (shouldResetDisplay || display === "Error") {
+      setExpressionLabel("");
+    }
 
-    if (display.startsWith("-")) {
-      updateDisplay(display.slice(1));
+    const openCount = countMatches(display, "(");
+    const closeCount = countMatches(display, ")");
+    const lastCharacter = getLastCharacter(display);
+    const shouldOpen =
+      display === "0" ||
+      shouldResetDisplay ||
+      isOperator(lastCharacter) ||
+      lastCharacter === "(";
+
+    if (shouldOpen) {
+      updateDisplay(
+        display === "0" || shouldResetDisplay ? "(" : `${display}(`,
+      );
+      setShouldResetDisplay(false);
       return;
     }
 
-    updateDisplay(`-${display}`);
-  }
+    if (openCount > closeCount) {
+      updateDisplay(`${display})`);
+      return;
+    }
 
-  function getResult(firstValue, secondValue, currentOperator) {
-    if (currentOperator === "+") return firstValue + secondValue;
-    if (currentOperator === "-") return firstValue - secondValue;
-    if (currentOperator === "*") return firstValue * secondValue;
-    if (currentOperator === "/") return firstValue / secondValue;
-
-    return secondValue;
+    updateDisplay(`${display} * (`);
   }
 
   function chooseOperator(nextOperator) {
-    const currentValue = Number(display);
+    if (display === "Error") return;
 
-    if (previousValue !== null && operator !== null && !shouldResetDisplay) {
-      const result = getResult(previousValue, currentValue, operator);
+    const lastCharacter = getLastCharacter(display);
 
-      updateDisplay(String(result));
-      setPreviousValue(result);
-      setOperator(nextOperator);
-      setShouldResetDisplay(true);
-
+    if (isOperator(lastCharacter)) {
+      updateDisplay(`${display.trim().slice(0, -1)}${nextOperator}`);
       return;
     }
 
-    setPreviousValue(currentValue);
-    setOperator(nextOperator);
-    setShouldResetDisplay(true);
+    if (lastCharacter === "(") return;
+
+    updateDisplay(`${display} ${nextOperator} `);
+    setShouldResetDisplay(false);
   }
 
   function calculate() {
-    if (operator === null || previousValue === null) return;
+    try {
+      const normalizedExpression = closeMissingParentheses(display);
+      const result = evaluateExpression(normalizedExpression);
 
-    const currentValue = Number(display);
-    let result;
+      if (!Number.isFinite(result)) {
+        updateDisplay("Error");
+        setExpressionLabel("");
+        setShouldResetDisplay(true);
+        return;
+      }
 
-    if (operator === "+") {
-      result = previousValue + currentValue;
+      setExpressionLabel(formatExpression(normalizedExpression));
+      updateDisplay(formatResult(result));
+      setShouldResetDisplay(true);
+    } catch {
+      updateDisplay("Error");
+      setExpressionLabel("");
+      setShouldResetDisplay(true);
     }
+  }
 
-    if (operator === "-") {
-      result = previousValue - currentValue;
-    }
-
-    if (operator === "*") {
-      result = previousValue * currentValue;
-    }
-
-    if (operator === "/") {
-      result = previousValue / currentValue;
-    }
-
-    updateDisplay(String(result));
-    setPreviousValue(null);
-    setOperator(null);
-    setShouldResetDisplay(true);
+  function formatExpression(expression) {
+    return expression
+      .replaceAll("*", "×")
+      .replaceAll("/", "÷")
+      .replace(/\s+/g, "");
   }
 
   function clearCalculator() {
     updateDisplay("0");
-    setPreviousValue(null);
-    setOperator(null);
+    setExpressionLabel("");
     setShouldResetDisplay(false);
   }
 
   function deleteLastDigit() {
     if (shouldResetDisplay) {
       updateDisplay("0");
+      setExpressionLabel("");
       setShouldResetDisplay(false);
+      return;
+    }
+
+    if (display === "Error") {
+      updateDisplay("0");
+      setExpressionLabel("");
       return;
     }
 
@@ -133,7 +179,7 @@ export const Calculator = ({
       return;
     }
 
-    updateDisplay(display.slice(0, -1));
+    updateDisplay(display.trimEnd().slice(0, -1).trimEnd() || "0");
   }
 
   function updateDisplay(nextDisplay) {
@@ -141,8 +187,139 @@ export const Calculator = ({
     onConfigChange?.({ display: nextDisplay });
   }
 
+  function countMatches(value, match) {
+    return value.split(match).length - 1;
+  }
+
+  function getLastCharacter(value) {
+    return value.trim().at(-1);
+  }
+
+  function isOperator(value) {
+    return ["+", "-", "*", "/"].includes(value);
+  }
+
+  function getLastNumber(value) {
+    return value.match(/\d+(\.\d*)?$/)?.[0] ?? "";
+  }
+
+  function replaceLastNumber(value, nextNumber) {
+    return value.replace(/\d+(\.\d*)?$/, nextNumber);
+  }
+
+  function getLastOperator(value) {
+    return value.match(/[+\-*/]\s*$/)?.[0]?.trim() ?? null;
+  }
+
+  function getLeftSideValue(expressionBeforeNumber) {
+    const leftSideExpression = expressionBeforeNumber
+      .replace(/[+\-*/]\s*$/, "")
+      .trim();
+    if (!leftSideExpression) return null;
+
+    try {
+      return evaluateExpression(closeMissingParentheses(leftSideExpression));
+    } catch {
+      return null;
+    }
+  }
+
+  function closeMissingParentheses(expression) {
+    const missingParentheses =
+      countMatches(expression, "(") - countMatches(expression, ")");
+
+    if (missingParentheses <= 0) return expression;
+
+    return `${expression}${")".repeat(missingParentheses)}`;
+  }
+
+  function evaluateExpression(expression) {
+    const tokens = tokenizeExpression(expression);
+    let index = 0;
+
+    if (tokens.length === 0) throw new Error("Empty expression");
+
+    function parseExpression() {
+      let value = parseTerm();
+
+      while (tokens[index] === "+" || tokens[index] === "-") {
+        const currentOperator = tokens[index];
+        index += 1;
+        const nextValue = parseTerm();
+
+        if (currentOperator === "+") value += nextValue;
+        if (currentOperator === "-") value -= nextValue;
+      }
+
+      return value;
+    }
+
+    function parseTerm() {
+      let value = parseFactor();
+
+      while (tokens[index] === "*" || tokens[index] === "/") {
+        const currentOperator = tokens[index];
+        index += 1;
+        const nextValue = parseFactor();
+
+        if (currentOperator === "*") value *= nextValue;
+        if (currentOperator === "/") value /= nextValue;
+      }
+
+      return value;
+    }
+
+    function parseFactor() {
+      const token = tokens[index];
+
+      if (token === undefined) throw new Error("Missing value");
+
+      if (token === "-") {
+        index += 1;
+        return -parseFactor();
+      }
+
+      if (token === "(") {
+        index += 1;
+        const value = parseExpression();
+
+        if (tokens[index] !== ")") {
+          throw new Error("Missing closing parenthesis");
+        }
+
+        index += 1;
+        return value;
+      }
+
+      if (token === ")") throw new Error("Unexpected closing parenthesis");
+
+      index += 1;
+      const numberValue = Number(token);
+
+      if (Number.isNaN(numberValue)) throw new Error("Invalid number");
+
+      return numberValue;
+    }
+
+    const result = parseExpression();
+
+    if (index < tokens.length) {
+      throw new Error("Invalid expression");
+    }
+
+    return result;
+  }
+
+  function tokenizeExpression(expression) {
+    return expression.match(/\d+(\.\d*)?|\.\d+|[()+\-*/]/g) ?? [];
+  }
+
+  function formatResult(result) {
+    return String(Number.parseFloat(result.toFixed(10)));
+  }
+
   const button = `
-    size-9
+    size-10
     !rounded-full
     !p-0
     flex
@@ -162,19 +339,20 @@ export const Calculator = ({
       top={
         <div
           className="
-        flex
-        justify-end
-        mx-12
-        p-2
-        text-gray-800
-        border
-        rounded-lg"
+            flex
+            justify-end
+            mx-12
+            text-gray-800
+          "
         >
-          <span className="text-lg">{display}</span>
+          <div className="grid gap-1">
+            <span className="min-h-4 text-sm text-gray-600 ">{expressionLabel}</span>
+            <span className="text-2xl ">{display}</span>
+          </div>
         </div>
       }
       middle={
-        <div className="grid grid-cols-4 gap-1.5">
+        <div className="grid grid-cols-4 gap-1">
           <button
             onClick={clearCalculator}
             className={`clickable ${button} ${utilityButton}`}
@@ -182,10 +360,10 @@ export const Calculator = ({
             AC
           </button>
           <button
-            onClick={toggleSign}
+            onClick={inputParentheses}
             className={`clickable ${button} ${utilityButton}`}
           >
-            ()
+            <Icon name="parentheses" className="text-white" />
           </button>
           <button
             onClick={inputPercent}

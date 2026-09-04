@@ -6,7 +6,7 @@ export const WidgetContainer = ({ children }) => {
 };
 
 export const WidgetCard = ({
-  title,
+  // title,
   widgetClassName = "bg-gray-500/30",
   widgetStyle,
   imageName,
@@ -25,7 +25,7 @@ export const WidgetCard = ({
       "
     >
       <>
-        <header
+        {/* <header
           className="
             p-3
             text-center
@@ -39,18 +39,15 @@ export const WidgetCard = ({
           "
         >
           <h3>{title}</h3>
-        </header>
+        </header> */}
         <div
           style={widgetStyle}
           className={`
             relative
             overflow-hidden
-            h-85
+            h-93
             text-white
-            rounded-tr-none
-            rounded-tl-none
-            rounded-br-lg
-            rounded-bl-lg
+            rounded-lg
             [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
             ${widgetClassName}
           `}

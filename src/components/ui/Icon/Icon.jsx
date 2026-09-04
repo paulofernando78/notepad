@@ -32,6 +32,7 @@ import {
   // N
   NotepadText,
   // P
+  Parentheses,
   PaintBucket,
   Plus,
   // R
@@ -86,6 +87,7 @@ const icons = {
   // N
   notepadText: NotepadText,
   // P
+  parentheses: Parentheses,
   paintBucket: PaintBucket,
   plus: Plus,
   // R
