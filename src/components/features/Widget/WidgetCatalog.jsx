@@ -115,21 +115,15 @@ export const widgetCatalog = {
       seconds: 0,
     },
   },
-  waterIntake: {
-    title: "water intake",
-    widgetClassName: "widget-gradient",
-    widgetStyle: getWidgetGradientStyle("blue"),
-    imageName: "waterIntake",
-    Component: WaterIntake,
-    defaultConfig: {},
-  },
   calculator: {
     title: "calculator",
     widgetClassName: "widget-gradient",
     widgetStyle: getWidgetGradientStyle("slate"),
     imageName: "calculator",
     Component: Calculator,
-    defaultConfig: {},
+    defaultConfig: {
+      display: "0",
+    },
   },
   markets: {
     title: "markets",
@@ -137,6 +131,14 @@ export const widgetCatalog = {
     widgetStyle: getWidgetGradientStyle("green"),
     imageName: "markets",
     Component: Markets,
+    defaultConfig: {},
+  },
+  waterIntake: {
+    title: "water intake",
+    widgetClassName: "widget-gradient",
+    widgetStyle: getWidgetGradientStyle("blue"),
+    imageName: "waterIntake",
+    Component: WaterIntake,
     defaultConfig: {},
   },
 };
