@@ -349,7 +349,7 @@ export const Calculator = ({
   }
 
   function formatResult(result) {
-    return String(Number.parseFloat(result.toFixed(10)));
+    return String(Number.parseFloat(result.toFixed(7)));
   }
 
   const button = `
@@ -509,11 +509,6 @@ export const Calculator = ({
           </button>
         </div>
       }
-      // bottom={
-      //   <WidgetControls>
-      //     <WidgetControls.Erase onClick={onRemove} />
-      //   </WidgetControls>
-      // }
     />
   );
 };
