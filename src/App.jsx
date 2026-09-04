@@ -120,6 +120,7 @@ function App() {
               <WidgetCard
                 title={definition.title}
                 widgetClassName={definition.widgetClassName}
+                widgetStyle={definition.widgetStyle}
                 imageName={definition.imageName}
                 key={widgetInstance.id}
                 onRemove={() => removeWidget(widgetInstance.id)}

@@ -8,6 +8,7 @@ export const WidgetContainer = ({ children }) => {
 export const WidgetCard = ({
   title,
   widgetClassName = "bg-gray-500/30",
+  widgetStyle,
   imageName,
   children,
   ref,
@@ -40,6 +41,7 @@ export const WidgetCard = ({
           <h3>{title}</h3>
         </header>
         <div
+        style={widgetStyle}
           className={`
             relative
             overflow-hidden

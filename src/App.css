@@ -69,3 +69,11 @@ hr {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.widget-gradient {
+  background-image: linear-gradient(
+    to bottom left,
+    var(--widget-from) 0%,
+    var(--widget-to) 80%
+  );
+}

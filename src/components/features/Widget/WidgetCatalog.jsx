@@ -6,10 +6,17 @@ import { WaterIntake } from "@/components/features/WaterIntake";
 import { Calculator } from "@/components/features/Calculator";
 import { Markets } from "@/components/features/Markets";
 
+const bgFrom = 200;
+const bgTo = 500;
+
 export const widgetCatalog = {
   clock: {
     title: "clock",
-    widgetClassName: "bg-linear-to-bl from-gray-200 to-gray-500",
+    widgetClassName: "widget-gradient",
+    widgetStyle: {
+      "--widget-from": `var(--color-gray-${bgFrom})`,
+      "--widget-to": `var(--color-gray-${bgTo})`,
+    },
     imageName: "clock",
     Component: Clock,
     defaultConfig: {
@@ -21,7 +28,11 @@ export const widgetCatalog = {
   },
   quickNotes: {
     title: "quick notes",
-    widgetClassName: "bg-linear-to-bl from-yellow-200 to-yellow-500",
+    widgetClassName: "widget-gradient",
+    widgetStyle: {
+      "--widget-from": `var(--color-yellow-${bgFrom})`,
+      "--widget-to": `var(--color-yellow-${bgTo})`,
+    },
     imageName: "quickNotes",
     Component: QuickNotes,
     defaultConfig: {
@@ -30,7 +41,11 @@ export const widgetCatalog = {
   },
   pomodoro: {
     title: "pomodoro",
-    widgetClassName: "bg-linear-to-bl from-red-200 to-red-500",
+    widgetClassName: "widget-gradient",
+    widgetStyle: {
+      "--widget-from": `var(--color-red-${bgFrom})`,
+      "--widget-to": `var(--color-red-${bgTo})`,
+    },
     imageName: "pomodoro",
     Component: Pomodoro,
     defaultConfig: {
@@ -42,7 +57,11 @@ export const widgetCatalog = {
   },
   timer: {
     title: "timer",
-    widgetClassName: "bg-linear-to-bl from-purple-200 to-purple-500",
+    widgetClassName: "widget-gradient",
+    widgetStyle: {
+      "--widget-from": `var(--color-purple-${bgFrom})`,
+      "--widget-to": `var(--color-purple-${bgTo})`,
+    },
     imageName: "timer",
     Component: Timer,
     defaultConfig: {
@@ -53,21 +72,33 @@ export const widgetCatalog = {
   },
   waterIntake: {
     title: "water intake",
-    widgetClassName: "bg-linear-to-bl from-blue-200 to-blue-500",
+    widgetClassName: "widget-gradient",
+    widgetStyle: {
+      "--widget-from": `var(--color-blue-${bgFrom})`,
+      "--widget-to": `var(--color-blue-${bgTo})`,
+    },
     imageName: "waterIntake",
     Component: WaterIntake,
     defaultConfig: {},
   },
   calculator: {
     title: "calculator",
-    widgetClassName: "bg-linear-to-bl from-slate-200 to-slate-500",
+    widgetClassName: "widget-gradient",
+    widgetStyle: {
+      "--widget-from": `var(--color-slate-${bgFrom})`,
+      "--widget-to": `var(--color-slate-${bgTo})`,
+    },
     imageName: "calculator",
     Component: Calculator,
     defaultConfig: {},
   },
   markets: {
     title: "markets",
-    widgetClassName: "bg-linear-to-bl from-green-200 to-green-500",
+    widgetClassName: "widget-gradient",
+    widgetStyle: {
+      "--widget-from": `var(--color-green-${bgFrom})`,
+      "--widget-to": `var(--color-green-${bgTo})`,
+    },
     imageName: "markets",
     Component: Markets,
     defaultConfig: {},
