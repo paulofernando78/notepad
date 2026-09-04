@@ -19,7 +19,7 @@ export const WidgetCard = ({
     <article
       ref={ref}
       className="
-        min-w-64
+        min-w-54
         font-['Oswald_Variable']
         scroll-mr-2
       "
@@ -45,7 +45,7 @@ export const WidgetCard = ({
           className={`
             relative
             overflow-hidden
-            h-93
+            h-80
             text-white
             rounded-lg
             [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
@@ -63,11 +63,11 @@ export const WidgetCard = ({
               className="
                 pointer-events-none
                 absolute
-                -bottom-10
-                -left-10
+                -bottom-14
+                -left-14
                 z-0
                 size-32
-                opacity-[0.8]
+                opacity-[0.5]
               "
             />
           )}

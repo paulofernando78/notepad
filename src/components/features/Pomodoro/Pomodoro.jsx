@@ -68,8 +68,7 @@ const durationTitle = `
 `;
 
 const durationDisplay = `
-  h-[30.8px]
-  pt-[0.99rem]
+  pt-2
   font-['Segoe_UI',sans-serif]
   font-bold
 `;
@@ -80,7 +79,7 @@ export const Pomodoro = ({
   longBreakMinutes: initialLongBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
   pomodoroGoal: initialPomodoroGoal = 4,
   onConfigChange,
-  onRemove,
+  // onRemove,
 }) => {
   const [focusMinutes, setFocusMinutes] = useState(initialFocusMinutes);
   const [breakMinutes, setBreakMinutes] = useState(initialBreakMinutes);
@@ -290,22 +289,27 @@ export const Pomodoro = ({
           <div
             className="
               flex
+              flex-col
               gap-4
+              items-center
               justify-center
             "
           >
             <span>{totalTime}</span>
-            <button
-              onClick={handleToggleSound}
-              aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
-              title={isSoundEnabled ? "Mute tick" : "Enable tick"}
-            >
-              {isSoundEnabled ? (
-                <Icon name="volumeX" />
-              ) : (
-                <Icon name="volume" />
+            {!isEditing && (
+                <button
+                  onClick={handleToggleSound}
+                  aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
+                  title={isSoundEnabled ? "Mute tick" : "Enable tick"}
+                  className="w-max clickable"
+                >
+                  {isSoundEnabled ? (
+                    <Icon name="volumeX" />
+                  ) : (
+                    <Icon name="volume" />
+                  )}
+                </button>
               )}
-            </button>
           </div>
         }
         middle={
@@ -440,14 +444,18 @@ export const Pomodoro = ({
           </div>
         }
         subMiddle={
-          <span
-            className={`block uppercase ${
-              mode === "done" ? activePomodoroDoneModeClass : inactiveModeClass
-            }
+          !isEditing && (
+            <span
+              className={`block uppercase ${
+                mode === "done"
+                  ? activePomodoroDoneModeClass
+                  : inactiveModeClass
+              }
                   `}
-          >
-            done
-          </span>
+            >
+              done
+            </span>
+          )
         }
         bottom={
           <WidgetControls>
@@ -463,7 +471,7 @@ export const Pomodoro = ({
               onConfirm={handleConfirmEdit}
             />
             <PomodoroGuideDialog />
-            <WidgetControls.Erase onClick={onRemove} />
+            {/* <WidgetControls.Erase onClick={onRemove} /> */}
           </WidgetControls>
         }
       />

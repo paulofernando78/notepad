@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
+import { WidgetBody } from "@/components/ui/Widget";
 import { Icon } from "@/components/ui/Icon";
 
 export const Calculator = ({
   display: savedDisplay = "0",
   onConfigChange,
-  onRemove,
+  // onRemove,
 }) => {
   const [expressionLabel, setExpressionLabel] = useState("");
   const [display, setDisplay] = useState(savedDisplay);
@@ -341,13 +341,14 @@ export const Calculator = ({
           className="
             flex
             justify-end
-            mx-12
-            text-gray-800
+            mr-[1.6rem]
           "
         >
           <div className="grid gap-1">
-            <span className="min-h-4 text-sm text-gray-600 ">{expressionLabel}</span>
-            <span className="text-2xl ">{display}</span>
+            <span>{display}</span>
+            <span className="min-h-4 text-sm text-gray-700/80 ">
+              {expressionLabel}
+            </span>
           </div>
         </div>
       }
@@ -472,11 +473,11 @@ export const Calculator = ({
           </button>
         </div>
       }
-      bottom={
-        <WidgetControls>
-          <WidgetControls.Erase onClick={onRemove} />
-        </WidgetControls>
-      }
+      // bottom={
+      //   <WidgetControls>
+      //     <WidgetControls.Erase onClick={onRemove} />
+      //   </WidgetControls>
+      // }
     />
   );
 };
