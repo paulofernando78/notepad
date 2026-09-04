@@ -240,7 +240,7 @@ export const Timer = ({
                 </div>
               ))}
             </div>
-            {/* <label>
+            <label>
               <input
                 type="text"
                 className="
@@ -249,12 +249,12 @@ export const Timer = ({
                     font-[Arial]
                     border
                     border-gray-500
-                    rounded-lg
+                    rounded-xl
                     placeholder:italic
                   "
                 placeholder="ex: boiling water..."
               />
-            </label> */}
+            </label>
           </div>
         ) : (
           <div

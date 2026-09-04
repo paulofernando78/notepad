@@ -63,7 +63,7 @@ const durationTitle = `
   px-2
   pb-[0.7rem]
   bg-gray-500/50
-  rounded-lg
+  rounded-xl
   justify-self-center
 `;
 

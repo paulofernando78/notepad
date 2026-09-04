@@ -41,7 +41,7 @@ export const SectionPanel = ({
         p-2
         w-full
         bg-gray-100/10
-        rounded-lg
+        rounded-2xl
       `}
     >
       <header
@@ -76,7 +76,7 @@ export const SectionPanel = ({
             gap-2
             p-2
             bg-gray-100/10
-            rounded-lg
+            rounded-xl
             overflow-x-auto
             no-scrollbar
             cursor-grab
