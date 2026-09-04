@@ -103,7 +103,7 @@ const icons = {
 export const Icon = ({
   name,
   size = 20,
-  className = "text-gray-400",
+  className = "text-gray-500",
   cursorNone = false,
   ...props
 }) => {
