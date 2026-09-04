@@ -76,7 +76,10 @@ export const WidgetPicker = ({ onAdd, ref }) => {
               flex
               flex-col
               gap-2
-              p-2
+              pt-2
+              pr-[0.3rem]
+              rb-2
+              pl-2
               h-76
               bg-gray-500/30
               rounded-br-lg
