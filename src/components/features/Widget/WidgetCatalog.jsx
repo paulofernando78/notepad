@@ -14,8 +14,8 @@ export const widgetCatalog = {
     title: "clock",
     widgetClassName: "widget-gradient",
     widgetStyle: {
-      "--widget-from": `var(--color-gray-${bgFrom})`,
-      "--widget-to": `var(--color-gray-${bgTo})`,
+      "--widget-from": `var(--color-slate-${bgFrom})`,
+      "--widget-to": `var(--color-slate-${bgTo})`,
     },
     imageName: "clock",
     Component: Clock,
@@ -59,8 +59,8 @@ export const widgetCatalog = {
     title: "timer",
     widgetClassName: "widget-gradient",
     widgetStyle: {
-      "--widget-from": `var(--color-purple-${bgFrom})`,
-      "--widget-to": `var(--color-purple-${bgTo})`,
+      "--widget-from": `var(--color-slate-${bgFrom})`,
+      "--widget-to": `var(--color-slate-${bgTo})`,
     },
     imageName: "timer",
     Component: Timer,

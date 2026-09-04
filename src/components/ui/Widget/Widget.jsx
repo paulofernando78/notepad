@@ -51,7 +51,7 @@ export const WidgetCard = ({
             rounded-tl-none
             rounded-br-lg
             rounded-bl-lg
-            [text-shadow:0_0_6px_rgba(255,255,255,0.3)]
+            [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
             ${widgetClassName}
           `}
         >
