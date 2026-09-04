@@ -289,12 +289,14 @@ export const Timer = ({
         )
       }
       subMiddle={
-        <span
-          className={`uppercase
+        !isEditing && (
+          <span
+            className={`uppercase
             ${mode === "done" ? activeTimerDoneModeClass : inactiveModeClass}`}
-        >
-          done
-        </span>
+          >
+            done
+          </span>
+        )
       }
       bottom={
         <WidgetControls>

@@ -213,8 +213,31 @@ export const Pomodoro = ({
     longBreakDuration: editLongBreakMinutes * 60,
   });
 
+  function getRemainingSessionDuration() {
+    if (mode === "done") return 0;
+
+    const remainingFocusSessions =
+      mode === "focus"
+        ? pomodoroGoal - completedPomodoros - 1
+        : pomodoroGoal - completedPomodoros;
+
+    const remainingBreaks = Math.max(remainingFocusSessions, 0);
+
+    const remainingLongBreaks = Math.floor(
+      remainingBreaks / LONG_BREAK_INTERVAL,
+    );
+    const remainingShortBreaks = remainingBreaks - remainingLongBreaks;
+
+    return (
+      time +
+      remainingFocusSessions * focusDuration +
+      remainingShortBreaks * breakDuration +
+      remainingLongBreaks * longBreakDuration
+    );
+  }
+
   const totalTime = formatTotalTime(
-    isEditing ? editingSessionDuration : sessionDuration,
+    isEditing ? editingSessionDuration : getRemainingSessionDuration(),
   );
 
   function handleEdit() {
@@ -297,19 +320,19 @@ export const Pomodoro = ({
           >
             <span>{totalTime}</span>
             {!isEditing && (
-                <button
-                  onClick={handleToggleSound}
-                  aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
-                  title={isSoundEnabled ? "Mute tick" : "Enable tick"}
-                  className="w-max clickable"
-                >
-                  {isSoundEnabled ? (
-                    <Icon name="volumeX" />
-                  ) : (
-                    <Icon name="volume" />
-                  )}
-                </button>
-              )}
+              <button
+                onClick={handleToggleSound}
+                aria-label={isSoundEnabled ? "Mute tick" : "Enable tick"}
+                title={isSoundEnabled ? "Mute tick" : "Enable tick"}
+                className="w-max clickable"
+              >
+                {isSoundEnabled ? (
+                  <Icon name="volumeX" />
+                ) : (
+                  <Icon name="volume" />
+                )}
+              </button>
+            )}
           </div>
         }
         middle={
