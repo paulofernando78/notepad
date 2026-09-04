@@ -380,8 +380,8 @@ export const Calculator = ({
             mr-[1.6rem]
           "
         >
-          <div className="grid gap-1">
-            <span className="flex items-center justify-end">
+          <div className="grid">
+            <span className="flex items-center justify-end text-2xl">
               {renderDisplayValue(display)}
             </span>
             <span className="flex items-center gap-[0.1rem] min-h-4 text-sm text-gray-700/80 justify-end">
