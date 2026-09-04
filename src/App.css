@@ -44,12 +44,12 @@ hr {
   @apply p-2
     border
     border-gray-700
-    bg-gray-700/30
+    bg-gray-700
     rounded-lg
     shadow-sm
     shadow-black/40
     cursor-pointer
-    hover:bg-gray-700;
+    hover:bg-gray-600;
 }
 
 * {

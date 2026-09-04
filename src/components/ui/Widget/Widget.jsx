@@ -1,10 +1,19 @@
 import { Icon } from "@/components/ui/Icon";
+import { widgetImages } from "@/assets/widgetImages";
 
 export const WidgetContainer = ({ children }) => {
   return <div className="flex gap-2">{children}</div>;
 };
 
-export const WidgetCard = ({ title, children, ref }) => {
+export const WidgetCard = ({
+  title,
+  widgetClassName = "bg-gray-500/30",
+  imageName,
+  children,
+  ref,
+}) => {
+  const widgetImage = widgetImages[imageName];
+
   return (
     <article
       ref={ref}
@@ -31,18 +40,38 @@ export const WidgetCard = ({ title, children, ref }) => {
           <h3>{title}</h3>
         </header>
         <div
-          className="
+          className={`
+            relative
+            overflow-hidden
             h-76
             text-white
-            bg-gray-500/30
             rounded-tr-none
             rounded-tl-none
             rounded-br-lg
             rounded-bl-lg
             [text-shadow:0_0_6px_rgba(255,255,255,0.3)]
-          "
+            ${widgetClassName}
+          `}
         >
-          {children}
+          <div className="relative z-10 h-full">{children}</div>
+
+          {widgetImage && (
+            <img
+              width="100"
+              height="100"
+              src={widgetImage.src}
+              alt={widgetImage.alt}
+              className="
+                pointer-events-none
+                absolute
+                -bottom-10
+                -left-10
+                z-0
+                size-32
+                opacity-[0.8]
+              "
+            />
+          )}
         </div>
       </>
     </article>

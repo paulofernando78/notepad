@@ -88,7 +88,6 @@ function App() {
     );
   }
 
-
   return (
     <div
       className="
@@ -104,6 +103,7 @@ function App() {
 
       <SectionPanel
         title="Widgets"
+        widgetClassName
         storageKey="section-widget"
         count={widgets.length}
       >
@@ -118,8 +118,10 @@ function App() {
 
             return (
               <WidgetCard
-                key={widgetInstance.id}
                 title={definition.title}
+                widgetClassName={definition.widgetClassName}
+                imageName={definition.imageName}
+                key={widgetInstance.id}
                 onRemove={() => removeWidget(widgetInstance.id)}
               >
                 <Component
