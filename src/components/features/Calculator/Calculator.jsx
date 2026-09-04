@@ -6,6 +6,7 @@ import { Icon } from "@/components/ui/Icon";
 export const Calculator = ({
   display: savedDisplay = "0",
   onConfigChange,
+  onClose
   // onRemove,
 }) => {
   const [expressionLabel, setExpressionLabel] = useState("");
@@ -152,6 +153,39 @@ export const Calculator = ({
       .replaceAll("*", "×")
       .replaceAll("/", "÷")
       .replace(/\s+/g, "");
+  }
+
+  function getOperatorIconName(operator) {
+    const operatorIcons = {
+      "*": "x",
+      "×": "x",
+      "/": "divide",
+      "÷": "divide",
+      "+": "plus",
+      "-": "minus",
+    };
+
+    return operatorIcons[operator];
+  }
+
+  function renderDisplayValue(value, iconSize = 20, iconClassName = "text-white") {
+    return value.split("").map((character, index) => {
+      const iconName = getOperatorIconName(character);
+
+      if (!iconName) {
+        return <span key={`${character}-${index}`}>{character}</span>;
+      }
+
+      return (
+        <Icon
+          key={`${character}-${index}`}
+          name={iconName}
+          size={iconSize}
+          strokeWidth={2}
+          className={iconClassName}
+        />
+      );
+    });
   }
 
   function clearCalculator() {
@@ -335,7 +369,7 @@ export const Calculator = ({
   const equalButton = "bg-emerald-600 hover:bg-emerald-500";
 
   return (
-    <WidgetBody
+    <WidgetBody onClose={onClose}
       top={
         <div
           className="
@@ -345,9 +379,11 @@ export const Calculator = ({
           "
         >
           <div className="grid gap-1">
-            <span>{display}</span>
-            <span className="min-h-4 text-sm text-gray-700/80 ">
-              {expressionLabel}
+            <span className="flex items-center justify-end">
+              {renderDisplayValue(display)}
+            </span>
+            <span className="flex items-center gap-[0.1rem] min-h-4 text-sm text-gray-700/80 justify-end">
+              {renderDisplayValue(expressionLabel, 14, "text-gray-700/80")}
             </span>
           </div>
         </div>

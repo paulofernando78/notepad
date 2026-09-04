@@ -11,6 +11,7 @@ export const Clock = ({
   longitude = -46.63331,
   timezone = "America/Sao_Paulo",
   onConfigChange,
+  onClose
 }) => {
   const locationInputRef = useRef(null);
 
@@ -163,7 +164,7 @@ export const Clock = ({
   }
 
   return (
-    <WidgetBody
+    <WidgetBody onClose={onClose}
       top={
         <>
           <span className="block">{currentTime}</span>

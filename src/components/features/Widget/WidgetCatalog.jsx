@@ -83,7 +83,7 @@ export const widgetCatalog = {
   quickNotes: {
     title: "quick notes",
     widgetClassName: "widget-gradient",
-    widgetStyle: getWidgetGradientStyle("yellow"),
+    widgetStyle: getWidgetGradientStyle("slate"),
     imageName: "quickNotes",
     Component: QuickNotes,
     defaultConfig: {
@@ -93,7 +93,7 @@ export const widgetCatalog = {
   pomodoro: {
     title: "pomodoro",
     widgetClassName: "widget-gradient",
-    widgetStyle: getWidgetGradientStyle("red"),
+    widgetStyle: getWidgetGradientStyle("slate"),
     imageName: "pomodoro",
     Component: Pomodoro,
     defaultConfig: {
@@ -128,7 +128,7 @@ export const widgetCatalog = {
   markets: {
     title: "markets",
     widgetClassName: "widget-gradient",
-    widgetStyle: getWidgetGradientStyle("green"),
+    widgetStyle: getWidgetGradientStyle("slate"),
     imageName: "markets",
     Component: Markets,
     defaultConfig: {},
@@ -136,7 +136,7 @@ export const widgetCatalog = {
   waterIntake: {
     title: "water intake",
     widgetClassName: "widget-gradient",
-    widgetStyle: getWidgetGradientStyle("blue"),
+    widgetStyle: getWidgetGradientStyle("slate"),
     imageName: "waterIntake",
     Component: WaterIntake,
     defaultConfig: {},

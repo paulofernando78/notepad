@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { WidgetBody, WidgetControls } from "@/components/ui/Widget";
 
-export const QuickNotes = ({ note = "", onConfigChange, onRemove }) => {
+export const QuickNotes = ({ note = "", onConfigChange, onClose }) => {
   const [currentNote, setCurrentNote] = useState(note);
 
   function handleNoteChange(event) {
@@ -18,7 +18,7 @@ export const QuickNotes = ({ note = "", onConfigChange, onRemove }) => {
   }
 
   return (
-    <WidgetBody
+    <WidgetBody onClose={onClose}
       middle={
           <div className="w-full h-full p-4">
             <textarea
@@ -44,7 +44,6 @@ export const QuickNotes = ({ note = "", onConfigChange, onRemove }) => {
       bottom={
         <WidgetControls>
           <WidgetControls.Reset onClick={handleReset} />
-          <WidgetControls.Erase onClick={onRemove} />
         </WidgetControls>
       }
     />

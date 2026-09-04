@@ -79,7 +79,7 @@ export const Pomodoro = ({
   longBreakMinutes: initialLongBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
   pomodoroGoal: initialPomodoroGoal = 4,
   onConfigChange,
-  // onRemove,
+  onClose
 }) => {
   const [focusMinutes, setFocusMinutes] = useState(initialFocusMinutes);
   const [breakMinutes, setBreakMinutes] = useState(initialBreakMinutes);
@@ -300,7 +300,7 @@ export const Pomodoro = ({
 
   return (
     <>
-      <WidgetBody
+      <WidgetBody onClose={onClose}
         top={
           <div
             className="

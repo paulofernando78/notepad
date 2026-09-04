@@ -11,7 +11,6 @@ export const WidgetCard = ({
   imageName,
   children,
   ref,
-  onRemove,
 }) => {
   const widgetImage = widgetImages[imageName];
 
@@ -34,36 +33,8 @@ export const WidgetCard = ({
           [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
           widget-body-height
           ${widgetClassName}
-          `
-        }
+          `}
       >
-        <div className="window-controls">
-          <button
-            type="button"
-            title="close"
-            aria-label="close widget"
-            onClick={onRemove}
-            className="window-control bg-red-500"
-          >
-            <Icon name="x" size={10} className="text-gray-600" />
-          </button>
-          <button
-            type="button"
-            title="minimize"
-            aria-label="minimize widget"
-            className="window-control bg-yellow-500"
-          >
-            <Icon name="minus" size={10} />
-          </button>
-          <button
-            type="button"
-            title="maximize"
-            aria-label="maximize widget"
-            className="window-control bg-green-500"
-          >
-            <Icon name="maximize2" size={10} />
-          </button>
-        </div>
         <div className="relative z-10 h-full">{children}</div>
         {widgetImage && (
           <img
@@ -74,8 +45,8 @@ export const WidgetCard = ({
             className="
                 pointer-events-none
                 absolute
-                -bottom-14
-                -left-14
+                -bottom-15
+                -left-15
                 z-0
                 size-32
                 opacity-[0.5]
@@ -87,17 +58,19 @@ export const WidgetCard = ({
   );
 };
 
-export const WidgetBody = ({ top, middle, subMiddle, bottom }) => {
+export const WidgetBody = ({ onClose, top, middle, subMiddle, bottom }) => {
   return (
     <div
       className="
         flex
         flex-col
         gap-4
-        py-4
+        pt-2
+        pb-4
         h-full
       "
     >
+      <WindowControls onClose={onClose}/>
       {top && (
         <div
           className="
@@ -140,6 +113,44 @@ export const WidgetBody = ({ top, middle, subMiddle, bottom }) => {
         </div>
       )}
       {bottom && <div className="self-center">{bottom}</div>}
+    </div>
+  );
+};
+
+export const WindowControls = ({ onClose }) => {
+  return (
+    <div
+      className="
+        flex
+        gap-1.5
+        pl-2
+      "
+    >
+      <button
+        type="button"
+        title="close"
+        aria-label="close widget"
+        onClick={onClose}
+        className="window-control bg-red-400"
+      >
+        <Icon name="x" size={10} className="text-gray-600" />
+      </button>
+      {/* <button
+        type="button"
+        title="minimize"
+        aria-label="minimize widget"
+        className="window-control bg-yellow-500"
+      >
+        <Icon name="minus" size={10} />
+      </button>
+      <button
+        type="button"
+        title="maximize"
+        aria-label="maximize widget"
+        className="window-control bg-green-500"
+      >
+        <Icon name="maximize2" size={10} />
+      </button> */}
     </div>
   );
 };

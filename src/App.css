@@ -41,15 +41,7 @@ hr {
 }
 
 .widget-body-height {
-  @apply h-80;
-}
-
-.window-controls {
-  @apply
-    flex
-    gap-1.5
-    pt-2
-    pl-2
+  @apply h-86;
 }
 
 .window-control {

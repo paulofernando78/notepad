@@ -123,14 +123,14 @@ function App() {
                 widgetStyle={definition.widgetStyle}
                 imageName={definition.imageName}
                 key={widgetInstance.id}
-                onRemove={() => removeWidget(widgetInstance.id)}
+                onClose={() => removeWidget(widgetInstance.id)}
               >
                 <Component
                   {...widgetInstance.config}
                   onConfigChange={(nextConfig) =>
                     updateWidgetConfig(widgetInstance.id, nextConfig)
                   }
-                  onRemove={handleRemove}
+                  onClose={handleRemove}
                 />
               </WidgetCard>
             );
