@@ -7,7 +7,6 @@ export const Calculator = ({
   display: savedDisplay = "0",
   onConfigChange,
   onClose,
-  // onRemove,
 }) => {
   const [expressionLabel, setExpressionLabel] = useState("");
   const [display, setDisplay] = useState(savedDisplay);
@@ -357,19 +356,18 @@ export const Calculator = ({
   }
 
   const button = `
-    size-10
+    size-11
     !rounded-full
-    !p-0
     flex
     items-center
     justify-center
     border-0
     text-white
   `;
-  const numberButton = "!bg-gray-900/70 hover:!bg-gray-800";
-  const utilityButton = "!bg-slate-600/70 hover:!bg-slate-500";
-  const operatorButton = "!bg-orange-400/70 hover:!bg-orange-300";
-  const equalButton = "!bg-gray-600 hover:!bg-gray-500";
+  // const numberButton = "!bg-gray-900/70 hover:!bg-gray-800";
+  const utilityButton = "!border !border-slate-600 !bg-slate-600/70 hover:!bg-slate-500";
+  const operatorButton = "!border !border-orange-300 !bg-orange-400/70 hover:!bg-orange-300";
+  const equalButton = "!border !border-slate-600 !bg-slate-600/70 hover:!bg-slate-500";
 
   return (
     <WidgetBody
@@ -421,19 +419,19 @@ export const Calculator = ({
 
           <button
             onClick={() => inputDigit("7")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             7
           </button>
           <button
             onClick={() => inputDigit("8")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             8
           </button>
           <button
             onClick={() => inputDigit("9")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             9
           </button>
@@ -446,19 +444,19 @@ export const Calculator = ({
 
           <button
             onClick={() => inputDigit("4")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             4
           </button>
           <button
             onClick={() => inputDigit("5")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             5
           </button>
           <button
             onClick={() => inputDigit("6")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             6
           </button>
@@ -471,19 +469,19 @@ export const Calculator = ({
           </button>
           <button
             onClick={() => inputDigit("1")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             1
           </button>
           <button
             onClick={() => inputDigit("2")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             2
           </button>
           <button
             onClick={() => inputDigit("3")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             3
           </button>
@@ -495,19 +493,19 @@ export const Calculator = ({
           </button>
           <button
             onClick={() => inputDigit("0")}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             0
           </button>
           <button
             onClick={inputDecimal}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             .
           </button>
           <button
             onClick={deleteLastDigit}
-            className={`clickable ${button} ${numberButton}`}
+            className={`clickable ${button}`}
           >
             <Icon name="delete" className="text-white" />
           </button>

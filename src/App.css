@@ -55,7 +55,8 @@ hr {
 }
 
 .clickable {
-  @apply p-2
+  @apply
+    p-2.25
     border
     border-gray-700
     bg-gray-700
