@@ -1,0 +1,1 @@
+export const widgetBodyHeight = "h-80"

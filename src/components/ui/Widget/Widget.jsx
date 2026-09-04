@@ -1,6 +1,8 @@
 import { Icon } from "@/components/ui/Icon";
 import { widgetImages } from "@/assets/widgetImages";
 
+import { widgetBodyHeight } from "@/components/ui/Widget/widgetStyles";
+
 export const WidgetContainer = ({ children }) => {
   return <div className="flex gap-2">{children}</div>;
 };
@@ -24,43 +26,27 @@ export const WidgetCard = ({
         scroll-mr-2
       "
     >
-      <>
-        {/* <header
-          className="
-            p-3
-            text-center
-            uppercase
-            border-b-0
-            bg-black/50
-            rounded-tl-lg
-            rounded-tr-lg
-            rounded-br-none
-            rounded-bl-none
-          "
-        >
-          <h3>{title}</h3>
-        </header> */}
-        <div
-          style={widgetStyle}
-          className={`
+      <div
+        style={widgetStyle}
+        className={`
             relative
             overflow-hidden
-            h-80
+            ${widgetBodyHeight}
             text-white
             rounded-lg
             [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
             ${widgetClassName}
           `}
-        >
-          <div className="relative z-10 h-full">{children}</div>
+      >
+        <div className="relative z-10 h-full">{children}</div>
 
-          {widgetImage && (
-            <img
-              width="100"
-              height="100"
-              src={widgetImage.src}
-              alt={widgetImage.alt}
-              className="
+        {widgetImage && (
+          <img
+            width="100"
+            height="100"
+            src={widgetImage.src}
+            alt={widgetImage.alt}
+            className="
                 pointer-events-none
                 absolute
                 -bottom-14
@@ -69,10 +55,9 @@ export const WidgetCard = ({
                 size-32
                 opacity-[0.5]
               "
-            />
-          )}
-        </div>
-      </>
+          />
+        )}
+      </div>
     </article>
   );
 };

@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 
+import { widgetBodyHeight } from "@/components/ui/Widget/widgetStyles";
+
 export const WidgetPicker = ({ onAdd, ref }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pickerRef = useRef(null);
@@ -58,21 +60,8 @@ export const WidgetPicker = ({ onAdd, ref }) => {
             scroll-mr-2
           "
         >
-          <header
-            className="
-            p-3
-            text-center
-            bg-black/50
-            rounded-tl-lg
-            rounded-tr-lg
-            rounded-br-none
-            rounded-bl-none
-          "
-          >
-            select
-          </header>
           <div
-            className="
+            className={`
               flex
               flex-col
               gap-2
@@ -80,12 +69,11 @@ export const WidgetPicker = ({ onAdd, ref }) => {
               pr-[0.3rem]
               rb-2
               pl-2
-              h-76
+              ${widgetBodyHeight}
               bg-gray-500/30
-              rounded-br-lg
-              rounded-bl-lg
+              rounded-lg
               overflow-y-auto
-            "
+            `}
           >
             <button
               onClick={() => handleAdd("clock")}

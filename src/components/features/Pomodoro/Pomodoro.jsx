@@ -92,13 +92,6 @@ export const Pomodoro = ({
   const breakDuration = breakMinutes * 60;
   const longBreakDuration = longBreakMinutes * 60;
 
-  const sessionDuration = calculateSessionDuration({
-    pomodoroGoal,
-    focusDuration,
-    breakDuration,
-    longBreakDuration,
-  });
-
   const [time, setTime] = useState(focusDuration);
 
   // Editing
