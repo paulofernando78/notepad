@@ -27,6 +27,7 @@ import {
   Info,
   // M
   MapPin,
+  Maximize2,
   MessageCircleWarning,
   Minus,
   // N
@@ -82,6 +83,7 @@ const icons = {
   info: Info,
   // M
   mapPin: MapPin,
+  maximize2: Maximize2,
   messageCircleWarning: MessageCircleWarning,
   minus: Minus,
   // N

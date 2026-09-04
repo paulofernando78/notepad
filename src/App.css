@@ -40,8 +40,24 @@ hr {
   color: gray;
 }
 
+.window-controls {
+  @apply
+    absolute
+    top-2
+    left-2
+    z-20
+    space-x-2
+}
+
+.window-control {
+  @apply
+    size-4
+    rounded-full
+}
+
 .clickable {
-  @apply p-2
+  @apply
+    p-2
     border
     border-gray-700
     bg-gray-700

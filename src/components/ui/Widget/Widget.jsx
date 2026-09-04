@@ -8,12 +8,12 @@ export const WidgetContainer = ({ children }) => {
 };
 
 export const WidgetCard = ({
-  // title,
   widgetClassName = "bg-gray-500/30",
   widgetStyle,
   imageName,
   children,
   ref,
+  onRemove,
 }) => {
   const widgetImage = widgetImages[imageName];
 
@@ -38,8 +38,34 @@ export const WidgetCard = ({
             ${widgetClassName}
           `}
       >
+        <div className="window-controls">
+          <button
+            type="button"
+            title="close"
+            aria-label="close widget"
+            onClick={onRemove}
+            className="window-control bg-red-500"
+          >
+            <Icon name="x" />
+          </button>
+          <button
+            type="button"
+            title="minimize"
+            aria-label="minimize widget"
+            className="window-control bg-yellow-500"
+          >
+            <Icon name="minus" />
+          </button>
+          <button
+            type="button"
+            title="minimize"
+            aria-label="maximize widget"
+            className="window-control bg-green-500"
+          >
+            <Icon name="maximize2" />
+          </button>
+        </div>
         <div className="relative z-10 h-full">{children}</div>
-
         {widgetImage && (
           <img
             width="100"
@@ -170,20 +196,6 @@ WidgetControls.Info = ({ onClick, ...props }) => {
   return (
     <button type="button" onClick={onClick} {...props} className="clickable">
       <Icon name="info" />
-    </button>
-  );
-};
-
-WidgetControls.Erase = ({ onClick }) => {
-  return (
-    <button
-      type="button"
-      title="Delete"
-      aria-label="Delete widget"
-      onClick={onClick}
-      className="clickable"
-    >
-      <Icon name="trash" />
     </button>
   );
 };
