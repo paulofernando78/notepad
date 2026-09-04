@@ -40,24 +40,30 @@ hr {
   color: gray;
 }
 
+.widget-body-height {
+  @apply h-80;
+}
+
 .window-controls {
   @apply
-    absolute
-    top-2
-    left-2
-    z-20
-    space-x-2
+    flex
+    gap-1.5
+    pt-2
+    pl-2
 }
 
 .window-control {
   @apply
+    grid
+    place-items-center
     size-4
     rounded-full
+    border-0
+    p-0;
 }
 
 .clickable {
-  @apply
-    p-2
+  @apply p-2
     border
     border-gray-700
     bg-gray-700

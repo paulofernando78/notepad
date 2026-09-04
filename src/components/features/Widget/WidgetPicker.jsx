@@ -1,8 +1,6 @@
 import { useRef, useState } from "react";
 import { Icon } from "@/components/ui/Icon";
 
-import { widgetBodyHeight } from "@/components/ui/Widget/widgetStyles";
-
 export const WidgetPicker = ({ onAdd, ref }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pickerRef = useRef(null);
@@ -69,11 +67,12 @@ export const WidgetPicker = ({ onAdd, ref }) => {
               pr-[0.3rem]
               rb-2
               pl-2
-              ${widgetBodyHeight}
               bg-gray-500/30
               rounded-lg
               overflow-y-auto
-            `}
+              widget-body-height
+              `
+            }
           >
             <button
               onClick={() => handleAdd("clock")}

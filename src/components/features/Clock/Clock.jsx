@@ -11,7 +11,6 @@ export const Clock = ({
   longitude = -46.63331,
   timezone = "America/Sao_Paulo",
   onConfigChange,
-  onRemove,
 }) => {
   const locationInputRef = useRef(null);
 
@@ -294,7 +293,6 @@ export const Clock = ({
               onEdit={handleEditWeather}
               onConfirm={handleConfirmWeather}
             />
-            <WidgetControls.Erase onClick={onRemove} />
           </WidgetControls>
         </div>
       }

@@ -1,8 +1,6 @@
 import { Icon } from "@/components/ui/Icon";
 import { widgetImages } from "@/assets/widgetImages";
 
-import { widgetBodyHeight } from "@/components/ui/Widget/widgetStyles";
-
 export const WidgetContainer = ({ children }) => {
   return <div className="flex gap-2">{children}</div>;
 };
@@ -29,14 +27,15 @@ export const WidgetCard = ({
       <div
         style={widgetStyle}
         className={`
-            relative
-            overflow-hidden
-            ${widgetBodyHeight}
-            text-white
-            rounded-lg
-            [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
-            ${widgetClassName}
-          `}
+          relative
+          text-white
+          rounded-lg
+          overflow-hidden
+          [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
+          widget-body-height
+          ${widgetClassName}
+          `
+        }
       >
         <div className="window-controls">
           <button
@@ -46,7 +45,7 @@ export const WidgetCard = ({
             onClick={onRemove}
             className="window-control bg-red-500"
           >
-            <Icon name="x" />
+            <Icon name="x" size={10} className="text-gray-600" />
           </button>
           <button
             type="button"
@@ -54,15 +53,15 @@ export const WidgetCard = ({
             aria-label="minimize widget"
             className="window-control bg-yellow-500"
           >
-            <Icon name="minus" />
+            <Icon name="minus" size={10} />
           </button>
           <button
             type="button"
-            title="minimize"
+            title="maximize"
             aria-label="maximize widget"
             className="window-control bg-green-500"
           >
-            <Icon name="maximize2" />
+            <Icon name="maximize2" size={10} />
           </button>
         </div>
         <div className="relative z-10 h-full">{children}</div>
