@@ -99,6 +99,8 @@ export const WidgetPicker = ({ onAdd, ref }) => {
             >
               quick notes
             </button>
+            {/* --- */}
+            <hr />
             <button
               onClick={() => handleAdd("pomodoro")}
               className="uppercase clickable"
@@ -112,14 +114,6 @@ export const WidgetPicker = ({ onAdd, ref }) => {
               timer
             </button>
             <button
-              onClick={() => handleAdd("waterIntake")}
-              className="uppercase clickable"
-            >
-              water Intake
-            </button>
-            {/* --- */}
-            <hr />
-            <button
               onClick={() => handleAdd("calculator")}
               className="uppercase clickable"
             >
@@ -130,6 +124,12 @@ export const WidgetPicker = ({ onAdd, ref }) => {
               className="uppercase clickable"
             >
               markets
+            </button>
+            <button
+              onClick={() => handleAdd("waterIntake")}
+              className="uppercase clickable"
+            >
+              water Intake
             </button>
           </div>
         </div>
