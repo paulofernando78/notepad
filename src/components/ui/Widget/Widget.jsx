@@ -1,4 +1,3 @@
-import { Border } from "@/components/ui/Border";
 import { Icon } from "@/components/ui/Icon";
 import { widgetImages } from "@/assets/widgetImages";
 
@@ -67,7 +66,7 @@ export const WidgetBody = ({ onClose, top, middle, subMiddle, bottom }) => {
         flex
         flex-col
         gap-4
-        pt-2
+        pt-1
         pb-4
         h-full
       "
@@ -125,7 +124,7 @@ export const WindowControls = ({ onClose }) => {
       className="
         flex
         gap-1.5
-        pl-2
+        pl-1
       "
     >
       <button
