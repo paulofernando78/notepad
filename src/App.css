@@ -40,6 +40,14 @@ hr {
   color: gray;
 }
 
+.test {
+  @apply
+    p-2
+    border
+  border-gray-500/50
+    rounded-lg
+}
+
 .widget-body-height {
   @apply h-86;
 }
@@ -88,7 +96,7 @@ hr {
 .widget-gradient {
   background-image: linear-gradient(
     to top left,
-    var(--widget-from) 60%,
-    var(--widget-to) 100%
+    color-mix(in srgb, var(--widget-from) 50%, transparent) 60%,
+    color-mix(in srgb, var(--widget-to) 50%, transparent) 100%
   );
 }

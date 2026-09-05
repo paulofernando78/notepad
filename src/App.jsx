@@ -94,7 +94,7 @@ function App() {
         flex flex-col
         gap-6
         w-full
-        max-w-299
+        max-w-301
         min-h-screen
         mx-auto p-3
       "

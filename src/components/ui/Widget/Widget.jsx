@@ -1,3 +1,4 @@
+import { Border } from "@/components/ui/Border";
 import { Icon } from "@/components/ui/Icon";
 import { widgetImages } from "@/assets/widgetImages";
 
@@ -31,6 +32,7 @@ export const WidgetCard = ({
           rounded-lg
           overflow-hidden
           [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
+          test
           widget-body-height
           ${widgetClassName}
           `}
