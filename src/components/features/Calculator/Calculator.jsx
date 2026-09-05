@@ -356,7 +356,7 @@ export const Calculator = ({
   }
 
   const button = `
-    size-11
+    size-10
     !rounded-full
     flex
     items-center

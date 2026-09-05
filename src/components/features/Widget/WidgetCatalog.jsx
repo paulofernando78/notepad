@@ -6,8 +6,8 @@ import { WaterIntake } from "@/components/features/WaterIntake";
 import { Calculator } from "@/components/features/Calculator";
 import { Markets } from "@/components/features/Markets";
 
-const bgFrom = 400;
-const bgTo = 500;
+const bgFrom = 500;
+const bgTo = 600;
 
 const widgetColors = {
   slate: {
