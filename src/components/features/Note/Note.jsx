@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Border } from "@/components/ui/Border";
 import { Icon } from "@/components/ui/Icon";
 
 export const Note = () => {
@@ -10,7 +9,7 @@ export const Note = () => {
   }
 
   return (
-    <Border className="flex flex-col w-70 h-60">
+    <div className="flex flex-col w-70 h-60">
       {/* Title */}
       <div className="flex items-center justify-between px-2">
         <span className="block pl-1 pt-2 pb-1 font-bold text-lg">
@@ -41,6 +40,6 @@ export const Note = () => {
         <Icon name="folderPlus" />
         <span>Add to folder</span>
       </div>
-    </Border>
+    </div>
   );
 };

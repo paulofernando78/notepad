@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Icon } from "@/components/ui/Icon";
-import { Border } from "@/components/ui/Border";
 
 export const Sidebar = () => {
   const [folderOpen, setFolderOpen] = useState(false);
@@ -12,7 +11,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <Border>
+    <div>
       <aside>
         <nav className="p-2 space-y-2">
           <Link to="/favorites" className="flex items-center gap-2">
@@ -43,6 +42,6 @@ export const Sidebar = () => {
           </div>
         </nav>
       </aside>
-    </Border>
+    </div>
   );
 };

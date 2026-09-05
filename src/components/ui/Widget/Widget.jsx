@@ -18,7 +18,7 @@ export const WidgetCard = ({
     <article
       ref={ref}
       className="
-        min-w-54
+        min-w-48.5
         font-['Oswald_Variable']
         scroll-mr-2
       "
@@ -27,11 +27,11 @@ export const WidgetCard = ({
         style={widgetStyle}
         className={`
           relative
-          text-white
+        text-white
           rounded-lg
           overflow-hidden
           [text-shadow:0_0_6px_rgba(255,255,255,0.2)]
-          test
+          global-border
           widget-body-height
           ${widgetClassName}
           `}
@@ -66,8 +66,6 @@ export const WidgetBody = ({ onClose, top, middle, subMiddle, bottom }) => {
         flex
         flex-col
         gap-4
-        pt-1
-        pb-4
         h-full
       "
     >
@@ -124,7 +122,6 @@ export const WindowControls = ({ onClose }) => {
       className="
         flex
         gap-1.5
-        pl-1
       "
     >
       <button

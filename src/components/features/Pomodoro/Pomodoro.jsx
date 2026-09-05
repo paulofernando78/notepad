@@ -59,10 +59,8 @@ function playTick() {
 const durationTitle = `
   flex
   flex-col
-  pt-3
-  px-2
+  pt-2
   pb-[0.7rem]
-  bg-gray-500/50
   rounded-xl
   justify-self-center
 `;
@@ -79,7 +77,7 @@ export const Pomodoro = ({
   longBreakMinutes: initialLongBreakMinutes = DEFAULT_LONG_BREAK_MINUTES,
   pomodoroGoal: initialPomodoroGoal = 4,
   onConfigChange,
-  onClose
+  onClose,
 }) => {
   const [focusMinutes, setFocusMinutes] = useState(initialFocusMinutes);
   const [breakMinutes, setBreakMinutes] = useState(initialBreakMinutes);
@@ -300,7 +298,8 @@ export const Pomodoro = ({
 
   return (
     <>
-      <WidgetBody onClose={onClose}
+      <WidgetBody
+        onClose={onClose}
         top={
           <div
             className="
@@ -336,7 +335,13 @@ export const Pomodoro = ({
             "
           >
             {isEditing ? (
-              <div className="grid grid-cols-2 gap-1">
+              <div
+                className="
+                  grid
+                  grid-cols-2
+                  gap-1
+                "
+              >
                 <span className="self-center">focus</span>
                 <NumberInput
                   hideLabel
@@ -385,7 +390,7 @@ export const Pomodoro = ({
                   className="
                     flex
                     items-center
-                    pl-1.5
+                    pl-2.75
                     w-max
                     gap-2
                   "
@@ -399,9 +404,8 @@ export const Pomodoro = ({
                 {/* Focus • Break • Long  */}
                 <div
                   className="
-                  grid
-                  grid-cols-[62px_62px_62px]
-                  gap-2
+                    grid
+                    grid-cols-[62px_62px_62px]
                 "
                 >
                   {/* FOCUS */}

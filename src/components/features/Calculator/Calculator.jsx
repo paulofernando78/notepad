@@ -170,7 +170,7 @@ export const Calculator = ({
   function renderDisplayValue(
     value,
     iconSize = 20,
-    iconClassName = "text-white",
+    iconClassName = "text-whie",
   ) {
     return value.split("").map((character, index) => {
       const iconName = getOperatorIconName(character);
@@ -365,9 +365,12 @@ export const Calculator = ({
     text-white
   `;
   // const numberButton = "!bg-gray-900/70 hover:!bg-gray-800";
-  const utilityButton = "!border !border-slate-600 !bg-slate-600/70 hover:!bg-slate-500";
-  const operatorButton = "!border !border-orange-400 !bg-orange-400/80 hover:!bg-orange-300";
-  const equalButton = "!border !border-slate-600 !bg-slate-600/70 hover:!bg-slate-500";
+  const utilityButton =
+    "!border !border-slate-600 !bg-slate-600/70 hover:!bg-slate-500";
+  const operatorButton =
+    "!border !border-orange-400 !bg-orange-400/80 hover:!bg-orange-300";
+  const equalButton =
+    "!border !border-slate-600 !bg-slate-600/70 hover:!bg-slate-500";
 
   return (
     <WidgetBody
@@ -381,17 +384,41 @@ export const Calculator = ({
           "
         >
           <div className="grid">
-            <span className="flex items-center justify-end text-2xl">
+            <span
+              className="
+                flex
+                items-center
+                justify-end
+                text-2xl
+            "
+            >
               {renderDisplayValue(display)}
             </span>
-            <span className="flex items-center gap-[0.1rem] min-h-4 text-sm text-gray-700/80 justify-end">
-              {renderDisplayValue(expressionLabel, 14, "text-gray-700/80")}
+            <span
+              className="
+                flex
+                items-center
+                gap-[0.1rem]
+                min-h-4
+                text-sm
+                text-gray-300/90
+                justify-end
+              "
+            >
+              {renderDisplayValue(expressionLabel, 14, "text-gray-3c00/90")}
             </span>
           </div>
         </div>
       }
       middle={
-        <div className="grid grid-cols-4 gap-1">
+        <div
+          className="
+            grid
+            grid-cols-4
+            gap-1
+            mb-0.75
+          "
+        >
           <button
             onClick={clearCalculator}
             className={`clickable ${button} ${utilityButton}`}
@@ -497,16 +524,10 @@ export const Calculator = ({
           >
             0
           </button>
-          <button
-            onClick={inputDecimal}
-            className={`clickable ${button}`}
-          >
+          <button onClick={inputDecimal} className={`clickable ${button}`}>
             .
           </button>
-          <button
-            onClick={deleteLastDigit}
-            className={`clickable ${button}`}
-          >
+          <button onClick={deleteLastDigit} className={`clickable ${button}`}>
             <Icon name="delete" className="text-white" />
           </button>
           <button

@@ -187,7 +187,7 @@ export const Clock = ({
                 flex
                 items-center
                 gap-2
-                w-50
+                w-41
               "
             >
               <Icon name="mapPin" />

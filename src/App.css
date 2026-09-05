@@ -40,7 +40,7 @@ hr {
   color: gray;
 }
 
-.test {
+.global-border {
   @apply
     p-2
     border
@@ -49,7 +49,7 @@ hr {
 }
 
 .widget-body-height {
-  @apply h-86;
+  @apply h-81;
 }
 
 .window-control {

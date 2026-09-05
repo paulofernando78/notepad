@@ -1,4 +1,3 @@
-import { Border } from "@/components/ui/Border";
 import { Icon } from "@/components/ui/Icon";
 
 const statusOptions = [
@@ -73,10 +72,10 @@ const TaskComposer = ({ color }) => {
 const TaskBoardColumn = ({ status }) => {
   return (
     <section className="flex flex-col gap-2">
-      <Border
+      <div
         className={`
           p-2
-          border-0
+          global-border
           ${status.color}
         `}
       >
@@ -85,7 +84,7 @@ const TaskBoardColumn = ({ status }) => {
           <Icon name="ellipsis" className="translate-y-[-0.4rem]" />
         </div>
         <TaskComposer color={status.color} />
-      </Border>
+      </div>
     </section>
   );
 };
