@@ -366,7 +366,7 @@ export const Calculator = ({
   `;
   // const numberButton = "!bg-gray-900/70 hover:!bg-gray-800";
   const utilityButton = "!border !border-slate-600 !bg-slate-600/70 hover:!bg-slate-500";
-  const operatorButton = "!border !border-orange-300 !bg-orange-400/70 hover:!bg-orange-300";
+  const operatorButton = "!border !border-orange-400 !bg-orange-400/80 hover:!bg-orange-300";
   const equalButton = "!border !border-slate-600 !bg-slate-600/70 hover:!bg-slate-500";
 
   return (
