@@ -87,7 +87,7 @@ hr {
 
 .widget-gradient {
   background-image: linear-gradient(
-    to top right,
+    to top,
     var(--widget-from) 0%,
     var(--widget-to) 100%
   );
