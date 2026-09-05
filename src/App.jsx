@@ -14,9 +14,9 @@ import { widgetCatalog, WidgetPicker } from "@/components/features/Widget";
 import { TaskBoard } from "@/components/features/TaskBoard";
 
 // Notes
-// import { Note } from "@/components/features/Note";
-// import { Sidebar } from "@/components/layout/Sidebar";
-// import { SearchBar } from "@/components/ui/SearchBar";
+import { Note } from "@/components/features/Note";
+import { Sidebar } from "@/components/layout/Sidebar";
+import { SearchBar } from "@/components/ui/SearchBar";
 
 const WIDGETS_STORAGE_KEY = "widgets";
 
@@ -143,7 +143,7 @@ function App() {
         <TaskBoard />
       </SectionPanel>
 
-      {/* <SectionPanel title="Notes">
+      <SectionPanel title="Notes">
         <div className="grid grid-cols-[200px_1fr] gap-2 flex-1">
           <Sidebar />
           <div className="space-y-2">
@@ -155,7 +155,7 @@ function App() {
             </main>
           </div>
         </div>
-      </SectionPanel> */}
+      </SectionPanel>
     </div>
   );
 }
